@@ -28,7 +28,7 @@
         <item>
          <widget class="QPushButton" name="pushButton">
           <property name="text">
-           <string>PushButton</string>
+           <string>Start 6x6 Game</string>
           </property>
          </widget>
         </item>
@@ -44,27 +44,31 @@
      </layout>
     </item>
     <item>
-     <widget class="QWidget" name="widget" native="true">
+     <widget class="QGraphicsView" name="graphicsViewField">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="minimumSize">
        <size>
-        <width>500</width>
-        <height>500</height>
+        <width>400</width>
+        <height>400</height>
        </size>
       </property>
-      <property name="autoFillBackground">
-       <bool>true</bool>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
       </property>
-      <property name="styleSheet">
-       <string notr="true">body {
-	background-color: green;
-}</string>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
       </property>
      </widget>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="labelPlayer1">
         <property name="text">
          <string>Spieler 1</string>
         </property>
@@ -87,7 +91,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="labelPlayer2">
         <property name="text">
          <string>Spieler 2</string>
         </property>

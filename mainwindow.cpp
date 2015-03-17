@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     reversiField = new controllerField(6);
+    sceneField = new viewField();
+    ui->graphicsViewField->setScene(sceneField);
 }
 
 MainWindow::~MainWindow()
@@ -17,4 +19,9 @@ MainWindow::~MainWindow()
 void MainWindow::startReversi()
 {
     reversiField->startGame();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    startReversi();
 }

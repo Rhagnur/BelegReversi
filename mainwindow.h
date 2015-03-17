@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "controllerField.h"
+#include "viewField.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,9 +18,13 @@ public:
     ~MainWindow();
     void startReversi();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     controllerField* reversiField;
+    viewField* sceneField;
 };
 
 #endif // MAINWINDOW_H

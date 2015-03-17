@@ -17,9 +17,6 @@ controllerField::controllerField(int fieldSize)
 
 void controllerField::startGame()
 {
-    bool abbruch = true;
-    while(abbruch)
-    {
         if (searchPossibleTurns())
         {
             std::cout<<"Mogliche Zuge gefunden"<<std::endl;
@@ -31,28 +28,7 @@ void controllerField::startGame()
 
         gamingField->showFieldDebug();
 
-        int i;
-        int j;
-        do
-        {
-            i = 0;
-            j = 0;
-            std::cout<<"Eingabe i";
-            std::cin>>i;
-            std::cout<<std::endl;
-            std::cout<<"Eingabe j";
-            std::cin>>j;
-            std::cout<<std::endl;
-            if (i == 99 || j == 99)
-            {
-                abbruch = false;
-                break;
-            }
-        } while(!turn(j, i));
-
-        changeActivePlayer();
-
-    }
+        //schangeActivePlayer();
 
 }
 

@@ -17,12 +17,14 @@ SOURCES += main.cpp\
     modelElement.cpp \
     modelField.cpp \
     controllerField.cpp \
-    modelPlayer.cpp
+    modelPlayer.cpp \
+    viewField.cpp
 
 HEADERS  += mainwindow.h \
     modelElement.h \
     modelField.h \
     controllerField.h \
-    modelPlayer.h
+    modelPlayer.h \
+    viewField.h
 
 FORMS    += mainwindow.ui
