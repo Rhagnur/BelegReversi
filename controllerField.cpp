@@ -170,3 +170,50 @@ bool controllerField::searchPossibleTurns()
             }
             return foundPossibleTurn;
 }
+
+void controllerField::startDrawing()
+{
+
+}
+
+void controllerField::setFieldSize(int w, int h)
+{
+    gamingField->setFieldWidth(w);
+    gamingField->setFieldHeight(h);
+}
+
+int controllerField::getGamingFieldWidth()
+{
+    return gamingField->getFieldWidth();
+}
+
+int controllerField::getGamingFieldHeight()
+{
+    return gamingField->getFieldWidth();
+}
+
+int controllerField::getGamingFieldMatrixSize()
+{
+    return gamingField->getFieldSize();
+}
+
+int controllerField::getGamingFieldElementValue(int i, int j)
+{
+    return gamingField->getFieldValue(i, j);
+}
+
+void controllerField::evaluateClick(int x, int y)
+{
+    if (x > 0 && x < gamingField->getFieldWidth() && y > 0 && y < gamingField->getFieldHeight())
+    {
+        int i = y / (gamingField->getFieldHeight()/gamingField->getFieldSize());
+        int j = x / (gamingField->getFieldWidth()/gamingField->getFieldSize());
+
+        if (gamingField->getFieldValue(i, j) == 3)
+        {
+            turn(i, j);
+            changeActivePlayer();
+            searchPossibleTurns();
+        }
+    }
+}

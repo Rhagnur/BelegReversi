@@ -21,6 +21,16 @@ void modelField::setFieldValue(int i, int j, int value)
     field[i][j].setValue(value);
 }
 
+void modelField::setFieldWidth(int w)
+{
+    fieldWidth = w;
+}
+
+void modelField::setFieldHeight(int h)
+{
+    fieldHeight = h;
+}
+
 int modelField::getFieldValue(int i, int j)
 {
     return field[i][j].getValue();
@@ -29,6 +39,16 @@ int modelField::getFieldValue(int i, int j)
 int modelField::getFieldSize()
 {
     return fieldSize;
+}
+
+int modelField::getFieldWidth()
+{
+    return fieldWidth;
+}
+
+int modelField::getFieldHeight()
+{
+    return fieldHeight;
 }
 
 void modelField::showFieldDebug()

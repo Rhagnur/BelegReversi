@@ -12,6 +12,13 @@ public:
     void changeActivePlayer();
     void startGame();
     bool turn(int i, int j);
+    void startDrawing();
+    void setFieldSize(int w, int h);
+    int getGamingFieldWidth();
+    int getGamingFieldHeight();
+    int getGamingFieldMatrixSize();
+    int getGamingFieldElementValue(int i, int j);
+    void evaluateClick(int x, int y);
 
 private:
     modelField* gamingField;
