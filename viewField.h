@@ -10,10 +10,10 @@
 class viewField : public QGraphicsScene
 {
 public:
-    viewField(int w, int h);
+    viewField();
     std::string returnTestStringXY();
     std::string returnTestStringSize();
-    void startReversi();
+    void startReversi(int w, int h);
     void updateFieldSize(int w, int h);
     void drawField();
 

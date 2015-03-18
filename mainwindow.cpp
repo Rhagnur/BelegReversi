@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    sceneField = new viewField(ui->graphicsViewField->width(), ui->graphicsViewField->height());
+    sceneField = new viewField();
     ui->graphicsViewField->setScene(sceneField);
     ui->graphicsViewField->fitInView(sceneField->sceneRect());
 }
@@ -20,8 +20,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
+    sceneField->startReversi(ui->graphicsViewField->width(), ui->graphicsViewField->height());
     sceneField->updateFieldSize(ui->graphicsViewField->width(), ui->graphicsViewField->height());
-    sceneField->startReversi();
+
 }
 
 void MainWindow::on_pushButton_2_clicked()

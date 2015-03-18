@@ -32,25 +32,9 @@ void controllerField::startGame()
 
 }
 
-bool controllerField::turn(int i, int j)
+void controllerField::turn(int i, int j)
 {
-    /* Check if player clicked on a field which is "possible" eg == 3 (all possible fields have been previously set to 3) */
-    if (gamingField->getFieldValue(i, j) == 3)
-    {
-        gamingField->setFieldValue(i, j , activePlayer);
-        //changeStones(i, j);
-
-        //todo: Steine dazwischen umdrehen
-        //todo: Playerwechsel
-
-        return true;
-
-    }
-    else
-    {
-        //todo unmöglicher Zug...Sound und Ani
-        return false;
-    }
+    gamingField->setFieldValue(i, j , activePlayer);
 }
 
 void controllerField::changeActivePlayer()
@@ -202,7 +186,7 @@ int controllerField::getGamingFieldElementValue(int i, int j)
     return gamingField->getFieldValue(i, j);
 }
 
-void controllerField::evaluateClick(int x, int y)
+bool controllerField::evaluateClick(int x, int y)
 {
     if (x > 0 && x < gamingField->getFieldWidth() && y > 0 && y < gamingField->getFieldHeight())
     {
@@ -211,9 +195,14 @@ void controllerField::evaluateClick(int x, int y)
 
         if (gamingField->getFieldValue(i, j) == 3)
         {
-            turn(i, j);
-            changeActivePlayer();
-            searchPossibleTurns();
+            (turn(i, j));
+                changeActivePlayer();
+                searchPossibleTurns();
+                return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

@@ -1,12 +1,10 @@
 #include "viewField.h"
 #include <iostream>
 
-viewField::viewField(int w, int h)
+viewField::viewField()
 {
     this->setBackgroundBrush(Qt::yellow);
     testStringXY = "Keine Daten enthalten";
-    reversiField = new controllerField(6);
-    reversiField->setFieldSize(w, h);
 }
 
 void viewField::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -20,9 +18,16 @@ void viewField::mousePressEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsEllipseItem* kreis = new QGraphicsEllipseItem(x-5, y-5, 10, 10);
     this->addItem(kreis);
 
-    reversiField->evaluateClick(x, y);
-    drawField();
-
+    if (reversiField->evaluateClick(x, y))
+    {
+        std::cout << "Guter Zug" << std::endl;
+        drawField();
+    }
+    else
+    {
+        std::cout << "Kein gueltiger Zug, nochmal" << std::endl;
+        //kein gültiger Zug
+    }
 }
 
 std::string viewField::returnTestStringXY()
@@ -31,14 +36,24 @@ std::string viewField::returnTestStringXY()
 }
 
 
-void viewField::startReversi()
+void viewField::startReversi(int w, int h)
 {
+    reversiField = new controllerField(6);
+    updateFieldSize(w, h);
     reversiField->startGame();
     drawField();
 }
 
 void viewField::updateFieldSize(int w, int h)
 {
+    if (w > h)
+    {
+        w = h;
+    }
+    else
+    {
+        h = w;
+    }
     reversiField->setFieldSize(w, h);
 }
 
