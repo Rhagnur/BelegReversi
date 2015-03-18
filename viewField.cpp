@@ -4,19 +4,12 @@
 viewField::viewField()
 {
     this->setBackgroundBrush(Qt::yellow);
-    testStringXY = "Keine Daten enthalten";
 }
 
 void viewField::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     int x = event->scenePos().x();
     int y = event->scenePos().y();
-
-    std::cout << "Mausklick erkannt" <<std::endl;
-    testStringXY = "X = " + std::to_string(x) + " und Y = " + std::to_string(y);
-    testStringSize = "Groesse = " + std::to_string(this->width()) + " x " + std::to_string(this->height());
-    QGraphicsEllipseItem* kreis = new QGraphicsEllipseItem(x-5, y-5, 10, 10);
-    this->addItem(kreis);
 
     if (reversiField->evaluateClick(x, y))
     {
@@ -29,12 +22,6 @@ void viewField::mousePressEvent(QGraphicsSceneMouseEvent *event)
         //kein gültiger Zug
     }
 }
-
-std::string viewField::returnTestStringXY()
-{
-    return testStringXY;
-}
-
 
 void viewField::startReversi(int w, int h)
 {

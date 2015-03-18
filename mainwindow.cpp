@@ -27,7 +27,5 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    ui->labelPlayer1->setText(QString::fromStdString(sceneField->returnTestStringXY()));
-    std::cout<<"GroesseView = " + std::to_string(ui->graphicsViewField->width()) + " x " + std::to_string(ui->graphicsViewField->height()) << std::endl;
-    std::cout<<"GroesseScene = " + std::to_string(sceneField->width()) + " x " + std::to_string(sceneField->height()) << std::endl;
+    //todo
 }
