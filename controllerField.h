@@ -3,11 +3,13 @@
 
 #include "modelField.h"
 #include "modelPlayer.h"
+#include "viewField.h"
 
 class controllerField
 {
 public:
-    controllerField(int fieldSize);
+    controllerField();
+    void initControllerField(int fieldSize, int w, int h);
     bool searchPossibleTurns();
     bool isPossibleTurn(int i, int j);
     void flipStones(int i, int j);
@@ -23,11 +25,14 @@ public:
     bool evaluateClick(int x, int y);
     bool checkWin();
     void stoneCount(int color);
+    viewField* passViewField();
+    void drawField();
 
 
 private:
-    modelField* gamingField;
-    modelPlayer* player[2];
+    viewField *viewGamingField;
+    modelField *gamingField;
+    modelPlayer *player[2];
     int activePlayer, otherPlayer;
 };
 

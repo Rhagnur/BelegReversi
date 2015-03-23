@@ -5,21 +5,17 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsItem>
 #include <string>
-#include "controllerField.h"
 
 class viewField : public QGraphicsScene
 {
 public:
     viewField();
-    void startReversi(int w, int h);
-    void updateFieldSize(int w, int h);
-    void drawField();
+    void drawField(int x, int y, int width, int height, int value);
+    viewField* getViewField();
 
 
 private:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    controllerField* reversiField;
-    QGraphicsRectItem *rectangle;
 
 
 };

@@ -3,11 +3,17 @@
 
 viewField::viewField()
 {
-    this->setBackgroundBrush(Qt::yellow);
+    std::cout << "Scenesize = " + std::to_string(this->width()) + " x " + std::to_string(this->height());
+}
+
+viewField* viewField::getViewField()
+{
+    return this;
 }
 
 void viewField::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    /*
     int x = event->scenePos().x();
     int y = event->scenePos().y();
 
@@ -21,67 +27,38 @@ void viewField::mousePressEvent(QGraphicsSceneMouseEvent *event)
         std::cout << "Kein gueltiger Zug, nochmal" << std::endl;
         //kein gültiger Zug
     }
+    */
 }
 
-void viewField::startReversi(int w, int h)
+void viewField::drawField(int x, int y, int width, int height, int value)
 {
-    reversiField = new controllerField(6);
-    updateFieldSize(w, h);
-    reversiField->startGame();
-    drawField();
-}
-
-void viewField::updateFieldSize(int w, int h)
-{
-    if (w > h)
-    {
-        w = h;
-    }
-    else
-    {
-        h = w;
-    }
-    reversiField->setFieldSize(w, h);
-}
-
-void viewField::drawField()
-{
-    int size = reversiField->getGamingFieldMatrixSize();
-    int fieldWidth = reversiField->getGamingFieldWidth();
-    int fieldHeight = reversiField->getGamingFieldHeight();
+    QGraphicsRectItem *rectangle;
     QBrush whiteBrush(Qt::white);   //empty
-    QBrush blackBrush(Qt::black);   //palyer 2
+    QBrush blackBrush(Qt::black);   //player 2
     QBrush grayBrush(Qt::gray);     //player 1
     QBrush redBrush(Qt::red);       //possible turn
     QPen blackPen(Qt::black);
     blackPen.setWidth(0);
 
-    this->clear();
-
-    for (int j = 0; j < size; j++)
+    std::cout << "Zeichne Feld : " + std::to_string(x) + " x " + std::to_string(y) + " - " + std::to_string(width) + " x " + std::to_string(height) + " -  Value: " + std::to_string(value) << std::endl;
+    //Zeichne leeres Feld
+    if ( value == 0 )
     {
-        for (int i = 0; i < size; i++)
-        {
-            //Zeichne leeres Feld
-            if ( reversiField->getGamingFieldElementValue(i, j) == 0 )
-            {
-                rectangle = this->addRect(j*(fieldWidth/size), i*(fieldHeight/size), fieldWidth/size, fieldHeight/size, blackPen, whiteBrush);
-            }
-            //Zeichne Spiele 1 Feld
-            else if ( reversiField->getGamingFieldElementValue(i, j) == 1 )
-            {
-                rectangle = this->addRect(j*(fieldWidth/size), i*(fieldHeight/size), fieldWidth/size, fieldHeight/size, blackPen, grayBrush);
-            }
-            //Zeichne Spieler 2 Feld
-            else if ( reversiField->getGamingFieldElementValue(i, j) == 2 )
-            {
-                rectangle = this->addRect(j*(fieldWidth/size), i*(fieldHeight/size), fieldWidth/size, fieldHeight/size, blackPen, blackBrush);
-            }
-            //Zeichen Möglicher Zug Feld
-            else if ( reversiField->getGamingFieldElementValue(i, j) == 3 )
-            {
-                rectangle = this->addRect(j*(fieldWidth/size), i*(fieldHeight/size), fieldWidth/size, fieldHeight/size, blackPen, redBrush);
-            }
-        }
+        rectangle = this->addRect(x, y, width, height, blackPen, whiteBrush);
+    }
+    //Zeichne Spiele 1 Feld
+    else if ( value == 1 )
+    {
+        rectangle = this->addRect(x, y, width, height, blackPen, grayBrush);
+    }
+    //Zeichne Spieler 2 Feld
+    else if ( value == 2 )
+    {
+        rectangle = this->addRect(x, y, width, height, blackPen, blackBrush);
+    }
+    //Zeichen Möglicher Zug Feld
+    else if ( value == 3 )
+    {
+        rectangle = this->addRect(x, y, width, height, blackPen, redBrush);
     }
 }

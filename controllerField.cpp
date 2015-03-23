@@ -5,12 +5,17 @@
 #include <stdio.h>
 #include <string>
 
-controllerField::controllerField(int fieldSize)
+controllerField::controllerField()
+{
+    viewGamingField = new viewField();
+}
+
+void controllerField::initControllerField(int fieldSize, int w, int h)
 {
     player[0] = new modelPlayer("Jan", 0);
     player[1] = new modelPlayer("Baran", 0);
     activePlayer = 1;
-    otherPlayer = 2;
+    otherPlayer = 2;    
     gamingField = new modelField(fieldSize);
     gamingField->setFieldValue(gamingField->getFieldSize()/2 - 1,gamingField->getFieldSize()/2 - 1, activePlayer);
     gamingField->setFieldValue(gamingField->getFieldSize()/2,gamingField->getFieldSize()/2, activePlayer);
@@ -20,6 +25,9 @@ controllerField::controllerField(int fieldSize)
     player[1]->setPlayerStoneCount(2);
     std::cout << player[0]->getPlayerName() + " hat Steine: " + std::to_string(player[0]->getPlayerStoneCount()) << std::endl;
     std::cout << player[1]->getPlayerName() + " hat Steine: " + std::to_string(player[1]->getPlayerStoneCount()) << std::endl;
+    startGame();
+    setFieldSize(w, h);
+    drawField();
 }
 
 void controllerField::startGame()
@@ -391,4 +399,34 @@ void controllerField::stoneCount(int color)
 {
     player[activePlayer - 1]->setPlayerStoneCount((player[activePlayer - 1]->getPlayerStoneCount()) + 1);
     player[otherPlayer - 1]->setPlayerStoneCount((player[otherPlayer - 1]->getPlayerStoneCount()) - 1);
+}
+
+viewField* controllerField::passViewField()
+{
+    return viewGamingField->getViewField();
+}
+
+void controllerField::drawField()
+{
+    std::cout << "Beginne Feld zu zeichnen" << std::endl;
+    for (int j = 0; j < gamingField->getFieldSize(); j++)
+    {
+        for (int i = 0; i < gamingField->getFieldSize(); i++)
+        {
+
+            int x = j*(gamingField->getFieldWidth()/gamingField->getFieldSize());
+            int y = i*(gamingField->getFieldHeight()/gamingField->getFieldSize());
+            int w = gamingField->getFieldWidth()/gamingField->getFieldSize();
+            int h = gamingField->getFieldHeight()/gamingField->getFieldSize();
+
+            //std::cout << std::to_string(i) + " - " + std::to_string(j) + " zeichnen" << std::endl;
+            //std::cout << "x = " + std::to_string(x) << std::endl;
+            //std::cout << "y = " + std::to_string(y) << std::endl;
+            //std::cout << "w = " + std::to_string(w) << std::endl;
+            //std::cout << "h = " + std::to_string(h) << std::endl;
+
+            viewGamingField->drawField(x, y, w, h, gamingField->getFieldValue(i, j));
+        }
+    }
+    std::cout << "Fertig Feld zu zeichnen" << std::endl;
 }

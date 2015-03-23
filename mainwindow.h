@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include "controllerField.h"
-#include "viewField.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -23,7 +23,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    viewField* sceneField;
+    controllerField* controllField;
 };
 
 #endif // MAINWINDOW_H

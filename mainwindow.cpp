@@ -8,9 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    sceneField = new viewField();
-    ui->graphicsViewField->setScene(sceneField);
-    ui->graphicsViewField->fitInView(sceneField->sceneRect());
+    controllField = new controllerField();
+    ui->graphicsViewField->setScene(controllField->passViewField());
+    //ui->graphicsViewField->fitInView(controllField->passViewField()->sceneRect());
 }
 
 MainWindow::~MainWindow()
@@ -20,8 +20,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    sceneField->startReversi(ui->graphicsViewField->width(), ui->graphicsViewField->height());
-    sceneField->updateFieldSize(ui->graphicsViewField->width(), ui->graphicsViewField->height());
+    std::cout << "Startbutton gedrueckt" << std::endl;
+    controllField->initControllerField(6, ui->graphicsViewField->width(), ui->graphicsViewField->height());
+    std::cout << "SetFieldSize to " + std::to_string(ui->graphicsViewField->width()) + " x " + std::to_string(ui->graphicsViewField->height()) << std::endl;
+    //sceneField->startReversi(ui->graphicsViewField->width(), ui->graphicsViewField->height());
+    //sceneField->updateFieldSize(ui->graphicsViewField->width(), ui->graphicsViewField->height());
 
 }
 
