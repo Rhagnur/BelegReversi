@@ -13,10 +13,11 @@ viewField* viewField::getViewField()
 
 void viewField::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    /*
+
     int x = event->scenePos().x();
     int y = event->scenePos().y();
-
+    std::cout << "Mausklick erkannt" + std::to_string(x) + " x " + std::to_string(y) << std::endl;
+    /*
     if (reversiField->evaluateClick(x, y))
     {
         std::cout << "Guter Zug" << std::endl;

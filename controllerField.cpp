@@ -419,12 +419,6 @@ void controllerField::drawField()
             int w = gamingField->getFieldWidth()/gamingField->getFieldSize();
             int h = gamingField->getFieldHeight()/gamingField->getFieldSize();
 
-            //std::cout << std::to_string(i) + " - " + std::to_string(j) + " zeichnen" << std::endl;
-            //std::cout << "x = " + std::to_string(x) << std::endl;
-            //std::cout << "y = " + std::to_string(y) << std::endl;
-            //std::cout << "w = " + std::to_string(w) << std::endl;
-            //std::cout << "h = " + std::to_string(h) << std::endl;
-
             viewGamingField->drawField(x, y, w, h, gamingField->getFieldValue(i, j));
         }
     }

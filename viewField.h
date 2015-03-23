@@ -12,10 +12,11 @@ public:
     viewField();
     void drawField(int x, int y, int width, int height, int value);
     viewField* getViewField();
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 
 private:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+
 
 
 };
