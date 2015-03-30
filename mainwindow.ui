@@ -38,7 +38,7 @@
         <item>
          <widget class="QPushButton" name="pushButton_2">
           <property name="text">
-           <string>Mauslistenerdaten anzeigen</string>
+           <string>PlatzhalterButton</string>
           </property>
          </widget>
         </item>
@@ -94,7 +94,7 @@
          </size>
         </property>
         <property name="text">
-         <string>Spieler 1</string>
+         <string>Infolabel_Spieler1</string>
         </property>
        </widget>
       </item>
@@ -135,7 +135,7 @@
          </size>
         </property>
         <property name="text">
-         <string>Spieler 2</string>
+         <string>Infolabel_Spieler2</string>
         </property>
        </widget>
       </item>

@@ -21,7 +21,6 @@ void viewField::drawField(int x, int y, int width, int height, int value)
     QPen blackPen(Qt::black);
     blackPen.setWidth(0);
 
-    std::cout << "Zeichne Feld : " + std::to_string(x) + " x " + std::to_string(y) + " - " + std::to_string(width) + " x " + std::to_string(height) + " -  Value: " + std::to_string(value) << std::endl;
     //Zeichne leeres Feld
     if ( value == 0 )
     {
