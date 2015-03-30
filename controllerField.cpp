@@ -380,6 +380,7 @@ bool controllerField::evaluateClick(int x, int y)
             std::cout << player[1]->getPlayerName() + " hat Steine: " + std::to_string(player[1]->getPlayerStoneCount()) << std::endl;
             changeActivePlayer();
             searchPossibleTurns();
+            drawField();
             return true;
         }
         else

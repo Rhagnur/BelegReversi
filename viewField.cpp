@@ -11,27 +11,6 @@ viewField* viewField::getViewField()
     return this;
 }
 
-void viewField::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-
-    int x = event->scenePos().x();
-    int y = event->scenePos().y();
-    std::cout << "Mausklick erkannt" + std::to_string(x) + " x " + std::to_string(y) << std::endl;
-
-    /*
-    if (reversiField->evaluateClick(x, y))
-    {
-        std::cout << "Guter Zug" << std::endl;
-        drawField();
-    }
-    else
-    {
-        std::cout << "Kein gueltiger Zug, nochmal" << std::endl;
-        //kein gültiger Zug
-    }
-    */
-}
-
 void viewField::drawField(int x, int y, int width, int height, int value)
 {
     QGraphicsRectItem *rectangle;
