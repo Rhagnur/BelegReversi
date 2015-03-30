@@ -6,6 +6,7 @@
 #include <QGraphicsItem>
 #include <string>
 
+
 class viewField : public QGraphicsScene
 {
 public:
