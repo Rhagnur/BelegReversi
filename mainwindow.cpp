@@ -23,6 +23,11 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     controllField->initControllerField(4, ui->graphicsViewField->width(), ui->graphicsViewField->height());
+    ui->label->setText(QString::fromStdString(controllField->getInfoText()));
+    ui->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
+    ui->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
+    std::cout << "Text 1 " + controllField->getPlayer1Text() << std::endl;
+    std::cout << "Text 2 " + controllField->getPlayer2Text() << std::endl;
     std::cout << "SetFieldSize to " + std::to_string(ui->graphicsViewField->width()) + " x " + std::to_string(ui->graphicsViewField->height()) << std::endl;
     ui->graphicsViewField->viewport()->installEventFilter(this);
 
@@ -39,13 +44,16 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
 
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
         QPoint coordinates = me->pos();
-
         controllField->evaluateClick(coordinates.x(), coordinates.y());
+        ui->label->setText(QString::fromStdString(controllField->getInfoText()));
+        ui->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
+        ui->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
 
         return true;
     }
     if (event->type() == QEvent::Resize)
     {
+
         controllField->setFieldSize(ui->graphicsViewField->width(), ui->graphicsViewField->height());
         controllField->drawField();
     }

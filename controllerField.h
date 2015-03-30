@@ -26,6 +26,9 @@ public:
     void stoneCount();
     viewField* passViewField();
     void drawField();
+    std::string getInfoText();
+    std::string getPlayer1Text();
+    std::string getPlayer2Text();
 
 
 private:
@@ -33,6 +36,7 @@ private:
     modelField *gamingField;
     modelPlayer *player[2];
     int activePlayer, otherPlayer;
+    std::string infoText, player1Text, player2Text;
 };
 
 #endif // CONTROLLERFIELD_H

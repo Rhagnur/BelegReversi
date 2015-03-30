@@ -12,8 +12,8 @@ controllerField::controllerField()
 
 void controllerField::initControllerField(int fieldSize, int w, int h)
 {
-    player[0] = new modelPlayer("Jan", 0);
-    player[1] = new modelPlayer("Baran", 0);
+    player[0] = new modelPlayer("Jan (gr)", 0);
+    player[1] = new modelPlayer("Baran (sw)", 0);
     activePlayer = 1;
     otherPlayer = 2;    
     gamingField = new modelField(fieldSize);
@@ -23,8 +23,9 @@ void controllerField::initControllerField(int fieldSize, int w, int h)
     gamingField->setFieldValue(gamingField->getFieldSize()/2 - 1,gamingField->getFieldSize()/2, otherPlayer);
     player[0]->setPlayerStoneCount(2);
     player[1]->setPlayerStoneCount(2);
-    std::cout << player[0]->getPlayerName() + " hat Steine: " + std::to_string(player[0]->getPlayerStoneCount()) << std::endl;
-    std::cout << player[1]->getPlayerName() + " hat Steine: " + std::to_string(player[1]->getPlayerStoneCount()) << std::endl;
+    infoText = player[activePlayer - 1]->getPlayerName() + " ist an der Reihe.";
+    player1Text = player[0]->getPlayerName() + ": " + std::to_string(player[0]->getPlayerStoneCount());
+    player2Text = player[1]->getPlayerName() + ": " + std::to_string(player[1]->getPlayerStoneCount());
     startGame();
     setFieldSize(w, h);
     drawField();
@@ -309,28 +310,29 @@ void controllerField::flipStones(int i, int j)
 
 bool controllerField::searchPossibleTurns()
 {
-    bool foundPossibleTurn = false;
-            for (int i = 0; i < gamingField->getFieldSize(); i++)
+    bool foundPossibleTurn = false;    
+
+    for (int i = 0; i < gamingField->getFieldSize(); i++)
+    {
+        for (int j = 0; j < gamingField->getFieldSize(); j++)
+        {
+            /* First, set all previous possible fields back to normal */
+            if (gamingField->getFieldValue(i, j) == 3)
             {
-                for (int j = 0; j < gamingField->getFieldSize(); j++)
+                gamingField->setFieldValue(i, j , 0);
+            }
+            /* Now, check which fields are possible turns */
+            if (gamingField->getFieldValue(i, j) == 0)
+            {
+                if (isPossibleTurn(i, j))
                 {
-                    /* First, set all previous possible fields back to normal */
-                    if (gamingField->getFieldValue(i, j) == 3)
-                    {
-                        gamingField->setFieldValue(i, j , 0);
-                    }
-                    /* Now, check which fields are possible turns */
-                    if (gamingField->getFieldValue(i, j) == 0)
-                    {
-                        if (isPossibleTurn(i, j))
-                        {
-                            gamingField->setFieldValue(i, j, 3);
-                            foundPossibleTurn = true;
-                        }
-                    }
+                    gamingField->setFieldValue(i, j, 3);
+                    foundPossibleTurn = true;
                 }
             }
-            return foundPossibleTurn;
+        }
+    }
+    return foundPossibleTurn;
 }
 
 void controllerField::setFieldSize(int w, int h)
@@ -368,11 +370,11 @@ void controllerField::evaluateClick(int x, int y)
 
         if (gamingField->getFieldValue(i, j) == 3)
         {
+            infoText = player[otherPlayer - 1]->getPlayerName() + " ist an der Reihe.";
             (turn(i, j));
             flipStones(i, j);
-            std::cout << player[activePlayer - 1]->getPlayerName() + " hat seinen Zug gemacht " << std::endl;
-            std::cout << player[0]->getPlayerName() + " hat Steine: " + std::to_string(player[0]->getPlayerStoneCount()) << std::endl;
-            std::cout << player[1]->getPlayerName() + " hat Steine: " + std::to_string(player[1]->getPlayerStoneCount()) << std::endl;
+            player1Text = player[0]->getPlayerName() + ": " + std::to_string(player[0]->getPlayerStoneCount());
+            player2Text = player[1]->getPlayerName() + ": " + std::to_string(player[1]->getPlayerStoneCount());
             changeActivePlayer();
             searchPossibleTurns();
             drawField();
@@ -391,24 +393,24 @@ void controllerField::checkWin()
     {
         if (player[0]->getPlayerStoneCount() > player[1]->getPlayerStoneCount())
         {
-            std::cout << "Spieler 1 hat gewonnen" << std::endl;
+            infoText = player[0]->getPlayerName() + " hat gewonnen!";
         }
         else if (player[0]->getPlayerStoneCount() < player[1]->getPlayerStoneCount())
         {
-            std::cout << "Spieler 2 hat gewonnen" << std::endl;
+            infoText = player[1]->getPlayerName() + " hat gewonnen!";
         }
         else
         {
-            std::cout << "Unentschieden" << std::endl;
+            infoText = "Unentschieden!!!";
         }
     }
     else if (player[0]->getPlayerStoneCount() == 0)
     {
-        std::cout << "Spieler 2 hat gewonnen, Spieler 1 hat keine Steine mehr" << std::endl;
+        infoText = player[1]->getPlayerName() + " hat gewonnen!";
     }
     else if (player[1]->getPlayerStoneCount() == 0)
     {
-        std::cout << "Spieler 1 hat gewonnen, Spieler 1 hat keine Steine mehr" << std::endl;
+        infoText = player[0]->getPlayerName() + " hat gewonnen!";
     }
     else
     {
@@ -443,3 +445,19 @@ void controllerField::drawField()
         }
     }
 }
+
+std::string controllerField::getInfoText()
+{
+    return infoText;
+}
+
+std::string controllerField::getPlayer1Text()
+{
+    return player1Text;
+}
+
+std::string controllerField::getPlayer2Text()
+{
+    return player2Text;
+}
+
