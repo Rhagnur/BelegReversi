@@ -158,7 +158,7 @@ void controllerField::flipStones(int i, int j)
             for (int y = i + 1; y < iIterator; y++)
             {
                 gamingField->setFieldValue(y, j, activePlayer);
-                stoneCount(activePlayer);
+                stoneCount();
             }
         }
     }
@@ -179,7 +179,7 @@ void controllerField::flipStones(int i, int j)
             while (y < iIterator && x < jIterator)
             {
                 gamingField->setFieldValue(y, x, activePlayer);
-                stoneCount(activePlayer);
+                stoneCount();
                 y++;
                 x++;
             }
@@ -198,7 +198,7 @@ void controllerField::flipStones(int i, int j)
             for (int x = j + 1; x < jIterator; x++)
             {
                 gamingField->setFieldValue(i, x, activePlayer);
-                stoneCount(activePlayer);
+                stoneCount();
             }
         }
     }
@@ -219,7 +219,7 @@ void controllerField::flipStones(int i, int j)
             while (y > iIterator && x < jIterator)
             {
                 gamingField->setFieldValue(y, x, activePlayer);
-                stoneCount(activePlayer);
+                stoneCount();
                 y--;
                 x++;
             }
@@ -238,7 +238,7 @@ void controllerField::flipStones(int i, int j)
             for (int y = i - 1; y > iIterator; y--)
             {
                 gamingField->setFieldValue(y, j, activePlayer);
-                stoneCount(activePlayer);
+                stoneCount();
             }
         }
     }
@@ -259,7 +259,7 @@ void controllerField::flipStones(int i, int j)
             while (y > iIterator && x > jIterator)
             {
                 gamingField->setFieldValue(y, x, activePlayer);
-                stoneCount(activePlayer);
+                stoneCount();
                 y--;
                 x--;
             }
@@ -278,7 +278,7 @@ void controllerField::flipStones(int i, int j)
             for (int x = j - 1; x > jIterator; x--)
             {
                 gamingField->setFieldValue(i, x, activePlayer);
-                stoneCount(activePlayer);
+                stoneCount();
             }
         }
     }
@@ -299,7 +299,7 @@ void controllerField::flipStones(int i, int j)
             while (y < iIterator && x > jIterator)
             {
                 gamingField->setFieldValue(y, x, activePlayer);
-                stoneCount(activePlayer);
+                stoneCount();
                 y++;
                 x--;
             }
@@ -333,11 +333,6 @@ bool controllerField::searchPossibleTurns()
             return foundPossibleTurn;
 }
 
-void controllerField::startDrawing()
-{
-
-}
-
 void controllerField::setFieldSize(int w, int h)
 {
     gamingField->setFieldWidth(w);
@@ -364,7 +359,7 @@ int controllerField::getGamingFieldElementValue(int i, int j)
     return gamingField->getFieldValue(i, j);
 }
 
-bool controllerField::evaluateClick(int x, int y)
+void controllerField::evaluateClick(int x, int y)
 {
     if (x > 0 && x < gamingField->getFieldWidth() && y > 0 && y < gamingField->getFieldHeight())
     {
@@ -381,22 +376,47 @@ bool controllerField::evaluateClick(int x, int y)
             changeActivePlayer();
             searchPossibleTurns();
             drawField();
-            return true;
         }
         else
         {
-            return false;
+            //todo
         }
+        checkWin();
     }
 }
 
-bool controllerField::checkWin()
+void controllerField::checkWin()
 {
-    //todo
-    return true;
+    if (player[0]->getPlayerStoneCount() + player[1]->getPlayerStoneCount() == gamingField->getFieldSize() * gamingField->getFieldSize())
+    {
+        if (player[0]->getPlayerStoneCount() > player[1]->getPlayerStoneCount())
+        {
+            std::cout << "Spieler 1 hat gewonnen" << std::endl;
+        }
+        else if (player[0]->getPlayerStoneCount() < player[1]->getPlayerStoneCount())
+        {
+            std::cout << "Spieler 2 hat gewonnen" << std::endl;
+        }
+        else
+        {
+            std::cout << "Unentschieden" << std::endl;
+        }
+    }
+    else if (player[0]->getPlayerStoneCount() == 0)
+    {
+        std::cout << "Spieler 2 hat gewonnen, Spieler 1 hat keine Steine mehr" << std::endl;
+    }
+    else if (player[1]->getPlayerStoneCount() == 0)
+    {
+        std::cout << "Spieler 1 hat gewonnen, Spieler 1 hat keine Steine mehr" << std::endl;
+    }
+    else
+    {
+        //todo
+    }
 }
 
-void controllerField::stoneCount(int color)
+void controllerField::stoneCount()
 {
     player[activePlayer - 1]->setPlayerStoneCount((player[activePlayer - 1]->getPlayerStoneCount()) + 1);
     player[otherPlayer - 1]->setPlayerStoneCount((player[otherPlayer - 1]->getPlayerStoneCount()) - 1);
@@ -409,7 +429,6 @@ viewField* controllerField::passViewField()
 
 void controllerField::drawField()
 {
-    std::cout << "Beginne Feld zu zeichnen" << std::endl;
     for (int j = 0; j < gamingField->getFieldSize(); j++)
     {
         for (int i = 0; i < gamingField->getFieldSize(); i++)
@@ -423,5 +442,4 @@ void controllerField::drawField()
             viewGamingField->drawField(x, y, w, h, gamingField->getFieldValue(i, j));
         }
     }
-    std::cout << "Fertig Feld zu zeichnen" << std::endl;
 }

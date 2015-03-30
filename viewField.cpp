@@ -3,7 +3,6 @@
 
 viewField::viewField()
 {
-    std::cout << "Scenesize = " + std::to_string(this->width()) + " x " + std::to_string(this->height());
 }
 
 viewField* viewField::getViewField()

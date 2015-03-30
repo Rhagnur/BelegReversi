@@ -9,7 +9,4 @@ int main(int argc, char *argv[])
     w.show();
 
     return a.exec();
-    //controllerField* reversiField;
-    //reversiField = new controllerField(6);
-    //reversiField->startGame();
 }

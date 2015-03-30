@@ -22,8 +22,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    std::cout << "Startbutton gedrueckt" << std::endl;
-    controllField->initControllerField(6, ui->graphicsViewField->width(), ui->graphicsViewField->height());
+    controllField->initControllerField(4, ui->graphicsViewField->width(), ui->graphicsViewField->height());
     std::cout << "SetFieldSize to " + std::to_string(ui->graphicsViewField->width()) + " x " + std::to_string(ui->graphicsViewField->height()) << std::endl;
     ui->graphicsViewField->viewport()->installEventFilter(this);
     //sceneField->startReversi(ui->graphicsViewField->width(), ui->graphicsViewField->height());
@@ -42,7 +41,6 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
 
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
         QPoint coordinates = me->pos();
-        std::cout << "Mainwindow hat Mausklick erkannt: "  + std::to_string(coordinates.x()) + " x " + std::to_string(coordinates.y()) << std::endl;
 
         controllField->evaluateClick(coordinates.x(), coordinates.y());
 

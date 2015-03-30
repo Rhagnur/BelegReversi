@@ -16,15 +16,14 @@ public:
     void changeActivePlayer();
     void startGame();
     void turn(int i, int j);
-    void startDrawing();
     void setFieldSize(int w, int h);
     int getGamingFieldWidth();
     int getGamingFieldHeight();
     int getGamingFieldMatrixSize();
     int getGamingFieldElementValue(int i, int j);
-    bool evaluateClick(int x, int y);
-    bool checkWin();
-    void stoneCount(int color);
+    void evaluateClick(int x, int y);
+    void checkWin();
+    void stoneCount();
     viewField* passViewField();
     void drawField();
 
