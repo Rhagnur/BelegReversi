@@ -8,10 +8,12 @@
 controllerField::controllerField()
 {
     viewGamingField = new viewField();
+    isInit = false;
 }
 
 void controllerField::initControllerField(int fieldSize, int w, int h)
 {
+    isInit = true;
     player[0] = new modelPlayer("Jan (gr)", 0);
     player[1] = new modelPlayer("Baran (sw)", 0);
     activePlayer = 1;
@@ -361,8 +363,9 @@ int controllerField::getGamingFieldElementValue(int i, int j)
     return gamingField->getFieldValue(i, j);
 }
 
-void controllerField::evaluateClick(int x, int y)
+bool controllerField::evaluateClick(int x, int y)
 {
+    bool value = false;
     if (x > 0 && x < gamingField->getFieldWidth() && y > 0 && y < gamingField->getFieldHeight())
     {
         int i = y / (gamingField->getFieldHeight()/gamingField->getFieldSize());
@@ -378,6 +381,7 @@ void controllerField::evaluateClick(int x, int y)
             changeActivePlayer();
             searchPossibleTurns();
             drawField();
+            value = true;
         }
         else
         {
@@ -385,6 +389,7 @@ void controllerField::evaluateClick(int x, int y)
         }
         checkWin();
     }
+    return value;
 }
 
 void controllerField::checkWin()
@@ -461,3 +466,10 @@ std::string controllerField::getPlayer2Text()
     return player2Text;
 }
 
+void controllerField::skipTurn()
+{
+    infoText = player[activePlayer - 1]->getPlayerName() + " konnte nicht ziehen. " + player[otherPlayer - 1]->getPlayerName() + " ist wieder dran. ";
+    changeActivePlayer();
+    searchPossibleTurns();
+    drawField();
+}

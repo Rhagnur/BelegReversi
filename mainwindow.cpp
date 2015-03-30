@@ -35,7 +35,21 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    //todo
+
+    if(controllField->isInit && !controllField->searchPossibleTurns())
+    {
+        controllField->skipTurn();
+        ui->label->setText(QString::fromStdString(controllField->getInfoText()));
+        skipCount += 1;
+        if (skipCount == 2)
+        {
+            std::cout << "Kein Spieler kann mehr ziehen, Spiel beendet." << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "Fehler, Zug möglich oder Spiel nicht gestartet." << std::endl;
+    }
 }
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
@@ -44,10 +58,14 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
 
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
         QPoint coordinates = me->pos();
-        controllField->evaluateClick(coordinates.x(), coordinates.y());
-        ui->label->setText(QString::fromStdString(controllField->getInfoText()));
-        ui->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
-        ui->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
+        if (controllField->evaluateClick(coordinates.x(), coordinates.y()))
+        {
+            ui->label->setText(QString::fromStdString(controllField->getInfoText()));
+            ui->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
+            ui->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
+            skipCount = 0;
+        }
+
 
         return true;
     }

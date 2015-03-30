@@ -21,7 +21,7 @@ public:
     int getGamingFieldHeight();
     int getGamingFieldMatrixSize();
     int getGamingFieldElementValue(int i, int j);
-    void evaluateClick(int x, int y);
+    bool evaluateClick(int x, int y);
     void checkWin();
     void stoneCount();
     viewField* passViewField();
@@ -29,6 +29,8 @@ public:
     std::string getInfoText();
     std::string getPlayer1Text();
     std::string getPlayer2Text();
+    void skipTurn();
+    bool isInit;
 
 
 private:

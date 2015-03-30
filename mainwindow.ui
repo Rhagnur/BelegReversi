@@ -38,7 +38,7 @@
         <item>
          <widget class="QPushButton" name="pushButton_2">
           <property name="text">
-           <string>PlatzhalterButton</string>
+           <string>Zug aussetzen</string>
           </property>
          </widget>
         </item>
