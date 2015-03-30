@@ -25,8 +25,6 @@ void MainWindow::on_pushButton_clicked()
     controllField->initControllerField(4, ui->graphicsViewField->width(), ui->graphicsViewField->height());
     std::cout << "SetFieldSize to " + std::to_string(ui->graphicsViewField->width()) + " x " + std::to_string(ui->graphicsViewField->height()) << std::endl;
     ui->graphicsViewField->viewport()->installEventFilter(this);
-    //sceneField->startReversi(ui->graphicsViewField->width(), ui->graphicsViewField->height());
-    //sceneField->updateFieldSize(ui->graphicsViewField->width(), ui->graphicsViewField->height());
 
 }
 
@@ -45,6 +43,11 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
         controllField->evaluateClick(coordinates.x(), coordinates.y());
 
         return true;
+    }
+    if (event->type() == QEvent::Resize)
+    {
+        controllField->setFieldSize(ui->graphicsViewField->width(), ui->graphicsViewField->height());
+        controllField->drawField();
     }
 
     return false;
