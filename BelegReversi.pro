@@ -28,3 +28,7 @@ HEADERS  += mainwindow.h \
     viewField.h
 
 FORMS    += mainwindow.ui
+
+OTHER_FILES +=
+
+RESOURCES +=

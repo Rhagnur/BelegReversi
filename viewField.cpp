@@ -1,8 +1,10 @@
 #include "viewField.h"
 #include <iostream>
+#include <QGraphicsPixmapItem>
 
 viewField::viewField()
 {
+
 }
 
 viewField* viewField::getViewField()
@@ -12,6 +14,10 @@ viewField* viewField::getViewField()
 
 void viewField::drawField(int x, int y, int width, int height, int value)
 {
+
+
+    //this->setBackgroundBrush(Qt::red);
+
     QGraphicsRectItem *rectangle;
     QBrush whiteBrush(Qt::white);   //empty
     QBrush blackBrush(Qt::black);   //player 2
@@ -20,24 +26,37 @@ void viewField::drawField(int x, int y, int width, int height, int value)
     QPen blackPen(Qt::black);
     blackPen.setWidth(0);
 
-    //Zeichne leeres Feld
     if ( value == 0 )
     {
-        rectangle = this->addRect(x, y, width, height, blackPen, whiteBrush);
+        *empty = empty->scaled(width, height);
+        field0 = new QGraphicsPixmapItem();
+        field0->setPixmap(*empty);
+        field0->setPos(x, y);
+        this->addItem(field0);
     }
-    //Zeichne Spiele 1 Feld
+
     else if ( value == 1 )
     {
-        rectangle = this->addRect(x, y, width, height, blackPen, grayBrush);
+        *player1 = player1->scaled(width, height);
+        field1 = new QGraphicsPixmapItem();
+        field1->setPixmap(*player1);
+        field1->setPos(x, y);
+        this->addItem(field1);
     }
-    //Zeichne Spieler 2 Feld
     else if ( value == 2 )
     {
-        rectangle = this->addRect(x, y, width, height, blackPen, blackBrush);
+        *player2 = player2->scaled(width, height);
+        field2 = new QGraphicsPixmapItem();
+        field2->setPixmap(*player2);
+        field2->setPos(x, y);
+        this->addItem(field2);
     }
-    //Zeichen Möglicher Zug Feld
     else if ( value == 3 )
     {
-        rectangle = this->addRect(x, y, width, height, blackPen, redBrush);
+        *possible = possible->scaled(width, height);
+        field3 = new QGraphicsPixmapItem();
+        field3->setPixmap(*possible);
+        field3->setPos(x, y);
+        this->addItem(field3);
     }
 }
