@@ -1,0 +1,5 @@
+﻿QT Creator 5.3
+Desktop Qt 5.3 MinGW 32bit
+Desktop Qt 5.3.0 MSVC2012 OpenGL 32bi
+Desktop Qt 5.3.0 MSVC2013 64bit
+Desktop Qt 5.3 MSVC2013 OpenGL 64bit

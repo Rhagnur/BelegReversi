@@ -17,7 +17,6 @@ void viewField::drawField(int x, int y, int width, int height, int value)
 
 
     //this->setBackgroundBrush(Qt::red);
-
     QGraphicsRectItem *rectangle;
     QBrush whiteBrush(Qt::white);   //empty
     QBrush blackBrush(Qt::black);   //player 2

@@ -339,8 +339,16 @@ bool controllerField::searchPossibleTurns()
 
 void controllerField::setFieldSize(int w, int h)
 {
-    gamingField->setFieldWidth(w);
-    gamingField->setFieldHeight(h);
+    int temp = 0;
+    if (w < h) {
+        temp = w;
+    }
+    else {
+        temp = h;
+    }
+    gamingField->setFieldWidth(temp);
+    gamingField->setFieldHeight(temp);
+    viewGamingField->clear();
 }
 
 int controllerField::getGamingFieldWidth()
@@ -436,6 +444,7 @@ viewField* controllerField::passViewField()
 
 void controllerField::drawField()
 {
+
     for (int j = 0; j < gamingField->getFieldSize(); j++)
     {
         for (int i = 0; i < gamingField->getFieldSize(); i++)
