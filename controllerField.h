@@ -31,6 +31,7 @@ public:
     std::string getPlayer2Text();
     void skipTurn();
     bool isInit;
+    void clearField();
 
 
 private:

@@ -38,12 +38,17 @@ void MainWindow::on_pushButton_2_clicked()
 
     if(controllField->isInit && !controllField->searchPossibleTurns())
     {
-        controllField->skipTurn();
-        ui->label->setText(QString::fromStdString(controllField->getInfoText()));
-        skipCount += 1;
-        if (skipCount == 2)
+        if (skipped && !controllField->searchPossibleTurns())
         {
+            //todo Spiel beendet Grafik
+            controllField->passViewField()->clearField();
             std::cout << "Kein Spieler kann mehr ziehen, Spiel beendet." << std::endl;
+        }
+        else
+        {
+            skipped = true;
+            controllField->skipTurn();
+            ui->label->setText(QString::fromStdString(controllField->getInfoText()));
         }
     }
     else
@@ -63,7 +68,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
             ui->label->setText(QString::fromStdString(controllField->getInfoText()));
             ui->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
             ui->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
-            skipCount = 0;
+            skipped = false;
         }
 
 

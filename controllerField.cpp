@@ -14,8 +14,8 @@ controllerField::controllerField()
 void controllerField::initControllerField(int fieldSize, int w, int h)
 {
     isInit = true;
-    player[0] = new modelPlayer("Jan (gr)", 0);
-    player[1] = new modelPlayer("Baran (sw)", 0);
+    player[0] = new modelPlayer("Jan", 0);
+    player[1] = new modelPlayer("Baran", 0);
     activePlayer = 1;
     otherPlayer = 2;    
     gamingField = new modelField(fieldSize);
@@ -348,7 +348,7 @@ void controllerField::setFieldSize(int w, int h)
     }
     gamingField->setFieldWidth(temp);
     gamingField->setFieldHeight(temp);
-    viewGamingField->clear();
+    viewGamingField->clearField();
 }
 
 int controllerField::getGamingFieldWidth()
@@ -407,23 +407,33 @@ void controllerField::checkWin()
         if (player[0]->getPlayerStoneCount() > player[1]->getPlayerStoneCount())
         {
             infoText = player[0]->getPlayerName() + " hat gewonnen!";
+            viewGamingField->clearField();
+            viewGamingField->drawText(player[0]->getPlayerName() + " hat gewonnen!");
         }
         else if (player[0]->getPlayerStoneCount() < player[1]->getPlayerStoneCount())
         {
             infoText = player[1]->getPlayerName() + " hat gewonnen!";
+            viewGamingField->clearField();
+            viewGamingField->drawText(player[1]->getPlayerName() + " hat gewonnen!");
         }
         else
         {
             infoText = "Unentschieden!!!";
+            viewGamingField->clearField();
+            viewGamingField->drawText("Unentschieden!!!");
         }
     }
     else if (player[0]->getPlayerStoneCount() == 0)
     {
         infoText = player[1]->getPlayerName() + " hat gewonnen!";
+        viewGamingField->clearField();
+        viewGamingField->drawText(player[1]->getPlayerName() + " hat gewonnen!");
     }
     else if (player[1]->getPlayerStoneCount() == 0)
     {
         infoText = player[0]->getPlayerName() + " hat gewonnen!";
+        viewGamingField->clearField();
+        viewGamingField->drawText(player[0]->getPlayerName() + " hat gewonnen!");
     }
     else
     {
@@ -455,7 +465,7 @@ void controllerField::drawField()
             int w = gamingField->getFieldWidth()/gamingField->getFieldSize();
             int h = gamingField->getFieldHeight()/gamingField->getFieldSize();
 
-            viewGamingField->drawField(x, y, w, h, gamingField->getFieldValue(i, j));
+            viewGamingField->drawElement(x, y, w, h, gamingField->getFieldValue(i, j));
         }
     }
 }

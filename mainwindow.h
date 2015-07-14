@@ -26,7 +26,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     controllerField* controllField;
-    int skipCount;
+    bool skipped;
 };
 
 #endif // MAINWINDOW_H

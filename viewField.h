@@ -12,13 +12,14 @@ class viewField : public QGraphicsScene
 {
 public:
     viewField();
-    void drawField(int x, int y, int width, int height, int value);
+    void drawElement(int x, int y, int width, int height, int value);
+    void drawText(std::string text);
     viewField* getViewField();
     void clearField();
 
 
 private:
-    QGraphicsPixmapItem *field0, *field1, *field2, *field3;
+    QGraphicsPixmapItem *field;
     QPixmap *empty = new QPixmap("C:\\Github\\BelegReversi\\img\\design1\\emptyField.png");
     QPixmap *player1 = new QPixmap("C:\\Github\\BelegReversi\\img\\design1\\greyStone.png");
     QPixmap *player2 = new QPixmap("C:\\Github\\BelegReversi\\img\\design1\\brownStone.png");
