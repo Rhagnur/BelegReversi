@@ -18,10 +18,10 @@ public:
 
 private:
     QGraphicsPixmapItem *field0, *field1, *field2, *field3;
-    QPixmap *empty = new QPixmap("c:\\emptyField.png");
-    QPixmap *player1 = new QPixmap("c:\\greyStone.png");
-    QPixmap *player2 = new QPixmap("c:\\brownStone.png");
-    QPixmap *possible = new QPixmap("c:\\possibleTurn.png");
+    QPixmap *empty = new QPixmap("C:\\Github\\BelegReversi\\img\\design1\\emptyField.png");
+    QPixmap *player1 = new QPixmap("C:\\Github\\BelegReversi\\img\\design1\\greyStone.png");
+    QPixmap *player2 = new QPixmap("C:\\Github\\BelegReversi\\img\\design1\\brownStone.png");
+    QPixmap *possible = new QPixmap("C:\\Github\\BelegReversi\\img\\design1\\possibleTurn.png");
 
 
 
