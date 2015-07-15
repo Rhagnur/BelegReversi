@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <iostream>
+#include <string>
 #include <QDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -38,15 +39,14 @@ void MainWindow::on_pushButton_2_clicked()
 
     if(controllField->isInit && !controllField->searchPossibleTurns())
     {
-        if (skipped && !controllField->searchPossibleTurns())
+        if (controllField->getSkipped() && !controllField->searchPossibleTurns())
         {
             //todo Spiel beendet Grafik
-            controllField->passViewField()->clearField();
+            controllField->checkWin();
             std::cout << "Kein Spieler kann mehr ziehen, Spiel beendet." << std::endl;
         }
         else
         {
-            skipped = true;
             controllField->skipTurn();
             ui->label->setText(QString::fromStdString(controllField->getInfoText()));
         }
@@ -68,7 +68,6 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
             ui->label->setText(QString::fromStdString(controllField->getInfoText()));
             ui->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
             ui->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
-            skipped = false;
         }
 
 

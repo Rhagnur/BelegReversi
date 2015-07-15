@@ -26,7 +26,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     controllerField* controllField;
-    bool skipped;
 };
 
 #endif // MAINWINDOW_H

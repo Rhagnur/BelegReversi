@@ -22,9 +22,9 @@ void viewField::drawText(std::string text)
 {
     std::cout << text << std::endl;
     QFont f;
-    f.setPointSize(50);
+    f.setPointSize(40);
     f.setBold(true);
-    f.setFamily("Viner Hand ITC");
+    f.setFamily("Verdana");
     QGraphicsTextItem * io = new QGraphicsTextItem;
     io->setTextWidth(400);
     io->setPos(0,100);

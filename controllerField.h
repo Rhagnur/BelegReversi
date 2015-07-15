@@ -32,6 +32,7 @@ public:
     void skipTurn();
     bool isInit;
     void clearField();
+    bool getSkipped();
 
 
 private:
@@ -40,6 +41,7 @@ private:
     modelPlayer *player[2];
     int activePlayer, otherPlayer;
     std::string infoText, player1Text, player2Text;
+    bool skipped;
 };
 
 #endif // CONTROLLERFIELD_H

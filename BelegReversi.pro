@@ -31,4 +31,8 @@ FORMS    += mainwindow.ui
 
 OTHER_FILES +=
 
-RESOURCES +=
+RESOURCES += \
+    img/images.qrc \
+    fonts/fonts.qrc
+
+QMAKE_CXXFLAGS += -std=c++11

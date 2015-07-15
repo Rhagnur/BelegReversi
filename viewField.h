@@ -20,12 +20,10 @@ public:
 
 private:
     QGraphicsPixmapItem *field;
-    QPixmap *empty = new QPixmap("C:\\Github\\BelegReversi\\img\\design1\\emptyField.png");
-    QPixmap *player1 = new QPixmap("C:\\Github\\BelegReversi\\img\\design1\\greyStone.png");
-    QPixmap *player2 = new QPixmap("C:\\Github\\BelegReversi\\img\\design1\\brownStone.png");
-    QPixmap *possible = new QPixmap("C:\\Github\\BelegReversi\\img\\design1\\possibleTurn.png");
-
-
+    QPixmap *empty = new QPixmap(":/design1/emptyField.png");
+    QPixmap *player1 = new QPixmap(":/design1/greyStone.png");
+    QPixmap *player2 = new QPixmap(":/design1/brownStone.png");
+    QPixmap *possible = new QPixmap(":/design1/possibleTurn.png");
 
 };
 

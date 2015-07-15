@@ -13,6 +13,7 @@ controllerField::controllerField()
 
 void controllerField::initControllerField(int fieldSize, int w, int h)
 {
+    skipped = false;
     isInit = true;
     player[0] = new modelPlayer("Jan", 0);
     player[1] = new modelPlayer("Baran", 0);
@@ -390,10 +391,11 @@ bool controllerField::evaluateClick(int x, int y)
             searchPossibleTurns();
             drawField();
             value = true;
+            skipped = false;
         }
         else
         {
-            //todo
+            //todo falscher zug
         }
         checkWin();
     }
@@ -434,6 +436,29 @@ void controllerField::checkWin()
         infoText = player[0]->getPlayerName() + " hat gewonnen!";
         viewGamingField->clearField();
         viewGamingField->drawText(player[0]->getPlayerName() + " hat gewonnen!");
+    }
+    else if (skipped) {
+        if (player[0]->getPlayerStoneCount() > player[1]->getPlayerStoneCount())
+        {
+            infoText = player[0]->getPlayerName() + " hat gewonnen!";
+            std::cout << infoText << std::endl;
+            viewGamingField->clearField();
+            viewGamingField->drawText(player[0]->getPlayerName() + " hat gewonnen!");
+        }
+        else if (player[1]->getPlayerStoneCount() > player[0]->getPlayerStoneCount())
+        {
+            infoText = player[1]->getPlayerName() + " hat gewonnen!";
+            std::cout << infoText << std::endl;
+            viewGamingField->clearField();
+            viewGamingField->drawText(player[1]->getPlayerName() + " hat gewonnen!");
+        }
+        else
+        {
+            infoText = "Unentschieden!";
+            std::cout << infoText << std::endl;
+            viewGamingField->clearField();
+            viewGamingField->drawText("Unentschieden!");
+        }
     }
     else
     {
@@ -487,8 +512,14 @@ std::string controllerField::getPlayer2Text()
 
 void controllerField::skipTurn()
 {
-    infoText = player[activePlayer - 1]->getPlayerName() + " konnte nicht ziehen. " + player[otherPlayer - 1]->getPlayerName() + " ist wieder dran. ";
+    infoText = player[activePlayer - 1]->getPlayerName() + " konnte nicht ziehen. \n" + player[otherPlayer - 1]->getPlayerName() + " ist wieder dran. ";
     changeActivePlayer();
     searchPossibleTurns();
     drawField();
+    skipped = true;
+}
+
+bool controllerField::getSkipped()
+{
+    return skipped;
 }
