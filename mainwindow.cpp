@@ -11,7 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     controllField = new controllerField();
-    ui->graphicsViewField->setScene(controllField->passViewField());
+    myMenu = new menu();
+
     //ui->graphicsViewField->fitInView(controllField->passViewField()->sceneRect());
 
 }
@@ -23,6 +24,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
+    ui->graphicsViewField->setScene(controllField->passViewField());
     controllField->initControllerField(4, ui->graphicsViewField->width(), ui->graphicsViewField->height());
     ui->label->setText(QString::fromStdString(controllField->getInfoText()));
     ui->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
@@ -57,6 +59,18 @@ void MainWindow::on_pushButton_2_clicked()
     }
 }
 
+void MainWindow::on_pushButton_3_clicked()
+{
+    ui->graphicsViewField->viewport()->removeEventFilter(this);
+    ui->graphicsViewField->setScene(myMenu);
+    if (!menuIsInit) {
+        menuIsInit = true;
+        myMenu->addOptionElements();
+    }
+
+    std::cout << "Optionen gedrückt" << std::endl;
+}
+
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
 {
     if (event->type() == QEvent::MouseButtonPress) {
@@ -82,3 +96,4 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
 
     return false;
 }
+

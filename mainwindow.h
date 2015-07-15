@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QMouseEvent>
 #include "controllerField.h"
+#include "menu.h"
 
 
 namespace Ui {
@@ -22,10 +23,13 @@ public:
 private slots:
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
+    void on_pushButton_3_clicked();
 
 private:
     Ui::MainWindow *ui;
     controllerField* controllField;
+    menu* myMenu;
+    bool menuIsInit = false;
 };
 
 #endif // MAINWINDOW_H
