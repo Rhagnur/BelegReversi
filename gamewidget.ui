@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GameWindow</class>
- <widget class="QMainWindow" name="GameWindow">
+ <class>GameWidget</class>
+ <widget class="QWidget" name="GameWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,13 +11,21 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>GameWindow</string>
+   <string>GameWidget</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(0, 0, 0);
 border: 0;</string>
   </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>500</width>
+     <height>600</height>
+    </rect>
+   </property>
    <property name="minimumSize">
     <size>
      <width>500</width>
@@ -36,7 +44,7 @@ border: 0;</string>
          <widget class="QPushButton" name="pushButton">
           <property name="styleSheet">
            <string notr="true">background-color: rgb(0, 0, 0);
-font: 75 12pt &quot;Viner Hand ITC&quot;;
+font: 75 12pt &quot;Verdana&quot;;
 color: rgb(255, 255, 255);
 height: 30px;
 border: 1px solid white;
@@ -48,10 +56,25 @@ border-radius: 5px;</string>
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(0, 0, 0);
+font: 75 12pt &quot;Verdana&quot;;
+color: rgb(255, 255, 255);
+height: 30px;
+border: 1px solid white;
+border-radius: 5px;</string>
+          </property>
+          <property name="text">
+           <string>Optionen</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="pushButton_2">
           <property name="styleSheet">
            <string notr="true">background-color: rgb(0, 0, 0);
-font: 75 12pt &quot;Viner Hand ITC&quot;;
+font: 75 12pt &quot;Verdana&quot;;
 color: rgb(255, 255, 255);
 height: 30px;
 border: 1px solid white;
@@ -114,7 +137,8 @@ border-radius: 5px;</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">color: rgb(255, 255, 255);
+font: 10pt &quot;Verdana&quot;;</string>
         </property>
         <property name="text">
          <string>Infolabel_Spieler1</string>
@@ -140,10 +164,14 @@ border-radius: 5px;</string>
       <item>
        <widget class="QLabel" name="label">
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">color: rgb(255, 255, 255);
+font: 10pt &quot;Verdana&quot;;</string>
         </property>
         <property name="text">
          <string>Infolabel_Infos</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -184,10 +212,14 @@ border-radius: 5px;</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">color: rgb(255, 255, 255);
+font: 10pt &quot;Verdana&quot;;</string>
         </property>
         <property name="text">
          <string>Infolabel_Spieler2</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>

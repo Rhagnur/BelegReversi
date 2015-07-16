@@ -30,7 +30,8 @@ HEADERS  += mainwindow.h \
     menu.h
 
 FORMS    += mainwindow.ui \
-    gamewindow.ui
+    gamewidget.ui \
+    menuwidget.ui
 
 OTHER_FILES +=
 
