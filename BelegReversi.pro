@@ -29,7 +29,8 @@ HEADERS  += mainwindow.h \
     viewField.h \
     menu.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    gamewindow.ui
 
 OTHER_FILES +=
 

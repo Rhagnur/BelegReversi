@@ -1,14 +1,13 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include <iostream>
 #include <string>
 #include <QDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    mainUI(new Ui::MainWindow), gameUI(new Ui::GameWindow)
 {
-    ui->setupUi(this);
+    mainUI->setupUi(this);
 
     controllField = new controllerField();
     myMenu = new menu();
@@ -19,20 +18,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    delete mainUI;
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-    ui->graphicsViewField->setScene(controllField->passViewField());
-    controllField->initControllerField(4, ui->graphicsViewField->width(), ui->graphicsViewField->height());
-    ui->label->setText(QString::fromStdString(controllField->getInfoText()));
-    ui->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
-    ui->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
+    mainUI->graphicsViewField->setScene(controllField->passViewField());
+    controllField->initControllerField(4, mainUI->graphicsViewField->width(), mainUI->graphicsViewField->height());
+    mainUI->label->setText(QString::fromStdString(controllField->getInfoText()));
+    mainUI->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
+    mainUI->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
     std::cout << "Text 1 " + controllField->getPlayer1Text() << std::endl;
     std::cout << "Text 2 " + controllField->getPlayer2Text() << std::endl;
-    std::cout << "SetFieldSize to " + std::to_string(ui->graphicsViewField->width()) + " x " + std::to_string(ui->graphicsViewField->height()) << std::endl;
-    ui->graphicsViewField->viewport()->installEventFilter(this);
+    std::cout << "SetFieldSize to " + std::to_string(mainUI->graphicsViewField->width()) + " x " + std::to_string(mainUI->graphicsViewField->height()) << std::endl;
+    mainUI->graphicsViewField->viewport()->installEventFilter(this);
 
 }
 
@@ -50,7 +49,7 @@ void MainWindow::on_pushButton_2_clicked()
         else
         {
             controllField->skipTurn();
-            ui->label->setText(QString::fromStdString(controllField->getInfoText()));
+            mainUI->label->setText(QString::fromStdString(controllField->getInfoText()));
         }
     }
     else
@@ -61,12 +60,13 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    ui->graphicsViewField->viewport()->removeEventFilter(this);
-    ui->graphicsViewField->setScene(myMenu);
+    mainUI->graphicsViewField->viewport()->removeEventFilter(this);
+    /*mainUI->graphicsViewField->setScene(myMenu);
     if (!menuIsInit) {
         menuIsInit = true;
         myMenu->addOptionElements();
-    }
+    }*/
+    gameUI->setupUi(this);
 
     std::cout << "Optionen gedrückt" << std::endl;
 }
@@ -79,9 +79,9 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
         QPoint coordinates = me->pos();
         if (controllField->evaluateClick(coordinates.x(), coordinates.y()))
         {
-            ui->label->setText(QString::fromStdString(controllField->getInfoText()));
-            ui->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
-            ui->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
+            mainUI->label->setText(QString::fromStdString(controllField->getInfoText()));
+            mainUI->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
+            mainUI->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
         }
 
 
@@ -90,7 +90,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
     if (event->type() == QEvent::Resize)
     {
 
-        controllField->setFieldSize(ui->graphicsViewField->width(), ui->graphicsViewField->height());
+        controllField->setFieldSize(mainUI->graphicsViewField->width(), mainUI->graphicsViewField->height());
         controllField->drawField();
     }
 
