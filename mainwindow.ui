@@ -20,7 +20,7 @@ border: 0;</string>
   <widget class="QWidget" name="centralWidget">
    <property name="minimumSize">
     <size>
-     <width>500</width>
+     <width>510</width>
      <height>600</height>
     </size>
    </property>

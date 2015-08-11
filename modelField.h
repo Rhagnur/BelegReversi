@@ -1,7 +1,6 @@
 #ifndef MODELFIELD_H
 #define MODELFIELD_H
 
-#include "modelElement.h"
 
 class modelField
 {
@@ -17,7 +16,7 @@ public:
     void showFieldDebug();
 
 private:
-    modelElement** field;
+    int** field;
     int fieldSize;
     int fieldWidth;
     int fieldHeight;

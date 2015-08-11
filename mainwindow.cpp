@@ -100,8 +100,9 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
     if (event->type() == QEvent::Resize)
     {
 
-        controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
-        controllField->drawField();
+        //controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
+        //controllField->drawField();
+        std::cout << "Resize erkannt" << std::endl;
     }
 
     return false;

@@ -14,7 +14,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    modelElement.cpp \
     modelField.cpp \
     controllerField.cpp \
     modelPlayer.cpp \
@@ -22,7 +21,6 @@ SOURCES += main.cpp\
     menu.cpp
 
 HEADERS  += mainwindow.h \
-    modelElement.h \
     modelField.h \
     controllerField.h \
     modelPlayer.h \

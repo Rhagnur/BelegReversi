@@ -4,21 +4,20 @@
 modelField::modelField(int fieldSize)
 {
     this->fieldSize = fieldSize;
-    field = new modelElement*[fieldSize];
+    field = new int*[fieldSize];
     for (int i = 0; i < fieldSize; i++)
     {
-        field[i] = new modelElement[fieldSize];
+        field[i] = new int[fieldSize];
         for (int j = 0; j < fieldSize; j++)
         {
-            modelElement *newElement = new modelElement();
-            field[i][j] = *newElement;
+            field[i][j] = 0;
         }
     }
 }
 
 void modelField::setFieldValue(int i, int j, int value)
 {
-    field[i][j].setValue(value);
+    field[i][j] = value;
 }
 
 void modelField::setFieldWidth(int w)
@@ -33,7 +32,7 @@ void modelField::setFieldHeight(int h)
 
 int modelField::getFieldValue(int i, int j)
 {
-    return field[i][j].getValue();
+    return field[i][j];
 }
 
 int modelField::getFieldSize()
@@ -57,7 +56,7 @@ void modelField::showFieldDebug()
     {
         for (int j = 0; j < fieldSize; j++)
         {
-            std::cout<<field[i][j].getValue();
+            std::cout << field[i][j];
         }
         std::cout<<std::endl;
     }
