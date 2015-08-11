@@ -13,9 +13,11 @@ MainWindow::MainWindow(QWidget *parent) :
     myMenu = new menu();
 
     menuWidget->setupUi(menuContainer);
+    this->connect(menuWidget->pushButton_Start, SIGNAL(clicked()), this, SLOT(on_pushButton_Start_clicked()));
+    this->connect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));
     gameWidget->setupUi(gameContainer);
     mainUI->gridLayout->addWidget(menuContainer);
-    menuContainer->installEventFilter();
+    //menuContainer->installEventFilter();
 
     //ui->graphicsViewField->fitInView(controllField->passViewField()->sceneRect());
 
@@ -26,7 +28,7 @@ MainWindow::~MainWindow()
     delete mainUI;
 }
 
-/*
+
 void MainWindow::on_pushButton_clicked()
 {
     gameWidget->graphicsViewField->setScene(controllField->passViewField());
@@ -63,7 +65,7 @@ void MainWindow::on_pushButton_2_clicked()
         std::cout << "Fehler, Zug möglich oder Spiel nicht gestartet." << std::endl;
     }
 }
-
+/*
 void MainWindow::on_pushButton_3_clicked()
 {
     gameWidget->graphicsViewField->viewport()->removeEventFilter(this);
@@ -77,16 +79,9 @@ void MainWindow::on_pushButton_3_clicked()
 }
 */
 
+
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
 {
-    if (event->type() == QEvent::MouseButtonPress) {
-        std::cout << "Mausklick erkannt" << std::endl;
-        return true;
-
-    }
-    return false;
-
-    /*
     if (event->type() == QEvent::MouseButtonPress) {
         std::cout << target->objectName().toStdString() << std::endl;
 
@@ -110,5 +105,19 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
     }
 
     return false;
-    */
+}
+
+void MainWindow::on_pushButton_Start_clicked()
+{
+    std::cout << "Start gedrückt" << std::endl;
+    this->connect(gameWidget->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
+    this->connect(gameWidget->pushButton_2, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
+    mainUI->gridLayout->removeWidget(menuContainer);
+    mainUI->gridLayout->addWidget(gameContainer);
+
+}
+
+void MainWindow::on_pushButton_optionsMenu_clicked()
+{
+    std::cout << "Optionen gedrückt" << std::endl;
 }
