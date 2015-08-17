@@ -18,6 +18,8 @@ void menu::addOptionElements()
 
     volSlider->setGeometry(40, 50, 300, 20);
     volSlider->setOrientation(Qt::Horizontal);
+    volSlider->setRange(0, 100);
+    volSlider->setValue(100);
     this->addWidget(volSlider);
 
     vol2Label->setGeometry(40, 90, 100, 20);
@@ -25,10 +27,12 @@ void menu::addOptionElements()
 
     volOnOff->setGeometry(40, 120, 20, 20);
     this->addWidget(volOnOff);
+    volOnOff->setChecked(true);
 
-    placeholder1Label->setGeometry(40, 150, 100, 20);
+    placeholder1Label->setGeometry(40, 160, 100, 20);
     this->addWidget(placeholder1Label);
 
     placeholder2Label->setGeometry(40, 230, 100, 20);
     this->addWidget(placeholder2Label);
+
 }

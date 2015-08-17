@@ -15,8 +15,8 @@ void controllerField::initControllerField(int fieldSize, int w, int h)
 {
     skipped = false;
     isInit = true;
-    player[0] = new modelPlayer("Jan", 0);
-    player[1] = new modelPlayer("Baran", 0);
+    player[0] = new modelPlayer("Spieler 1", 0);
+    player[1] = new modelPlayer("Spieler 2", 0);
     activePlayer = 1;
     otherPlayer = 2;    
     gamingField = new modelField(fieldSize);

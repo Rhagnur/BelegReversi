@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     controllField = new controllerField();
     myMenu = new menu();
+    myMenu->addOptionElements();
 
     menuWidget->setupUi(menuContainer);
     this->connect(menuWidget->pushButton_Start, SIGNAL(clicked()), this, SLOT(on_pushButton_Start_clicked()));
@@ -20,6 +21,21 @@ MainWindow::MainWindow(QWidget *parent) :
     //menuContainer->installEventFilter();
 
     //ui->graphicsViewField->fitInView(controllField->passViewField()->sceneRect());
+
+
+
+    playList = new QMediaPlaylist;
+    playList->addMedia(QUrl("qrc:/music/Track01.mp3"));
+    playList->addMedia(QUrl("qrc:/music/Track02.mp3"));
+    playList->addMedia(QUrl("qrc:/music/Track03.mp3"));
+    playList->addMedia(QUrl("qrc:/music/Track04.mp3"));
+    playList->setCurrentIndex(1);
+
+    player = new QMediaPlayer;
+    player->setPlaylist(playList);
+
+    player->setVolume(100);
+    player->play();
 
 }
 
@@ -65,19 +81,48 @@ void MainWindow::on_pushButton_2_clicked()
         std::cout << "Fehler, Zug möglich oder Spiel nicht gestartet." << std::endl;
     }
 }
-/*
+
+//IngameOption Menu
 void MainWindow::on_pushButton_3_clicked()
 {
-    gameWidget->graphicsViewField->viewport()->removeEventFilter(this);
-    mainUI->graphicsViewField->setScene(myMenu);
-    if (!menuIsInit) {
-        menuIsInit = true;
-        myMenu->addOptionElements();
+    if (ingameOptionOn)
+    {
+        this->disconnect(myMenu->volSlider, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
+        this->disconnect(myMenu->volOnOff, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
+        gameWidget->pushButton_3->setText("Optionen");
+        gameWidget->graphicsViewField->setScene(controllField->passViewField());
+        gameWidget->graphicsViewField->viewport()->installEventFilter(this);
+        ingameOptionOn = false;
+    }
+    else {
+        gameWidget->pushButton_3->setText("Zurück");
+        gameWidget->graphicsViewField->viewport()->removeEventFilter(this);
+        gameWidget->graphicsViewField->setScene(myMenu);
+        this->connect(myMenu->volSlider, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
+        this->connect(myMenu->volOnOff, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
+        ingameOptionOn = true;
     }
 
-    std::cout << "Optionen gedrückt" << std::endl;
+
+    std::cout << "Optionen (ingame) gedrückt" << std::endl;
 }
-*/
+
+void MainWindow::changeVolume(int value)
+{
+    std::cout << "Volume = " + std::to_string(myMenu->volSlider->value()) << std::endl;
+    player->setVolume(value);
+}
+
+void MainWindow::toggleVolume(bool checked)
+{
+    std::cout << "toggleVol = " + std::to_string(checked) << std::endl;
+    if (checked) {
+        player->setVolume(myMenu->volSlider->value());
+    }
+    else {
+        player->setVolume(0);
+    }
+}
 
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
@@ -110,9 +155,12 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
 
 void MainWindow::on_pushButton_Start_clicked()
 {
+    this->disconnect(menuWidget->pushButton_Start, SIGNAL(clicked()), this, SLOT(on_pushButton_Start_clicked()));
+    this->disconnect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));
     std::cout << "Start gedrückt" << std::endl;
     this->connect(gameWidget->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
     this->connect(gameWidget->pushButton_2, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
+    this->connect(gameWidget->pushButton_3, SIGNAL(clicked()), this, SLOT(on_pushButton_3_clicked()));
     mainUI->gridLayout->removeWidget(menuContainer);
     mainUI->gridLayout->addWidget(gameContainer);
 
@@ -122,3 +170,5 @@ void MainWindow::on_pushButton_optionsMenu_clicked()
 {
     std::cout << "Optionen gedrückt" << std::endl;
 }
+
+

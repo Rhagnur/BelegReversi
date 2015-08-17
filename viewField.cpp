@@ -37,6 +37,10 @@ void viewField::drawText(std::string text)
 
 void viewField::drawElement(int x, int y, int width, int height, int value)
 {
+    QPixmap *empty = new QPixmap(":/img/design1/emptyField.png");
+    QPixmap *player1 = new QPixmap(":/img/design1/greyStone.png");
+    QPixmap *player2 = new QPixmap(":/img/design1/brownStone.png");
+    QPixmap *possible = new QPixmap(":/img/design1/possibleTurn.png");
 
     if ( value == 0 )
     {
