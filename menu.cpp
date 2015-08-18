@@ -5,9 +5,10 @@ menu::menu()
     this->setBackgroundBrush(QBrush(Qt::lightGray, Qt::SolidPattern));
     vol1Label = new QLabel(QString::fromStdString("Volume regeln"));
     vol2Label = new QLabel(QString::fromStdString("Volume on-off"));
-    placeholder1Label = new QLabel(QString::fromStdString("Platzhalter 1"));
+    designLabel = new QLabel(QString::fromStdString("Design"));
     placeholder2Label = new QLabel(QString::fromStdString("Platzhalter 2"));;
     volSlider = new QSlider();
+    designSlider = new QSlider();
     volOnOff = new QCheckBox();
 }
 
@@ -29,8 +30,14 @@ void menu::addOptionElements()
     this->addWidget(volOnOff);
     volOnOff->setChecked(true);
 
-    placeholder1Label->setGeometry(40, 160, 100, 20);
-    this->addWidget(placeholder1Label);
+    designLabel->setGeometry(40, 160, 100, 20);
+    this->addWidget(designLabel);
+
+    designSlider->setGeometry(40, 190, 300, 20);
+    designSlider->setOrientation(Qt::Horizontal);
+    designSlider->setRange(1, 3);
+    designSlider->setValue(1);
+    this->addWidget(designSlider);
 
     placeholder2Label->setGeometry(40, 230, 100, 20);
     this->addWidget(placeholder2Label);

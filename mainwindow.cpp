@@ -48,7 +48,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     gameWidget->graphicsViewField->setScene(controllField->passViewField());
-    controllField->initControllerField(4, gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
+    controllField->initControllerField(4, gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height(), myMenu->designSlider->value());
     gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
     gameWidget->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
     gameWidget->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
@@ -89,6 +89,7 @@ void MainWindow::on_pushButton_3_clicked()
     {
         this->disconnect(myMenu->volSlider, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
         this->disconnect(myMenu->volOnOff, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
+        this->disconnect(myMenu->designSlider, SIGNAL(valueChanged(int)), this, SLOT(changeDesign(int)));
         gameWidget->pushButton_3->setText("Optionen");
         gameWidget->graphicsViewField->setScene(controllField->passViewField());
         gameWidget->graphicsViewField->viewport()->installEventFilter(this);
@@ -100,6 +101,7 @@ void MainWindow::on_pushButton_3_clicked()
         gameWidget->graphicsViewField->setScene(myMenu);
         this->connect(myMenu->volSlider, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
         this->connect(myMenu->volOnOff, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
+        this->connect(myMenu->designSlider, SIGNAL(valueChanged(int)), this, SLOT(changeDesign(int)));
         ingameOptionOn = true;
     }
 
@@ -122,6 +124,13 @@ void MainWindow::toggleVolume(bool checked)
     else {
         player->setVolume(0);
     }
+}
+
+void MainWindow::changeDesign(int design)
+{
+    std::cout << "Design = " + std::to_string(myMenu->designSlider->value()) << std::endl;
+    //player->setVolume(value);
+    controllField->setDesign(design);
 }
 
 

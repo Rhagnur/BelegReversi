@@ -12,7 +12,7 @@ class viewField : public QGraphicsScene
 {
 public:
     viewField();
-    void drawElement(int x, int y, int width, int height, int value);
+    void drawElement(int x, int y, int width, int height, int value, int design);
     void drawText(std::string text);
     viewField* getViewField();
     void clearField();

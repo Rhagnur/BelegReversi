@@ -9,7 +9,7 @@ class controllerField
 {
 public:
     controllerField();
-    void initControllerField(int fieldSize, int w, int h);
+    void initControllerField(int fieldSize, int w, int h, int design);
     bool searchPossibleTurns();
     bool isPossibleTurn(int i, int j);
     void flipStones(int i, int j);
@@ -33,13 +33,14 @@ public:
     bool isInit;
     void clearField();
     bool getSkipped();
+    void setDesign(int design);
 
 
 private:
     viewField *viewGamingField;
     modelField *gamingField;
     modelPlayer *player[2];
-    int activePlayer, otherPlayer;
+    int activePlayer, otherPlayer, design;
     std::string infoText, player1Text, player2Text;
     bool skipped;
 };

@@ -12,13 +12,13 @@ class menu: public QGraphicsScene
 public:
     menu();
     void addOptionElements();
-    QSlider *volSlider;
+    QSlider *volSlider, *designSlider;
     QCheckBox *volOnOff;
 
 private:
     QLabel *vol1Label;
     QLabel *vol2Label;
-    QLabel *placeholder1Label;
+    QLabel *designLabel;
     QLabel *placeholder2Label;
 
 

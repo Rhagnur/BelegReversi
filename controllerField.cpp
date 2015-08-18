@@ -11,14 +11,15 @@ controllerField::controllerField()
     isInit = false;
 }
 
-void controllerField::initControllerField(int fieldSize, int w, int h)
+void controllerField::initControllerField(int fieldSize, int w, int h, int design)
 {
     skipped = false;
     isInit = true;
     player[0] = new modelPlayer("Spieler 1", 0);
     player[1] = new modelPlayer("Spieler 2", 0);
     activePlayer = 1;
-    otherPlayer = 2;    
+    otherPlayer = 2;
+    this->design = design;
     gamingField = new modelField(fieldSize);
     gamingField->setFieldValue(gamingField->getFieldSize()/2 - 1,gamingField->getFieldSize()/2 - 1, activePlayer);
     gamingField->setFieldValue(gamingField->getFieldSize()/2,gamingField->getFieldSize()/2, activePlayer);
@@ -490,7 +491,7 @@ void controllerField::drawField()
             int w = gamingField->getFieldWidth()/gamingField->getFieldSize();
             int h = gamingField->getFieldHeight()/gamingField->getFieldSize();
 
-            viewGamingField->drawElement(x, y, w, h, gamingField->getFieldValue(i, j));
+            viewGamingField->drawElement(x, y, w, h, gamingField->getFieldValue(i, j), design);
         }
     }
 }
@@ -522,4 +523,13 @@ void controllerField::skipTurn()
 bool controllerField::getSkipped()
 {
     return skipped;
+}
+
+void controllerField::setDesign(int design)
+{
+    this->design = design;
+    if (isInit)
+    {
+        drawField();
+    }
 }

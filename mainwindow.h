@@ -37,6 +37,7 @@ private slots:
 
     void changeVolume(int value);
     void toggleVolume(bool checked);
+    void changeDesign(int design);
 
 private:
     QWidget *menuContainer = new QWidget();
