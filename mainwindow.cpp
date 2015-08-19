@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     menuWidget->setupUi(menuContainer);
     this->connect(menuWidget->pushButton_Start, SIGNAL(clicked()), this, SLOT(on_pushButton_Start_clicked()));
+    this->connect(menuWidget->pushButton_StartAI, SIGNAL(clicked()), this, SLOT(on_pushButton_StartAI_clicked()));
     this->connect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));
     gameWidget->setupUi(gameContainer);
     mainUI->gridLayout->addWidget(menuContainer);
@@ -48,7 +49,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     gameWidget->graphicsViewField->setScene(controllField->passViewField());
-    controllField->initControllerField(4, gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height(), myMenu->designSlider->value());
+    controllField->initControllerField(4, myMenu->designSlider->value());
     gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
     gameWidget->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
     gameWidget->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
@@ -56,7 +57,8 @@ void MainWindow::on_pushButton_clicked()
     std::cout << "Text 2 " + controllField->getPlayer2Text() << std::endl;
     std::cout << "SetFieldSize to " + std::to_string(gameWidget->graphicsViewField->width()) + " x " + std::to_string(gameWidget->graphicsViewField->height()) << std::endl;
     gameWidget->graphicsViewField->viewport()->installEventFilter(this);
-
+    controllField->startGame();
+    controllField->drawField();
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -129,7 +131,6 @@ void MainWindow::toggleVolume(bool checked)
 void MainWindow::changeDesign(int design)
 {
     std::cout << "Design = " + std::to_string(myMenu->designSlider->value()) << std::endl;
-    //player->setVolume(value);
     controllField->setDesign(design);
 }
 
@@ -137,8 +138,6 @@ void MainWindow::changeDesign(int design)
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
 {
     if (event->type() == QEvent::MouseButtonPress) {
-        std::cout << target->objectName().toStdString() << std::endl;
-
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
         QPoint coordinates = me->pos();
         if (controllField->evaluateClick(coordinates.x(), coordinates.y()))
@@ -154,8 +153,8 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
     if (event->type() == QEvent::Resize)
     {
 
-        //controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
-        //controllField->drawField();
+        controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
+        controllField->drawField();
         std::cout << "Resize erkannt" << std::endl;
     }
 
@@ -165,6 +164,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
 void MainWindow::on_pushButton_Start_clicked()
 {
     this->disconnect(menuWidget->pushButton_Start, SIGNAL(clicked()), this, SLOT(on_pushButton_Start_clicked()));
+    this->disconnect(menuWidget->pushButton_StartAI, SIGNAL(clicked()), this, SLOT(on_pushButton_StartAI_clicked()));
     this->disconnect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));
     std::cout << "Start gedrückt" << std::endl;
     this->connect(gameWidget->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
@@ -175,9 +175,41 @@ void MainWindow::on_pushButton_Start_clicked()
 
 }
 
+void MainWindow::on_pushButton_StartAI_clicked()
+{
+    std::cout << "Start AI gedrückt" << std::endl;
+
+    this->disconnect(menuWidget->pushButton_Start, SIGNAL(clicked()), this, SLOT(on_pushButton_Start_clicked()));
+    this->disconnect(menuWidget->pushButton_StartAI, SIGNAL(clicked()), this, SLOT(on_pushButton_StartAI_clicked()));
+    this->disconnect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));
+
+    this->connect(gameWidget->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
+    this->connect(gameWidget->pushButton_2, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
+    this->connect(gameWidget->pushButton_3, SIGNAL(clicked()), this, SLOT(on_pushButton_3_clicked()));
+
+    mainUI->gridLayout->removeWidget(menuContainer);
+    mainUI->gridLayout->addWidget(gameContainer);
+
+
+    controllField->initControllerField(4, myMenu->designSlider->value());
+    gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
+    gameWidget->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
+    gameWidget->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
+    std::cout << "Text 1 " + controllField->getPlayer1Text() << std::endl;
+    std::cout << "Text 2 " + controllField->getPlayer2Text() << std::endl;
+    gameWidget->graphicsViewField->viewport()->installEventFilter(this);
+    gameWidget->graphicsViewField->setScene(controllField->passViewField());
+    std::cout << "SetFieldSize to " + std::to_string(gameWidget->graphicsViewField->width()) + " x " + std::to_string(gameWidget->graphicsViewField->height()) << std::endl;
+    controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
+    controllField->startGame();
+    controllField->drawField();
+}
+
 void MainWindow::on_pushButton_optionsMenu_clicked()
 {
     std::cout << "Optionen gedrückt" << std::endl;
 }
+
+
 
 

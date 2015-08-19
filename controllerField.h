@@ -9,7 +9,7 @@ class controllerField
 {
 public:
     controllerField();
-    void initControllerField(int fieldSize, int w, int h, int design);
+    void initControllerField(int fieldSize, int design);
     bool searchPossibleTurns();
     bool isPossibleTurn(int i, int j);
     void flipStones(int i, int j);

@@ -29,7 +29,8 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui \
     gamewidget.ui \
-    menuwidget.ui
+    menuwidget.ui \
+    pvpwidget.ui
 
 OTHER_FILES +=
 

@@ -11,7 +11,7 @@ controllerField::controllerField()
     isInit = false;
 }
 
-void controllerField::initControllerField(int fieldSize, int w, int h, int design)
+void controllerField::initControllerField(int fieldSize, int design)
 {
     skipped = false;
     isInit = true;
@@ -30,9 +30,6 @@ void controllerField::initControllerField(int fieldSize, int w, int h, int desig
     infoText = player[activePlayer - 1]->getPlayerName() + " ist an der Reihe.";
     player1Text = player[0]->getPlayerName() + ": " + std::to_string(player[0]->getPlayerStoneCount());
     player2Text = player[1]->getPlayerName() + ": " + std::to_string(player[1]->getPlayerStoneCount());
-    startGame();
-    setFieldSize(w, h);
-    drawField();
 }
 
 void controllerField::startGame()

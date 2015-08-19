@@ -39,6 +39,8 @@ private slots:
     void toggleVolume(bool checked);
     void changeDesign(int design);
 
+    void on_pushButton_StartAI_clicked();
+
 private:
     QWidget *menuContainer = new QWidget();
     QWidget *gameContainer = new QWidget();
