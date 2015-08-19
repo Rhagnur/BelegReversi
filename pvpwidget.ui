@@ -218,7 +218,7 @@ border-radius: 5px;</string>
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_StartPvP">
+      <widget class="QPushButton" name="pushButton_StartGamePvP">
        <property name="styleSheet">
         <string notr="true">background-color: #424242;
 font: 75 12pt &quot;Verdana&quot;;

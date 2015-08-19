@@ -29,15 +29,14 @@ public:
 private slots:
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
-    void on_pushButton_Start_clicked();
+    void on_pushButton_StartPvP_clicked();
     void on_pushButton_optionsMenu_clicked();
     void on_pushButton_3_clicked();
     void changeVolume(int value);
     void toggleVolume(bool checked);
     void changeDesign(int design);
     void on_pushButton_StartAI_clicked();
-
-    void on_pushButton_StartPvP_clicked();
+    void on_pushButton_StartGamePvP_clicked();
 
 private:
     QWidget *menuContainer = new QWidget();

@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     gameWidget->setupUi(gameContainer);
     pvpWidget->setupUi(pvpContainer);
 
-    this->connect(menuWidget->pushButton_Start, SIGNAL(clicked()), this, SLOT(on_pushButton_Start_clicked()));
+    this->connect(menuWidget->pushButton_StartPvP, SIGNAL(clicked()), this, SLOT(on_pushButton_StartPvP_clicked()));
     this->connect(menuWidget->pushButton_StartAI, SIGNAL(clicked()), this, SLOT(on_pushButton_StartAI_clicked()));
     this->connect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));
 
@@ -160,15 +160,15 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
     return false;
 }
 
-void MainWindow::on_pushButton_Start_clicked()
+void MainWindow::on_pushButton_StartPvP_clicked()
 {
-    this->disconnect(menuWidget->pushButton_Start, SIGNAL(clicked()), this, SLOT(on_pushButton_Start_clicked()));
+    this->disconnect(menuWidget->pushButton_StartPvP, SIGNAL(clicked()), this, SLOT(on_pushButton_StartPvP_clicked()));
     this->disconnect(menuWidget->pushButton_StartAI, SIGNAL(clicked()), this, SLOT(on_pushButton_StartAI_clicked()));
     this->disconnect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));
     std::cout << "Start gedrückt" << std::endl;
     mainUI->gridLayout->removeWidget(menuContainer);
     mainUI->gridLayout->addWidget(pvpContainer);
-    this->connect(pvpWidget->pushButton_StartPvP, SIGNAL(clicked(bool)), this, SLOT(on_pushButton_StartPvP_clicked()));
+    this->connect(pvpWidget->pushButton_StartGamePvP, SIGNAL(clicked(bool)), this, SLOT(on_pushButton_StartGamePvP_clicked()));
 
 }
 
@@ -176,7 +176,7 @@ void MainWindow::on_pushButton_StartAI_clicked()
 {
     std::cout << "Start AI gedrückt" << std::endl;
 
-    this->disconnect(menuWidget->pushButton_Start, SIGNAL(clicked()), this, SLOT(on_pushButton_Start_clicked()));
+    this->disconnect(menuWidget->pushButton_StartPvP, SIGNAL(clicked()), this, SLOT(on_pushButton_StartPvP_clicked()));
     this->disconnect(menuWidget->pushButton_StartAI, SIGNAL(clicked()), this, SLOT(on_pushButton_StartAI_clicked()));
     this->disconnect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));
 
@@ -211,7 +211,7 @@ void MainWindow::on_pushButton_optionsMenu_clicked()
 
 
 
-void MainWindow::on_pushButton_StartPvP_clicked()
+void MainWindow::on_pushButton_StartGamePvP_clicked()
 {
     std::string player1Name = pvpWidget->lineEdit_Player1->text().toStdString();
     std::string player2Name = pvpWidget->lineEdit_Player2->text().toStdString();
