@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MenuWidget</class>
- <widget class="QWidget" name="MenuWidget">
+ <class>HSWidget</class>
+ <widget class="QWidget" name="HSWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>524</width>
-    <height>626</height>
+    <width>500</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -38,69 +38,42 @@ border: 0;</string>
     </spacer>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton_StartPvP">
+      <widget class="QLabel" name="label_HSTitle">
        <property name="styleSheet">
-        <string notr="true">background-color: #424242;
-font: 75 12pt &quot;Verdana&quot;;
+        <string notr="true">font: 75 16pt &quot;Verdana&quot;;
 color: #FFF;
-height: 50px;
-min-width: 300px;
-border-radius: 5px;</string>
-       </property>
-       <property name="text">
-        <string>Spieler gegen Spieler</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_StartAI">
-       <property name="styleSheet">
-        <string notr="true">background-color: #424242;
-font: 75 12pt &quot;Verdana&quot;;
-color: #FFF;
-height: 50px;
-min-width: 300px;
-border-radius: 5px;</string>
-       </property>
-       <property name="text">
-        <string>Spieler gegen Computer</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_optionsMenu">
-       <property name="styleSheet">
-        <string notr="true">background-color: #424242;
-font: 75 12pt &quot;Verdana&quot;;
-color: #FFF;
-height: 50px;
-min-width: 300px;
-border-radius: 5px;</string>
-       </property>
-       <property name="text">
-        <string>Optionen</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_Highscore">
-       <property name="styleSheet">
-        <string notr="true">background-color: #424242;
-font: 75 12pt &quot;Verdana&quot;;
-color: #FFF;
-height: 50px;
-min-width: 300px;
-border-radius: 5px;</string>
+margin-bottom: 6px;</string>
        </property>
        <property name="text">
         <string>Highscore</string>
        </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_Credits">
+      <widget class="QLabel" name="label_HSInfo">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Verdana&quot;;
+color: #FFF;
+margin-bottom: 6px;</string>
+       </property>
+       <property name="text">
+        <string>Name - Punktzahl - Feldgröße</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGraphicsView" name="graphicsViewHS"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_HSBack">
        <property name="styleSheet">
         <string notr="true">background-color: #424242;
 font: 75 12pt &quot;Verdana&quot;;
@@ -110,7 +83,7 @@ min-width: 300px;
 border-radius: 5px;</string>
        </property>
        <property name="text">
-        <string>Credits</string>
+        <string>Zurück</string>
        </property>
       </widget>
      </item>

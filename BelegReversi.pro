@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui multimedia
+QT       += core gui multimedia sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,19 +18,24 @@ SOURCES += main.cpp\
     controllerField.cpp \
     modelPlayer.cpp \
     viewField.cpp \
-    menu.cpp
+    menu.cpp \
+    sqlite.cpp \
+    viewHS.cpp
 
 HEADERS  += mainwindow.h \
     modelField.h \
     controllerField.h \
     modelPlayer.h \
     viewField.h \
-    menu.h
+    menu.h \
+    sqlite.h \
+    viewHS.h
 
 FORMS    += mainwindow.ui \
     gamewidget.ui \
     menuwidget.ui \
-    pvpwidget.ui
+    pvpwidget.ui \
+    hswidget.ui
 
 OTHER_FILES +=
 
@@ -40,3 +45,5 @@ RESOURCES += \
     music/music.qrc
 
 QMAKE_CXXFLAGS += -std=c++11
+
+DISTFILES +=

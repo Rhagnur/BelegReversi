@@ -4,6 +4,7 @@
 #include "modelField.h"
 #include "modelPlayer.h"
 #include "viewField.h"
+#include "sqlite.h"
 
 class controllerField
 {
@@ -21,6 +22,7 @@ public:
     int getGamingFieldHeight();
     int getGamingFieldMatrixSize();
     int getGamingFieldElementValue(int i, int j);
+    std::string getHighscore();
     bool evaluateClick(int x, int y);
     void checkWin();
     void stoneCount();
@@ -43,6 +45,7 @@ private:
     viewField *viewGamingField;
     modelField *gamingField;
     modelPlayer *player[2];
+    SQLite *myDB;
     int activePlayer, otherPlayer, design;
     std::string infoText, player1Text, player2Text;
     bool skipped, showPossibleFields;

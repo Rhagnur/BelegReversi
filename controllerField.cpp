@@ -10,6 +10,7 @@ controllerField::controllerField()
     viewGamingField = new viewField();
     isInit = false;
     showPossibleFields = false;
+    myDB = new SQLite();
 }
 
 void controllerField::initControllerField(int fieldSize, int design)
@@ -410,12 +411,14 @@ void controllerField::checkWin()
             infoText = player[0]->getPlayerName() + " hat gewonnen!";
             viewGamingField->clearField();
             viewGamingField->drawText(player[0]->getPlayerName() + " hat gewonnen!");
+            myDB->insertPlayerHighscore(player[0]->getPlayerName(), player[0]->getPlayerStoneCount(), gamingField->getFieldSize());
         }
         else if (player[0]->getPlayerStoneCount() < player[1]->getPlayerStoneCount())
         {
             infoText = player[1]->getPlayerName() + " hat gewonnen!";
             viewGamingField->clearField();
             viewGamingField->drawText(player[1]->getPlayerName() + " hat gewonnen!");
+            myDB->insertPlayerHighscore(player[1]->getPlayerName(), player[1]->getPlayerStoneCount(), gamingField->getFieldSize());
         }
         else
         {
@@ -429,12 +432,14 @@ void controllerField::checkWin()
         infoText = player[1]->getPlayerName() + " hat gewonnen!";
         viewGamingField->clearField();
         viewGamingField->drawText(player[1]->getPlayerName() + " hat gewonnen!");
+        myDB->insertPlayerHighscore(player[1]->getPlayerName(), player[1]->getPlayerStoneCount(), gamingField->getFieldSize());
     }
     else if (player[1]->getPlayerStoneCount() == 0)
     {
         infoText = player[0]->getPlayerName() + " hat gewonnen!";
         viewGamingField->clearField();
         viewGamingField->drawText(player[0]->getPlayerName() + " hat gewonnen!");
+        myDB->insertPlayerHighscore(player[0]->getPlayerName(), player[0]->getPlayerStoneCount(), gamingField->getFieldSize());
     }
     else if (skipped) {
         if (player[0]->getPlayerStoneCount() > player[1]->getPlayerStoneCount())
@@ -443,6 +448,7 @@ void controllerField::checkWin()
             std::cout << infoText << std::endl;
             viewGamingField->clearField();
             viewGamingField->drawText(player[0]->getPlayerName() + " hat gewonnen!");
+            myDB->insertPlayerHighscore(player[0]->getPlayerName(), player[0]->getPlayerStoneCount(), gamingField->getFieldSize());
         }
         else if (player[1]->getPlayerStoneCount() > player[0]->getPlayerStoneCount())
         {
@@ -450,6 +456,7 @@ void controllerField::checkWin()
             std::cout << infoText << std::endl;
             viewGamingField->clearField();
             viewGamingField->drawText(player[1]->getPlayerName() + " hat gewonnen!");
+            myDB->insertPlayerHighscore(player[1]->getPlayerName(), player[1]->getPlayerStoneCount(), gamingField->getFieldSize());
         }
         else
         {
@@ -547,4 +554,9 @@ void controllerField::setPlayer2Name(std::string name)
 void controllerField::setShowPossTurns(bool setting)
 {
     showPossibleFields = setting;
+}
+
+std::string controllerField::getHighscore()
+{
+    return myDB->getHighscores();
 }
