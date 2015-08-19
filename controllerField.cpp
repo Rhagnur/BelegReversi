@@ -530,3 +530,15 @@ void controllerField::setDesign(int design)
         drawField();
     }
 }
+
+void controllerField::setPlayer1Name(std::string name)
+{
+    player[0]->setPlayerName(name);
+    player1Text = player[0]->getPlayerName() + ": " + std::to_string(player[0]->getPlayerStoneCount());
+}
+
+void controllerField::setPlayer2Name(std::string name)
+{
+    player[1]->setPlayerName(name);
+    player2Text = player[1]->getPlayerName() + ": " + std::to_string(player[1]->getPlayerStoneCount());
+}

@@ -5,7 +5,7 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    mainUI(new Ui::MainWindow), gameWidget(new Ui::GameWidget), menuWidget(new Ui::MenuWidget)
+    mainUI(new Ui::MainWindow), gameWidget(new Ui::GameWidget), menuWidget(new Ui::MenuWidget), pvpWidget(new Ui::PvPWidget)
 {
     mainUI->setupUi(this);
 
@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->connect(menuWidget->pushButton_StartAI, SIGNAL(clicked()), this, SLOT(on_pushButton_StartAI_clicked()));
     this->connect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));
     gameWidget->setupUi(gameContainer);
+    pvpWidget->setupUi(pvpContainer);
     mainUI->gridLayout->addWidget(menuContainer);
     //menuContainer->installEventFilter();
 
@@ -56,9 +57,10 @@ void MainWindow::on_pushButton_clicked()
     std::cout << "Text 1 " + controllField->getPlayer1Text() << std::endl;
     std::cout << "Text 2 " + controllField->getPlayer2Text() << std::endl;
     std::cout << "SetFieldSize to " + std::to_string(gameWidget->graphicsViewField->width()) + " x " + std::to_string(gameWidget->graphicsViewField->height()) << std::endl;
-    gameWidget->graphicsViewField->viewport()->installEventFilter(this);
+    controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
     controllField->startGame();
     controllField->drawField();
+    gameWidget->graphicsViewField->viewport()->installEventFilter(this);    
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -167,11 +169,9 @@ void MainWindow::on_pushButton_Start_clicked()
     this->disconnect(menuWidget->pushButton_StartAI, SIGNAL(clicked()), this, SLOT(on_pushButton_StartAI_clicked()));
     this->disconnect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));
     std::cout << "Start gedrückt" << std::endl;
-    this->connect(gameWidget->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
-    this->connect(gameWidget->pushButton_2, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
-    this->connect(gameWidget->pushButton_3, SIGNAL(clicked()), this, SLOT(on_pushButton_3_clicked()));
     mainUI->gridLayout->removeWidget(menuContainer);
-    mainUI->gridLayout->addWidget(gameContainer);
+    mainUI->gridLayout->addWidget(pvpContainer);
+    this->connect(pvpWidget->pushButton_StartPvP, SIGNAL(clicked(bool)), this, SLOT(on_pushButton_StartPvP_clicked()));
 
 }
 
@@ -213,3 +213,43 @@ void MainWindow::on_pushButton_optionsMenu_clicked()
 
 
 
+
+void MainWindow::on_pushButton_StartPvP_clicked()
+{
+    std::string player1Name = pvpWidget->lineEdit_Player1->text().toStdString();
+    std::string player2Name = pvpWidget->lineEdit_Player2->text().toStdString();
+
+    if (player1Name == "" || player1Name.length() < 2)
+    {
+        player1Name = "Spieler 1";
+    }
+    if (player2Name == "" || player2Name.length() < 2)
+    {
+        player2Name = "Spieler 2";
+    }
+
+    this->connect(gameWidget->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
+    this->connect(gameWidget->pushButton_2, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
+    this->connect(gameWidget->pushButton_3, SIGNAL(clicked()), this, SLOT(on_pushButton_3_clicked()));
+
+    mainUI->gridLayout->removeWidget(pvpContainer);
+    mainUI->gridLayout->addWidget(gameContainer);
+
+
+    controllField->initControllerField(4, myMenu->designSlider->value());
+
+    controllField->setPlayer1Name(player1Name);
+    controllField->setPlayer2Name(player2Name);
+
+    gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
+    gameWidget->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
+    gameWidget->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
+    std::cout << "Text 1 " + controllField->getPlayer1Text() << std::endl;
+    std::cout << "Text 2 " + controllField->getPlayer2Text() << std::endl;
+    gameWidget->graphicsViewField->viewport()->installEventFilter(this);
+    gameWidget->graphicsViewField->setScene(controllField->passViewField());
+    std::cout << "SetFieldSize to " + std::to_string(gameWidget->graphicsViewField->width()) + " x " + std::to_string(gameWidget->graphicsViewField->height()) << std::endl;
+    controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
+    controllField->startGame();
+    controllField->drawField();
+}

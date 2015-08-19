@@ -29,6 +29,8 @@ public:
     std::string getInfoText();
     std::string getPlayer1Text();
     std::string getPlayer2Text();
+    void setPlayer1Name(std::string name);
+    void setPlayer2Name(std::string name);
     void skipTurn();
     bool isInit;
     void clearField();
