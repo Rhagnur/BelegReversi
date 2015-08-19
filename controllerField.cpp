@@ -9,6 +9,7 @@ controllerField::controllerField()
 {
     viewGamingField = new viewField();
     isInit = false;
+    showPossibleFields = false;
 }
 
 void controllerField::initControllerField(int fieldSize, int design)
@@ -488,7 +489,7 @@ void controllerField::drawField()
             int w = gamingField->getFieldWidth()/gamingField->getFieldSize();
             int h = gamingField->getFieldHeight()/gamingField->getFieldSize();
 
-            viewGamingField->drawElement(x, y, w, h, gamingField->getFieldValue(i, j), design);
+            viewGamingField->drawElement(x, y, w, h, gamingField->getFieldValue(i, j), design, showPossibleFields);
         }
     }
 }
@@ -541,4 +542,9 @@ void controllerField::setPlayer2Name(std::string name)
 {
     player[1]->setPlayerName(name);
     player2Text = player[1]->getPlayerName() + ": " + std::to_string(player[1]->getPlayerStoneCount());
+}
+
+void controllerField::setShowPossTurns(bool setting)
+{
+    showPossibleFields = setting;
 }

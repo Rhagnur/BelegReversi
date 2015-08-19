@@ -14,17 +14,14 @@ MainWindow::MainWindow(QWidget *parent) :
     myMenu->addOptionElements();
 
     menuWidget->setupUi(menuContainer);
+    gameWidget->setupUi(gameContainer);
+    pvpWidget->setupUi(pvpContainer);
+
     this->connect(menuWidget->pushButton_Start, SIGNAL(clicked()), this, SLOT(on_pushButton_Start_clicked()));
     this->connect(menuWidget->pushButton_StartAI, SIGNAL(clicked()), this, SLOT(on_pushButton_StartAI_clicked()));
     this->connect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));
-    gameWidget->setupUi(gameContainer);
-    pvpWidget->setupUi(pvpContainer);
+
     mainUI->gridLayout->addWidget(menuContainer);
-    //menuContainer->installEventFilter();
-
-    //ui->graphicsViewField->fitInView(controllField->passViewField()->sceneRect());
-
-
 
     playList = new QMediaPlaylist;
     playList->addMedia(QUrl("qrc:/music/Track01.mp3"));
@@ -240,6 +237,7 @@ void MainWindow::on_pushButton_StartPvP_clicked()
 
     controllField->setPlayer1Name(player1Name);
     controllField->setPlayer2Name(player2Name);
+    controllField->setShowPossTurns(pvpWidget->checkBox_showPossMoves->isChecked());
 
     gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
     gameWidget->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));

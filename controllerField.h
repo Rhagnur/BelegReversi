@@ -31,6 +31,7 @@ public:
     std::string getPlayer2Text();
     void setPlayer1Name(std::string name);
     void setPlayer2Name(std::string name);
+    void setShowPossTurns(bool setting);
     void skipTurn();
     bool isInit;
     void clearField();
@@ -44,7 +45,7 @@ private:
     modelPlayer *player[2];
     int activePlayer, otherPlayer, design;
     std::string infoText, player1Text, player2Text;
-    bool skipped;
+    bool skipped, showPossibleFields;
 };
 
 #endif // CONTROLLERFIELD_H

@@ -35,7 +35,7 @@ void viewField::drawText(std::string text)
     this->addItem(io);
 }
 
-void viewField::drawElement(int x, int y, int width, int height, int value, int design)
+void viewField::drawElement(int x, int y, int width, int height, int value, int design, bool showPossTurns)
 {
     QPixmap *empty, *player1, *player2, *possible;
 
@@ -44,21 +44,43 @@ void viewField::drawElement(int x, int y, int width, int height, int value, int 
         empty = new QPixmap(":/img/design1/emptyField.png");
         player1 = new QPixmap(":/img/design1/greyStone.png");
         player2 = new QPixmap(":/img/design1/brownStone.png");
-        possible = new QPixmap(":/img/design1/possibleTurn.png");
+        if (showPossTurns)
+        {
+            possible = new QPixmap(":/img/design1/possibleTurn.png");
+        }
+        else
+        {
+            possible = new QPixmap(":/img/design1/emptyField.png");
+        }
+
     }
     if (design == 2)
     {
         empty = new QPixmap(":/img/design2/emptyField.png");
         player1 = new QPixmap(":/img/design2/greyStone.png");
         player2 = new QPixmap(":/img/design2/brownStone.png");
-        possible = new QPixmap(":/img/design2/possibleTurn.png");
+        if (showPossTurns)
+        {
+            possible = new QPixmap(":/img/design2/possibleTurn.png");
+        }
+        else
+        {
+            possible = new QPixmap(":/img/design2/emptyField.png");
+        }
     }
     if (design == 3)
     {
         empty = new QPixmap(":/img/design3/emptyField.png");
         player1 = new QPixmap(":/img/design3/greyStone.png");
         player2 = new QPixmap(":/img/design3/brownStone.png");
-        possible = new QPixmap(":/img/design3/possibleTurn.png");
+        if (showPossTurns)
+        {
+            possible = new QPixmap(":/img/design2/possibleTurn.png");
+        }
+        else
+        {
+            possible = new QPixmap(":/img/design2/emptyField.png");
+        }
     }
 
 
