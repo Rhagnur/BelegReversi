@@ -277,7 +277,6 @@ void MainWindow::on_pushButton_Highscore_clicked()
     mainUI->gridLayout->addWidget(hsContainer);
     hsContainer->show();
     this->connect(hsWidget->pushButton_HSBack, SIGNAL(clicked()), this, SLOT(on_pushButton_HSBack_clicked()));
-    std::cout << controllField->getHighscore() << std::endl;
     hsWidget->graphicsViewHS->setScene(hsField->getViewField());
     hsField->drawText(controllField->getHighscore());
 }

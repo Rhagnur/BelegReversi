@@ -17,17 +17,66 @@ void ViewHS::clearField()
 
 void ViewHS::drawText(std::string text)
 {
-    std::cout << text << std::endl;
-    QFont f;
-    f.setPointSize(16);
-    f.setBold(true);
-    f.setFamily("Verdana");
-    QGraphicsTextItem * io = new QGraphicsTextItem;
-    io->setPos(0,100);
-    io->setFont(f);
-    io->setPlainText(QString::fromStdString(text));
-    io->setDefaultTextColor(Qt::white);
+    int i, index = 0;
+    std::string name = "";
+    std::string score = "";
+    std::string size = "";
 
-    this->addItem(io);
+    for (char test : text)
+    {
+        if(index == 0 && test != '#')
+        {
+            name += test;
+        }
+        if(index == 1 && test != '#')
+        {
+            score += test;
+        }
+        if(index == 2 && test != '#')
+        {
+            size += test;
+        }
+
+        if(test == '#')
+        {
+            index += 1;
+        }
+        if(test == '\n')
+        {
+            i += 1;
+            index = 0;
+
+            QFont f;
+            f.setPointSize(16);
+            f.setBold(true);
+            f.setFamily("Verdana");
+            QGraphicsTextItem * nameIO = new QGraphicsTextItem;
+            QGraphicsTextItem * scoreIO = new QGraphicsTextItem;
+            QGraphicsTextItem * sizeIO = new QGraphicsTextItem;
+
+            nameIO->setPos(0,40 + (i * 35));
+            nameIO->setFont(f);
+            nameIO->setPlainText(QString::fromStdString(name));
+            nameIO->setDefaultTextColor(Qt::white);
+            this->addItem(nameIO);
+
+            scoreIO->setPos(190,40 + (i * 35));
+            scoreIO->setFont(f);
+            scoreIO->setPlainText(QString::fromStdString(score));
+            scoreIO->setDefaultTextColor(Qt::white);
+            this->addItem(scoreIO);
+
+            sizeIO->setPos(250,40 + (i * 35));
+            sizeIO->setFont(f);
+            sizeIO->setPlainText(QString::fromStdString(size));
+            sizeIO->setDefaultTextColor(Qt::white);
+            this->addItem(sizeIO);
+
+            name = "";
+            score = "";
+            size = "";
+        }
+    }
+
 }
 
