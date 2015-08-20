@@ -79,14 +79,11 @@ void MainWindow::on_pushButton_IngameBack_clicked()
 
 void MainWindow::on_pushButton_IngameSkip_clicked()
 {
-
     if(controllField->isInit && !controllField->searchPossibleTurns())
     {
         if (controllField->getSkipped() && !controllField->searchPossibleTurns())
         {
-            //todo Spiel beendet Grafik
             controllField->checkWin();
-            std::cout << "Kein Spieler kann mehr ziehen, Spiel beendet." << std::endl;
         }
         else
         {
@@ -94,13 +91,9 @@ void MainWindow::on_pushButton_IngameSkip_clicked()
             gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
         }
     }
-    else
-    {
-        std::cout << "Fehler, Zug möglich oder Spiel nicht gestartet." << std::endl;
-    }
 }
 
-//IngameOption Menu
+//IngameOption Menu noch deutlich besser machen!
 void MainWindow::on_pushButton_IngameOptions_clicked()
 {
     if (ingameOptionOn)
@@ -122,20 +115,15 @@ void MainWindow::on_pushButton_IngameOptions_clicked()
         this->connect(myMenu->designSlider, SIGNAL(valueChanged(int)), this, SLOT(changeDesign(int)));
         ingameOptionOn = true;
     }
-
-
-    std::cout << "Optionen (ingame) gedrückt" << std::endl;
 }
 
 void MainWindow::changeVolume(int value)
 {
-    std::cout << "Volume = " + std::to_string(myMenu->volSlider->value()) << std::endl;
     player->setVolume(value);
 }
 
 void MainWindow::toggleVolume(bool checked)
 {
-    std::cout << "toggleVol = " + std::to_string(checked) << std::endl;
     if (checked) {
         player->setVolume(myMenu->volSlider->value());
     }
@@ -146,7 +134,6 @@ void MainWindow::toggleVolume(bool checked)
 
 void MainWindow::changeDesign(int design)
 {
-    std::cout << "Design = " + std::to_string(myMenu->designSlider->value()) << std::endl;
     controllField->setDesign(design);
 }
 
@@ -163,15 +150,12 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
             gameWidget->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
         }
 
-
         return true;
     }
     if (event->type() == QEvent::Resize)
     {
-
         controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
         controllField->drawField();
-        std::cout << "Resize erkannt" << std::endl;
     }
 
     return false;
@@ -182,7 +166,6 @@ void MainWindow::on_pushButton_StartPvP_clicked()
     this->disconnect(menuWidget->pushButton_StartPvP, SIGNAL(clicked()), this, SLOT(on_pushButton_StartPvP_clicked()));
     this->disconnect(menuWidget->pushButton_StartAI, SIGNAL(clicked()), this, SLOT(on_pushButton_StartAI_clicked()));
     this->disconnect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));
-    std::cout << "Start gedrückt" << std::endl;
     mainUI->gridLayout->removeWidget(menuContainer);
     menuContainer->hide();
     mainUI->gridLayout->addWidget(pvpContainer);
@@ -194,8 +177,6 @@ void MainWindow::on_pushButton_StartPvP_clicked()
 
 void MainWindow::on_pushButton_StartAI_clicked()
 {
-    std::cout << "Start AI gedrückt" << std::endl;
-
     this->disconnect(menuWidget->pushButton_StartPvP, SIGNAL(clicked()), this, SLOT(on_pushButton_StartPvP_clicked()));
     this->disconnect(menuWidget->pushButton_StartAI, SIGNAL(clicked()), this, SLOT(on_pushButton_StartAI_clicked()));
     this->disconnect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));

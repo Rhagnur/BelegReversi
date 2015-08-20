@@ -42,17 +42,8 @@ void controllerField::initControllerField(int fieldSize, int design)
 
 void controllerField::startGame()
 {
-        if (searchPossibleTurns())
-        {
-            std::cout<<"Mogliche Zuge gefunden"<<std::endl;
-        }
-        else
-        {
-            std::cout<<"Keine moglichen Zuge gefunden"<<std::endl;
-        }
-
-        gamingField->showFieldDebug();
-
+    searchPossibleTurns();
+    gamingField->showFieldDebug();
 }
 
 void controllerField::turn(int i, int j)
@@ -490,7 +481,7 @@ void controllerField::checkWin()
     }
     else
     {
-        //todo
+        //todo?
     }
 }
 
