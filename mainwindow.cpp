@@ -10,15 +10,28 @@ MainWindow::MainWindow(QWidget *parent) :
     mainUI->setupUi(this);
 
     controllField = new controllerField();
+
     myMenu = new menu();
     myMenu->addOptionElements();
 
-    menuWidget->setupUi(menuContainer);
-    gameWidget->setupUi(gameContainer);
-    pvpWidget->setupUi(pvpContainer);
-    hsWidget->setupUi(hsContainer);
-
     hsField = new ViewHS();
+
+    menuWidget->setupUi(menuContainer);
+    gameWidget->setupUi(gameContainer);    
+    hsWidget->setupUi(hsContainer);
+    pvpWidget->setupUi(pvpContainer);
+
+    pvpWidget->comboBox_PvPFieldsize->addItem("4x4", QVariant(4));
+    pvpWidget->comboBox_PvPFieldsize->addItem("6x6", QVariant(6));
+    pvpWidget->comboBox_PvPFieldsize->addItem("8x8", QVariant(8));
+    pvpWidget->comboBox_PvPFieldsize->addItem("10x10", QVariant(10));
+    pvpWidget->comboBox_PvPFieldsize->setCurrentIndex(2);
+    pvpWidget->comboBox_PvPGamemode->addItem(tr("normal"));
+    pvpWidget->comboBox_PvPGamemode->addItem(tr("Bo3"));
+    pvpWidget->comboBox_PvPGamemode->addItem(tr("Bo5"));
+    pvpWidget->comboBox_PvPGamemode->addItem(tr("Under Pressure"));
+
+
 
     this->connect(menuWidget->pushButton_StartPvP, SIGNAL(clicked()), this, SLOT(on_pushButton_StartPvP_clicked()));
     this->connect(menuWidget->pushButton_StartAI, SIGNAL(clicked()), this, SLOT(on_pushButton_StartAI_clicked()));
@@ -40,7 +53,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     player->setVolume(100);
     player->play();
-
 }
 
 MainWindow::~MainWindow()
@@ -227,6 +239,8 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
 
     std::string player1Name = pvpWidget->lineEdit_Player1->text().toStdString();
     std::string player2Name = pvpWidget->lineEdit_Player2->text().toStdString();
+    QVariant sizeVariant = pvpWidget->comboBox_PvPFieldsize->itemData(pvpWidget->comboBox_PvPFieldsize->currentIndex());
+    int fieldSize = sizeVariant.toInt();
 
     if (player1Name == "" || player1Name.length() < 2)
     {
@@ -247,7 +261,7 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
     gameContainer->show();
 
 
-    controllField->initControllerField(4, myMenu->designSlider->value());
+    controllField->initControllerField(fieldSize, myMenu->designSlider->value());
 
     controllField->setPlayer1Name(player1Name);
     controllField->setPlayer2Name(player2Name);

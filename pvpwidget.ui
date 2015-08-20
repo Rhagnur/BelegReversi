@@ -40,17 +40,14 @@ border: 0;</string>
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <spacer name="verticalSpacer_4">
+      <spacer name="verticalSpacer_6">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Preferred</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
          <width>20</width>
-         <height>20</height>
+         <height>40</height>
         </size>
        </property>
       </spacer>
@@ -135,6 +132,42 @@ border-radius: 5px;</string>
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="styleSheet">
+        <string notr="true">font: 75 14pt &quot;Verdana&quot;;
+color: #FFF;
+margin-bottom: 6px;</string>
+       </property>
+       <property name="text">
+        <string>Spielfeldbreite</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox_PvPFieldsize">
+       <property name="styleSheet">
+        <string notr="true">font: 75 11pt &quot;Verdana&quot;;
+color: #FFF;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
      <item alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="label_PossMoves">
        <property name="styleSheet">
@@ -165,7 +198,7 @@ color: #FFF;</string>
       </widget>
      </item>
      <item>
-      <spacer name="verticalSpacer_3">
+      <spacer name="verticalSpacer_4">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -190,17 +223,10 @@ margin-bottom: 6px;</string>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QComboBox" name="comboBox_PvPGamemode">
        <property name="styleSheet">
-        <string notr="true">background-color: #424242;
-font: 75 12pt &quot;Verdana&quot;;
-color: #FFF;
-height: 50px;
-min-width: 300px;
-border-radius: 5px;</string>
-       </property>
-       <property name="text">
-        <string>PushButton</string>
+        <string notr="true">font: 75 11pt &quot;Verdana&quot;;
+color: #FFF;</string>
        </property>
       </widget>
      </item>
@@ -218,35 +244,38 @@ border-radius: 5px;</string>
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_StartGamePvP">
-       <property name="styleSheet">
-        <string notr="true">background-color: #424242;
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QPushButton" name="pushButton_StartGamePvP">
+         <property name="styleSheet">
+          <string notr="true">background-color: #424242;
 font: 75 12pt &quot;Verdana&quot;;
 color: #FFF;
 height: 50px;
-min-width: 300px;
+min-width: 145px;
 border-radius: 5px;</string>
-       </property>
-       <property name="text">
-        <string>Spiel starten</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_BackPVP">
-       <property name="styleSheet">
-        <string notr="true">background-color: #424242;
+         </property>
+         <property name="text">
+          <string>Spiel starten</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_BackPVP">
+         <property name="styleSheet">
+          <string notr="true">background-color: #424242;
 font: 75 12pt &quot;Verdana&quot;;
 color: #FFF;
 height: 50px;
-min-width: 300px;
-border-radius: 5px;
-margin-top: 6px;</string>
-       </property>
-       <property name="text">
-        <string>zurück</string>
-       </property>
-      </widget>
+min-width: 145px;
+border-radius: 5px;</string>
+         </property>
+         <property name="text">
+          <string>zurück</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>

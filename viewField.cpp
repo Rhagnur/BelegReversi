@@ -57,8 +57,8 @@ void viewField::drawElement(int x, int y, int width, int height, int value, int 
     if (design == 2)
     {
         empty = new QPixmap(":/img/design2/emptyField.png");
-        player1 = new QPixmap(":/img/design2/greyStone.png");
-        player2 = new QPixmap(":/img/design2/brownStone.png");
+        player1 = new QPixmap(":/img/design2/whiteStone.png");
+        player2 = new QPixmap(":/img/design2/blackStone.png");
         if (showPossTurns)
         {
             possible = new QPixmap(":/img/design2/possibleTurn.png");
@@ -75,11 +75,11 @@ void viewField::drawElement(int x, int y, int width, int height, int value, int 
         player2 = new QPixmap(":/img/design3/brownStone.png");
         if (showPossTurns)
         {
-            possible = new QPixmap(":/img/design2/possibleTurn.png");
+            possible = new QPixmap(":/img/design3/possibleTurn.png");
         }
         else
         {
-            possible = new QPixmap(":/img/design2/emptyField.png");
+            possible = new QPixmap(":/img/design3/emptyField.png");
         }
     }
 

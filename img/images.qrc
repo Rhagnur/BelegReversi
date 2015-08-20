@@ -4,13 +4,13 @@
         <file>design1/brownStone.png</file>
         <file>design1/greyStone.png</file>
         <file>design1/possibleTurn.png</file>
-        <file>design2/brownStone.png</file>
         <file>design2/emptyField.png</file>
-        <file>design2/greyStone.png</file>
         <file>design2/possibleTurn.png</file>
         <file>design3/brownStone.png</file>
         <file>design3/emptyField.png</file>
         <file>design3/greyStone.png</file>
         <file>design3/possibleTurn.png</file>
+        <file>design2/blackStone.png</file>
+        <file>design2/whiteStone.png</file>
     </qresource>
 </RCC>
