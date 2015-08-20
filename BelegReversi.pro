@@ -41,7 +41,6 @@ OTHER_FILES +=
 
 RESOURCES += \
     img/images.qrc \
-    fonts/fonts.qrc \
     music/music.qrc
 
 QMAKE_CXXFLAGS += -std=c++11
