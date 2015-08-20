@@ -246,21 +246,6 @@ color: #FFF;</string>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QPushButton" name="pushButton_StartGamePvP">
-         <property name="styleSheet">
-          <string notr="true">background-color: #424242;
-font: 75 12pt &quot;Verdana&quot;;
-color: #FFF;
-height: 50px;
-min-width: 145px;
-border-radius: 5px;</string>
-         </property>
-         <property name="text">
-          <string>Spiel starten</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="pushButton_BackPVP">
          <property name="styleSheet">
           <string notr="true">background-color: #424242;
@@ -272,6 +257,21 @@ border-radius: 5px;</string>
          </property>
          <property name="text">
           <string>zurück</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_StartGamePvP">
+         <property name="styleSheet">
+          <string notr="true">background-color: #424242;
+font: 75 12pt &quot;Verdana&quot;;
+color: #FFF;
+height: 50px;
+min-width: 145px;
+border-radius: 5px;</string>
+         </property>
+         <property name="text">
+          <string>Spiel starten</string>
          </property>
         </widget>
        </item>

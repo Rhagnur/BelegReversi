@@ -73,19 +73,38 @@ margin-bottom: 6px;</string>
       <widget class="QGraphicsView" name="graphicsViewHS"/>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_HSBack">
-       <property name="styleSheet">
-        <string notr="true">background-color: #424242;
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QPushButton" name="pushButton_HSBack">
+         <property name="styleSheet">
+          <string notr="true">background-color: #424242;
 font: 75 12pt &quot;Verdana&quot;;
 color: #FFF;
 height: 50px;
-min-width: 300px;
+min-width: 140px;
 border-radius: 5px;</string>
-       </property>
-       <property name="text">
-        <string>Zurück</string>
-       </property>
-      </widget>
+         </property>
+         <property name="text">
+          <string>Zurück</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_HSExport">
+         <property name="styleSheet">
+          <string notr="true">background-color: #424242;
+font: 75 12pt &quot;Verdana&quot;;
+color: #FFF;
+height: 50px;
+min-width: 140px;
+border-radius: 5px;</string>
+         </property>
+         <property name="text">
+          <string>Export</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>

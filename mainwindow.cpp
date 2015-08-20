@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <QDialog>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -291,6 +292,7 @@ void MainWindow::on_pushButton_Highscore_clicked()
     mainUI->gridLayout->addWidget(hsContainer);
     hsContainer->show();
     this->connect(hsWidget->pushButton_HSBack, SIGNAL(clicked()), this, SLOT(on_pushButton_HSBack_clicked()));
+    this->connect(hsWidget->pushButton_HSExport, SIGNAL(clicked()), this, SLOT(on_pushButton_HSExport_clicked()));
     hsWidget->graphicsViewHS->setScene(hsField->getViewField());
     hsField->clearField();
     hsField->drawText(controllField->getHighscore());
@@ -299,6 +301,7 @@ void MainWindow::on_pushButton_Highscore_clicked()
 void MainWindow::on_pushButton_HSBack_clicked()
 {
     this->disconnect(hsWidget->pushButton_HSBack, SIGNAL(clicked()), this, SLOT(on_pushButton_HSBack_clicked()));
+    this->disconnect(hsWidget->pushButton_HSExport, SIGNAL(clicked()), this, SLOT(on_pushButton_HSExport_clicked()));
     mainUI->gridLayout->removeWidget(hsContainer);
     hsContainer->hide();
     mainUI->gridLayout->addWidget(menuContainer);
@@ -321,4 +324,27 @@ void MainWindow::on_pushButton_BackPVP_clicked()
     this->connect(menuWidget->pushButton_StartAI, SIGNAL(clicked()), this, SLOT(on_pushButton_StartAI_clicked()));
     this->connect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));
     this->connect(menuWidget->pushButton_Highscore, SIGNAL(clicked()), this, SLOT(on_pushButton_Highscore_clicked()));
+}
+
+void MainWindow::on_pushButton_HSExport_clicked()
+{
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Speichern als..."),
+                                                  QString(), tr("TXT-Files (*.txt);;All Files (*)"));
+    if (!filePath.endsWith(".txt"))
+    {
+        filePath += ".txt";
+    }
+
+    QFile exportFile(filePath);
+    if (exportFile.exists())
+    {
+        exportFile.remove();
+    }
+    if (exportFile.open(QFile::Append))
+    {
+        QTextStream out(&exportFile);
+        std::string buffer = controllField->getHighscore();
+        std::replace(buffer.begin(), buffer.end(), '#', ' ');
+        out << QString::fromStdString(buffer);
+    }
 }

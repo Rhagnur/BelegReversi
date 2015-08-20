@@ -43,6 +43,8 @@ private slots:
     void on_pushButton_HSBack_clicked();
     void on_pushButton_BackPVP_clicked();
 
+    void on_pushButton_HSExport_clicked();
+
 private:
     QWidget *menuContainer = new QWidget();
     QWidget *gameContainer = new QWidget();
