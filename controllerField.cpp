@@ -4,6 +4,7 @@
 #include <istream>
 #include <stdio.h>
 #include <string>
+#include <QSound>
 
 controllerField::controllerField()
 {
@@ -11,6 +12,11 @@ controllerField::controllerField()
     isInit = false;
     showPossibleFields = false;
     myDB = new SQLite();
+    set1 = new QSound(":/music/blop.wav");
+    set2 = new QSound(":/music/woosh.wav");
+    wrong = new QSound(":/music/trombone.wav");
+    applause = new QSound(":/music/applause.wav");
+    applauseLight = new QSound(":/music/applauseLight.wav");
 }
 
 void controllerField::initControllerField(int fieldSize, int design)
@@ -52,6 +58,14 @@ void controllerField::startGame()
 void controllerField::turn(int i, int j)
 {
     gamingField->setFieldValue(i, j , activePlayer);
+    if (activePlayer == 1)
+    {
+        set1->play();
+    }
+    else
+    {
+        set2->play();
+    }
     player[activePlayer - 1]->setPlayerStoneCount((player[activePlayer - 1]->getPlayerStoneCount()) + 1);
 }
 
@@ -395,7 +409,7 @@ bool controllerField::evaluateClick(int x, int y)
         }
         else
         {
-            //todo falscher zug
+            wrong->play();
         }
         checkWin();
     }
@@ -412,6 +426,7 @@ void controllerField::checkWin()
             viewGamingField->clearField();
             viewGamingField->drawText(player[0]->getPlayerName() + " hat gewonnen!");
             myDB->insertPlayerHighscore(player[0]->getPlayerName(), player[0]->getPlayerStoneCount(), gamingField->getFieldSize());
+            applause->play();
         }
         else if (player[0]->getPlayerStoneCount() < player[1]->getPlayerStoneCount())
         {
@@ -419,12 +434,14 @@ void controllerField::checkWin()
             viewGamingField->clearField();
             viewGamingField->drawText(player[1]->getPlayerName() + " hat gewonnen!");
             myDB->insertPlayerHighscore(player[1]->getPlayerName(), player[1]->getPlayerStoneCount(), gamingField->getFieldSize());
+            applause->play();
         }
         else
         {
             infoText = "Unentschieden!!!";
             viewGamingField->clearField();
             viewGamingField->drawText("Unentschieden!!!");
+            applauseLight->play();
         }
     }
     else if (player[0]->getPlayerStoneCount() == 0)
@@ -433,6 +450,7 @@ void controllerField::checkWin()
         viewGamingField->clearField();
         viewGamingField->drawText(player[1]->getPlayerName() + " hat gewonnen!");
         myDB->insertPlayerHighscore(player[1]->getPlayerName(), player[1]->getPlayerStoneCount(), gamingField->getFieldSize());
+        applause->play();
     }
     else if (player[1]->getPlayerStoneCount() == 0)
     {
@@ -440,6 +458,7 @@ void controllerField::checkWin()
         viewGamingField->clearField();
         viewGamingField->drawText(player[0]->getPlayerName() + " hat gewonnen!");
         myDB->insertPlayerHighscore(player[0]->getPlayerName(), player[0]->getPlayerStoneCount(), gamingField->getFieldSize());
+        applause->play();
     }
     else if (skipped) {
         if (player[0]->getPlayerStoneCount() > player[1]->getPlayerStoneCount())
@@ -449,6 +468,7 @@ void controllerField::checkWin()
             viewGamingField->clearField();
             viewGamingField->drawText(player[0]->getPlayerName() + " hat gewonnen!");
             myDB->insertPlayerHighscore(player[0]->getPlayerName(), player[0]->getPlayerStoneCount(), gamingField->getFieldSize());
+            applause->play();
         }
         else if (player[1]->getPlayerStoneCount() > player[0]->getPlayerStoneCount())
         {
@@ -457,6 +477,7 @@ void controllerField::checkWin()
             viewGamingField->clearField();
             viewGamingField->drawText(player[1]->getPlayerName() + " hat gewonnen!");
             myDB->insertPlayerHighscore(player[1]->getPlayerName(), player[1]->getPlayerStoneCount(), gamingField->getFieldSize());
+            applause->play();
         }
         else
         {
@@ -464,6 +485,7 @@ void controllerField::checkWin()
             std::cout << infoText << std::endl;
             viewGamingField->clearField();
             viewGamingField->drawText("Unentschieden!");
+            applauseLight->play();
         }
     }
     else

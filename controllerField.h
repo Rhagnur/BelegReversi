@@ -5,6 +5,7 @@
 #include "modelPlayer.h"
 #include "viewField.h"
 #include "sqlite.h"
+#include <QSound>
 
 class controllerField
 {
@@ -49,6 +50,7 @@ private:
     int activePlayer, otherPlayer, design;
     std::string infoText, player1Text, player2Text;
     bool skipped, showPossibleFields;
+    QSound *set1, *set2, *wrong, *applause, *applauseLight;
 };
 
 #endif // CONTROLLERFIELD_H

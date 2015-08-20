@@ -292,6 +292,7 @@ void MainWindow::on_pushButton_Highscore_clicked()
     hsContainer->show();
     this->connect(hsWidget->pushButton_HSBack, SIGNAL(clicked()), this, SLOT(on_pushButton_HSBack_clicked()));
     hsWidget->graphicsViewHS->setScene(hsField->getViewField());
+    hsField->clearField();
     hsField->drawText(controllField->getHighscore());
 }
 
