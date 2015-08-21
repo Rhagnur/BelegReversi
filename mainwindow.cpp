@@ -143,19 +143,34 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
     if (event->type() == QEvent::MouseButtonPress) {
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
         QPoint coordinates = me->pos();
+        gameWidget->graphicsViewField->setGeometry(offset,48,w,h);
         if (controllField->evaluateClick(coordinates.x(), coordinates.y()))
         {
             gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
             gameWidget->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
             gameWidget->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
         }
-
         return true;
     }
     if (event->type() == QEvent::Resize)
     {
-        controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
+        w = gameWidget->graphicsViewField->width();
+        h = gameWidget->graphicsViewField->height();
+        offset = 0;
+        if (w > h) {
+            w = h;
+        }
+        if (h > w) {
+            h = w;
+        }
+        offset = (this->width() - w) / 2;
+        offset -= 10;
+        gameWidget->graphicsViewField->setGeometry(offset,48,w,h);
+        std::cout << "Resize: " + std::to_string(this->width()) + " - " + std::to_string(w) << std::endl;
+        controllField->setFieldSize(w, h);
+        controllField->clearField();
         controllField->drawField();
+        return true;
     }
 
     return false;
@@ -253,13 +268,13 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
     gameWidget->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
     gameWidget->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
     std::cout << "Text 1 " + controllField->getPlayer1Text() << std::endl;
-    std::cout << "Text 2 " + controllField->getPlayer2Text() << std::endl;
-    gameWidget->graphicsViewField->viewport()->installEventFilter(this);
+    std::cout << "Text 2 " + controllField->getPlayer2Text() << std::endl;   
     gameWidget->graphicsViewField->setScene(controllField->passViewField());
     std::cout << "SetFieldSize to " + std::to_string(gameWidget->graphicsViewField->width()) + " x " + std::to_string(gameWidget->graphicsViewField->height()) << std::endl;
     controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
     controllField->startGame();
     controllField->drawField();
+    gameWidget->graphicsViewField->viewport()->installEventFilter(this);
 }
 
 void MainWindow::on_pushButton_Highscore_clicked()

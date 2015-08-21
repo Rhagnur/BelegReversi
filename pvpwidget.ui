@@ -66,6 +66,9 @@ margin-bottom: 6px;</string>
      </item>
      <item>
       <widget class="QLineEdit" name="lineEdit_Player1">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
        <property name="styleSheet">
         <string notr="true">background-color: #636363;
 font: 75 12pt &quot;Verdana&quot;;
@@ -106,6 +109,9 @@ margin-bottom: 6px;</string>
      </item>
      <item>
       <widget class="QLineEdit" name="lineEdit_Player2">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
        <property name="styleSheet">
         <string notr="true">background-color: #636363;
 font: 75 12pt &quot;Verdana&quot;;
@@ -149,9 +155,15 @@ margin-bottom: 6px;</string>
      </item>
      <item>
       <widget class="QComboBox" name="comboBox_PvPFieldsize">
+       <property name="focusPolicy">
+        <enum>Qt::WheelFocus</enum>
+       </property>
        <property name="styleSheet">
-        <string notr="true">font: 75 11pt &quot;Verdana&quot;;
-color: #FFF;</string>
+        <string notr="true">background-color: #636363;
+font: 75 12pt &quot;Verdana&quot;;
+color: #FFF;
+height: 35px;
+padding: 0px;</string>
        </property>
       </widget>
      </item>
@@ -187,6 +199,9 @@ margin-bottom: 6px;</string>
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">font: 75 11pt &quot;Verdana&quot;;
@@ -224,9 +239,15 @@ margin-bottom: 6px;</string>
      </item>
      <item>
       <widget class="QComboBox" name="comboBox_PvPGamemode">
+       <property name="focusPolicy">
+        <enum>Qt::WheelFocus</enum>
+       </property>
        <property name="styleSheet">
-        <string notr="true">font: 75 11pt &quot;Verdana&quot;;
-color: #FFF;</string>
+        <string notr="true">background-color: #636363;
+font: 75 12pt &quot;Verdana&quot;;
+color: #FFF;
+height: 35px;
+padding: 0px;</string>
        </property>
       </widget>
      </item>
@@ -247,6 +268,9 @@ color: #FFF;</string>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QPushButton" name="pushButton_BackPVP">
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
          <property name="styleSheet">
           <string notr="true">background-color: #424242;
 font: 75 12pt &quot;Verdana&quot;;
@@ -262,6 +286,9 @@ border-radius: 5px;</string>
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_StartGamePvP">
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
          <property name="styleSheet">
           <string notr="true">background-color: #424242;
 font: 75 12pt &quot;Verdana&quot;;

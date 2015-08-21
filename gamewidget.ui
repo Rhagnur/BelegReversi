@@ -29,6 +29,9 @@ border: 0;</string>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QPushButton" name="pushButton_IngameBack">
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
            <property name="styleSheet">
             <string notr="true">background-color: #424242;
 font: 75 12pt &quot;Verdana&quot;;
@@ -43,6 +46,9 @@ border-radius: 5px;</string>
          </item>
          <item>
           <widget class="QPushButton" name="pushButton_IngameOptions">
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
            <property name="styleSheet">
             <string notr="true">background-color: #424242;
 font: 75 12pt &quot;Verdana&quot;;
@@ -57,6 +63,9 @@ border-radius: 5px;</string>
          </item>
          <item>
           <widget class="QPushButton" name="pushButton_IngameSkip">
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
            <property name="styleSheet">
             <string notr="true">background-color: #424242;
 font: 75 12pt &quot;Verdana&quot;;
@@ -95,6 +104,9 @@ border-radius: 5px;</string>
          <property name="layoutDirection">
           <enum>Qt::LeftToRight</enum>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: grey;</string>
+         </property>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
@@ -105,7 +117,7 @@ border-radius: 5px;</string>
           <enum>Qt::ScrollBarAlwaysOff</enum>
          </property>
          <property name="alignment">
-          <set>Qt::AlignHCenter|Qt::AlignTop</set>
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
          </property>
         </widget>
        </item>

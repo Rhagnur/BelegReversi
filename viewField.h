@@ -6,10 +6,12 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsItem>
 #include <string>
+#include <QList>
 
 
 class viewField : public QGraphicsScene
 {
+    Q_OBJECT
 public:
     viewField();
     void drawElement(int x, int y, int width, int height, int value, int design, bool showPossTurns);
@@ -20,7 +22,7 @@ public:
 
 private:
     QGraphicsPixmapItem *field;
-
+    QList<QGraphicsPixmapItem> *list;
 
 };
 

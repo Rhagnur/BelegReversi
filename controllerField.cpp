@@ -345,15 +345,12 @@ bool controllerField::searchPossibleTurns()
 
 void controllerField::setFieldSize(int w, int h)
 {
-    int temp = 0;
-    if (w < h) {
-        temp = w;
-    }
-    else {
-        temp = h;
-    }
-    gamingField->setFieldWidth(temp);
-    gamingField->setFieldHeight(temp);
+    gamingField->setFieldWidth(w);
+    gamingField->setFieldHeight(h);
+}
+
+void controllerField::clearField()
+{
     viewGamingField->clearField();
 }
 
@@ -390,13 +387,14 @@ bool controllerField::evaluateClick(int x, int y)
             infoText = player[otherPlayer - 1]->getPlayerName() + " ist an der Reihe.";
             (turn(i, j));
             flipStones(i, j);
-            player1Text = player[0]->getPlayerName() + ": " + std::to_string(player[0]->getPlayerStoneCount());
-            player2Text = player[1]->getPlayerName() + ": " + std::to_string(player[1]->getPlayerStoneCount());
+            //player1Text = player[0]->getPlayerName() + ": " + std::to_string(player[0]->getPlayerStoneCount());
+            //player2Text = player[1]->getPlayerName() + ": " + std::to_string(player[1]->getPlayerStoneCount());
             changeActivePlayer();
             searchPossibleTurns();
-            drawField();
             value = true;
             skipped = false;
+            viewGamingField->clear();
+            //drawField();
         }
         else
         {
@@ -479,10 +477,6 @@ void controllerField::checkWin()
             applauseLight->play();
         }
     }
-    else
-    {
-        //todo?
-    }
 }
 
 void controllerField::stoneCount()
@@ -498,6 +492,7 @@ viewField* controllerField::passViewField()
 
 void controllerField::drawField()
 {
+    viewGamingField->clearField();
 
     for (int j = 0; j < gamingField->getFieldSize(); j++)
     {

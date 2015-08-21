@@ -61,6 +61,7 @@ private:
     QMediaPlayer *player;
     QMediaPlaylist *playList;
     ViewHS *hsField;
+    int w = 500,h = 500, offset;
 
 };
 

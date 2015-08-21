@@ -76,6 +76,9 @@ margin-bottom: 6px;</string>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QPushButton" name="pushButton_HSBack">
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
          <property name="styleSheet">
           <string notr="true">background-color: #424242;
 font: 75 12pt &quot;Verdana&quot;;
@@ -91,6 +94,9 @@ border-radius: 5px;</string>
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_HSExport">
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
          <property name="styleSheet">
           <string notr="true">background-color: #424242;
 font: 75 12pt &quot;Verdana&quot;;

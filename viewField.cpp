@@ -15,7 +15,7 @@ viewField* viewField::getViewField()
 
 void viewField::clearField()
 {
-    this->clear();
+    QList<QGraphicsPixmapItem *> list = this->findChildren<QGraphicsPixmapItem *>();
 }
 
 void viewField::drawText(std::string text)
