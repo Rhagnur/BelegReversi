@@ -6,6 +6,9 @@
 #include "viewField.h"
 #include "sqlite.h"
 #include <QSound>
+#include <QLabel>
+#include <QLCDNumber>
+#include <QPlainTextEdit>
 
 class controllerField
 {
@@ -30,8 +33,6 @@ public:
     viewField* passViewField();
     void drawField();
     std::string getInfoText();
-    std::string getPlayer1Text();
-    std::string getPlayer2Text();
     void setPlayer1Name(std::string name);
     void setPlayer2Name(std::string name);
     void setShowPossTurns(bool setting);
@@ -40,6 +41,7 @@ public:
     void clearField();
     bool getSkipped();
     void setDesign(int design);
+    void setLabelAndLCD(QPlainTextEdit *infoBox, QLCDNumber *lcdPlayer1, QLCDNumber *lcdPlayer2);
 
 
 private:
@@ -48,9 +50,11 @@ private:
     modelPlayer *player[2];
     SQLite *myDB;
     int activePlayer, otherPlayer, design;
-    std::string infoText, player1Text, player2Text;
+    std::string infoText;
     bool skipped, showPossibleFields;
     QSound *set1, *set2, *wrong, *applause, *applauseLight;
+    QPlainTextEdit *infoBox;
+    QLCDNumber *lcdPlayer1, *lcdPLayer2;
 };
 
 #endif // CONTROLLERFIELD_H

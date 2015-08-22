@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string>
 #include <QSound>
+#include <ctime>
 
 controllerField::controllerField()
 {
@@ -36,8 +37,6 @@ void controllerField::initControllerField(int fieldSize, int design)
     player[0]->setPlayerStoneCount(2);
     player[1]->setPlayerStoneCount(2);
     infoText = player[activePlayer - 1]->getPlayerName() + " ist an der Reihe.";
-    player1Text = player[0]->getPlayerName() + ": " + std::to_string(player[0]->getPlayerStoneCount());
-    player2Text = player[1]->getPlayerName() + ": " + std::to_string(player[1]->getPlayerStoneCount());
 }
 
 void controllerField::startGame()
@@ -384,17 +383,29 @@ bool controllerField::evaluateClick(int x, int y)
 
         if (gamingField->getFieldValue(i, j) == 3)
         {
-            infoText = player[otherPlayer - 1]->getPlayerName() + " ist an der Reihe.";
+            time_t currentTime;
+            struct tm *localTime;
+
+            time( &currentTime );
+            localTime = localtime( &currentTime );
+
+            int Hour   = localTime->tm_hour;
+            int Min    = localTime->tm_min;
+            int Sec    = localTime->tm_sec;
+            std::string timeString = "[" + std::to_string(Hour) + ":" + std::to_string(Min) + ":" + std::to_string(Sec) + "] ";
+
+            infoText = timeString + player[otherPlayer - 1]->getPlayerName() + " ist an der Reihe.";
+            infoBox->appendPlainText(QString::fromStdString(infoText));
             (turn(i, j));
             flipStones(i, j);
-            player1Text = player[0]->getPlayerName() + ": " + std::to_string(player[0]->getPlayerStoneCount());
-            player2Text = player[1]->getPlayerName() + ": " + std::to_string(player[1]->getPlayerStoneCount());
             changeActivePlayer();
             searchPossibleTurns();
             value = true;
             skipped = false;
             viewGamingField->clear();
             drawField();
+
+
         }
         else
         {
@@ -483,6 +494,9 @@ void controllerField::stoneCount()
 {
     player[activePlayer - 1]->setPlayerStoneCount((player[activePlayer - 1]->getPlayerStoneCount()) + 1);
     player[otherPlayer - 1]->setPlayerStoneCount((player[otherPlayer - 1]->getPlayerStoneCount()) - 1);
+
+    lcdPlayer1->display(player[0]->getPlayerStoneCount());
+    lcdPLayer2->display(player[1]->getPlayerStoneCount());
 }
 
 viewField* controllerField::passViewField()
@@ -514,15 +528,6 @@ std::string controllerField::getInfoText()
     return infoText;
 }
 
-std::string controllerField::getPlayer1Text()
-{
-    return player1Text;
-}
-
-std::string controllerField::getPlayer2Text()
-{
-    return player2Text;
-}
 
 void controllerField::skipTurn()
 {
@@ -550,13 +555,11 @@ void controllerField::setDesign(int design)
 void controllerField::setPlayer1Name(std::string name)
 {
     player[0]->setPlayerName(name);
-    player1Text = player[0]->getPlayerName() + ": " + std::to_string(player[0]->getPlayerStoneCount());
 }
 
 void controllerField::setPlayer2Name(std::string name)
 {
     player[1]->setPlayerName(name);
-    player2Text = player[1]->getPlayerName() + ": " + std::to_string(player[1]->getPlayerStoneCount());
 }
 
 void controllerField::setShowPossTurns(bool setting)
@@ -567,4 +570,11 @@ void controllerField::setShowPossTurns(bool setting)
 std::string controllerField::getHighscore()
 {
     return myDB->getHighscores();
+}
+
+void controllerField::setLabelAndLCD(QPlainTextEdit *infoBox, QLCDNumber *lcdPlayer1, QLCDNumber *lcdPlayer2)
+{
+    this->infoBox = infoBox;
+    this->lcdPlayer1 = lcdPlayer1;
+    this->lcdPLayer2 = lcdPlayer2;
 }

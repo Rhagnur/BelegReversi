@@ -88,7 +88,7 @@ void MainWindow::on_pushButton_IngameSkip_clicked()
         else
         {
             controllField->skipTurn();
-            gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
+            //gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
         }
     }
 }
@@ -143,14 +143,15 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
     if (event->type() == QEvent::MouseButtonPress) {
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
         QPoint coordinates = me->pos();
-        gameWidget->graphicsViewField->setGeometry(offset,48,w,h);
         if (controllField->evaluateClick(coordinates.x(), coordinates.y()))
         {
-            //gameWidget->label->setText(QString("Test"));
+            //gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
+            //gameWidget->label->update();
             //gameWidget->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
             //gameWidget->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
             std::cout << "Click" << std::endl;
         }
+        //gameWidget->graphicsViewField->setGeometry(offset,48,w,h);
         return true;
     }
     if (event->type() == QEvent::Resize)
@@ -208,11 +209,9 @@ void MainWindow::on_pushButton_StartAI_clicked()
 
 
     controllField->initControllerField(4, myMenu->designSlider->value());
-    gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
-    gameWidget->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
-    gameWidget->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
-    std::cout << "Text 1 " + controllField->getPlayer1Text() << std::endl;
-    std::cout << "Text 2 " + controllField->getPlayer2Text() << std::endl;
+    //gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
+    gameWidget->labelPlayer1->setText(pvpWidget->lineEdit_Player1->text());
+    gameWidget->labelPlayer2->setText(pvpWidget->lineEdit_Player2->text());
     gameWidget->graphicsViewField->viewport()->installEventFilter(this);
     gameWidget->graphicsViewField->setScene(controllField->passViewField());
     std::cout << "SetFieldSize to " + std::to_string(gameWidget->graphicsViewField->width()) + " x " + std::to_string(gameWidget->graphicsViewField->height()) << std::endl;
@@ -265,11 +264,10 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
     controllField->setPlayer2Name(player2Name);
     controllField->setShowPossTurns(pvpWidget->checkBox_showPossMoves->isChecked());
 
-    gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
-    gameWidget->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
-    gameWidget->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
-    std::cout << "Text 1 " + controllField->getPlayer1Text() << std::endl;
-    std::cout << "Text 2 " + controllField->getPlayer2Text() << std::endl;   
+    //gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
+    gameWidget->labelPlayer1->setText(pvpWidget->lineEdit_Player1->text());
+    gameWidget->labelPlayer2->setText(pvpWidget->lineEdit_Player2->text());
+    controllField->setLabelAndLCD(gameWidget->infoBox, gameWidget->lcdNumber_Player1, gameWidget->lcdNumber_Player2);
     gameWidget->graphicsViewField->setScene(controllField->passViewField());
     std::cout << "SetFieldSize to " + std::to_string(gameWidget->graphicsViewField->width()) + " x " + std::to_string(gameWidget->graphicsViewField->height()) << std::endl;
     controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());

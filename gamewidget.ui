@@ -126,7 +126,16 @@ border-radius: 5px;</string>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
+        <widget class="QLCDNumber" name="lcdNumber_Player1"/>
+       </item>
+       <item>
         <widget class="QLabel" name="labelPlayer1">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
            <width>150</width>
@@ -141,7 +150,7 @@ border-radius: 5px;</string>
          </property>
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255);
-font: 10pt &quot;Verdana&quot;;</string>
+font: 12pt &quot;Verdana&quot;;</string>
          </property>
          <property name="text">
           <string>Infolabel_Spieler1</string>
@@ -162,9 +171,12 @@ font: 10pt &quot;Verdana&quot;;</string>
         </spacer>
        </item>
        <item>
+        <widget class="QLCDNumber" name="lcdNumber_Player2"/>
+       </item>
+       <item>
         <widget class="QLabel" name="labelPlayer2">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -183,39 +195,40 @@ font: 10pt &quot;Verdana&quot;;</string>
          </property>
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255);
-font: 10pt &quot;Verdana&quot;;</string>
+font: 12pt &quot;Verdana&quot;;</string>
          </property>
          <property name="text">
           <string>Infolabel_Spieler2</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
       </layout>
      </item>
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);
-font: 10pt &quot;Verdana&quot;;</string>
-       </property>
-       <property name="text">
-        <string>Infolabel_Infos</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QPlainTextEdit" name="infoBox">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">max-height: 60px;
+color: rgb(255, 255, 255);
+font: 12pt &quot;Verdana&quot;;
+text-align: center;
+padding-left: 3em;
+padding-right: 3em;</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4"/>
    </item>
   </layout>
  </widget>
