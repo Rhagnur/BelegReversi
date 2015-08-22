@@ -105,7 +105,7 @@ border-radius: 5px;</string>
           <enum>Qt::LeftToRight</enum>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: grey;</string>
+          <string notr="true"/>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
@@ -117,7 +117,7 @@ border-radius: 5px;</string>
           <enum>Qt::ScrollBarAlwaysOff</enum>
          </property>
          <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>

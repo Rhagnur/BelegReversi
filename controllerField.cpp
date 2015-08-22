@@ -387,14 +387,14 @@ bool controllerField::evaluateClick(int x, int y)
             infoText = player[otherPlayer - 1]->getPlayerName() + " ist an der Reihe.";
             (turn(i, j));
             flipStones(i, j);
-            //player1Text = player[0]->getPlayerName() + ": " + std::to_string(player[0]->getPlayerStoneCount());
-            //player2Text = player[1]->getPlayerName() + ": " + std::to_string(player[1]->getPlayerStoneCount());
+            player1Text = player[0]->getPlayerName() + ": " + std::to_string(player[0]->getPlayerStoneCount());
+            player2Text = player[1]->getPlayerName() + ": " + std::to_string(player[1]->getPlayerStoneCount());
             changeActivePlayer();
             searchPossibleTurns();
             value = true;
             skipped = false;
             viewGamingField->clear();
-            //drawField();
+            drawField();
         }
         else
         {

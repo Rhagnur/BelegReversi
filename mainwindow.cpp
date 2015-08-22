@@ -146,9 +146,10 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
         gameWidget->graphicsViewField->setGeometry(offset,48,w,h);
         if (controllField->evaluateClick(coordinates.x(), coordinates.y()))
         {
-            gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
-            gameWidget->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
-            gameWidget->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
+            //gameWidget->label->setText(QString("Test"));
+            //gameWidget->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
+            //gameWidget->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
+            std::cout << "Click" << std::endl;
         }
         return true;
     }
