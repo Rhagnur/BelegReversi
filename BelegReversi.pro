@@ -35,7 +35,8 @@ FORMS    += mainwindow.ui \
     gamewidget.ui \
     menuwidget.ui \
     pvpwidget.ui \
-    hswidget.ui
+    hswidget.ui \
+    optionwidget.ui
 
 OTHER_FILES +=
 

@@ -6,7 +6,7 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    mainUI(new Ui::MainWindow), gameWidget(new Ui::GameWidget), menuWidget(new Ui::MenuWidget), pvpWidget(new Ui::PvPWidget), hsWidget(new Ui::HSWidget)
+    mainUI(new Ui::MainWindow), gameWidget(new Ui::GameWidget), menuWidget(new Ui::MenuWidget), pvpWidget(new Ui::PvPWidget), hsWidget(new Ui::HSWidget), optionWidget(new Ui::OptionWidget)
 {
     mainUI->setupUi(this);
 
@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     gameWidget->setupUi(gameContainer);    
     hsWidget->setupUi(hsContainer);
     pvpWidget->setupUi(pvpContainer);
+    optionWidget->setupUi(optionContainer);
 
     pvpWidget->comboBox_PvPFieldsize->addItem("4x4", QVariant(4));
     pvpWidget->comboBox_PvPFieldsize->addItem("6x6", QVariant(6));
@@ -31,6 +32,12 @@ MainWindow::MainWindow(QWidget *parent) :
     pvpWidget->comboBox_PvPGamemode->addItem(tr("Bo3"));
     pvpWidget->comboBox_PvPGamemode->addItem(tr("Bo5"));
     pvpWidget->comboBox_PvPGamemode->addItem(tr("Under Pressure"));
+
+    optionWidget->comboBox_OptionSprache->addItem("Deutsch", QVariant("de"));
+    optionWidget->comboBox_OptionSprache->addItem("English", QVariant("eng"));
+    optionWidget->comboBox_OptionDesign->addItem("Klassisch", QVariant(1));
+    optionWidget->comboBox_OptionDesign->addItem("Love", QVariant(2));
+    optionWidget->comboBox_OptionDesign->addItem("Blabla", QVariant(3));
 
 
 
@@ -222,7 +229,16 @@ void MainWindow::on_pushButton_StartAI_clicked()
 
 void MainWindow::on_pushButton_optionsMenu_clicked()
 {
-    std::cout << "Optionen gedrückt" << std::endl;
+    this->disconnect(menuWidget->pushButton_StartPvP, SIGNAL(clicked()), this, SLOT(on_pushButton_StartPvP_clicked()));
+    this->disconnect(menuWidget->pushButton_StartAI, SIGNAL(clicked()), this, SLOT(on_pushButton_StartAI_clicked()));
+    this->disconnect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));
+    this->disconnect(menuWidget->pushButton_Highscore, SIGNAL(clicked()), this, SLOT(on_pushButton_Highscore_clicked()));
+    mainUI->gridLayout->removeWidget(menuContainer);
+    menuContainer->hide();
+    mainUI->gridLayout->addWidget(optionContainer);
+    optionContainer->show();
+    this->connect(optionWidget->pushButton_OptionBack, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionBack_clicked()));
+    this->connect(optionWidget->pushButton_OptionMusikLoad, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionMusikLoad_clicked()));
 }
 
 
@@ -342,4 +358,25 @@ void MainWindow::on_pushButton_HSExport_clicked()
         std::replace(buffer.begin(), buffer.end(), '#', ' ');
         out << QString::fromStdString(buffer);
     }
+}
+
+void MainWindow::on_pushButton_OptionBack_clicked()
+{
+
+}
+
+void MainWindow::on_pushButton_OptionMusikLoad_clicked()
+{
+    QStringList files = QFileDialog::getOpenFileNames(this, tr("Laden"), QString(), tr("MP3-Files (*.mp3)"));
+    if (files.length() > 0) {
+        std::cout << "Musik laden" << std::endl;
+        player->stop();
+        playList->clear();
+        for (QString file : files) {
+            std::cout << "add " + file.toStdString() << std::endl;
+            playList->addMedia(QUrl::fromLocalFile(file));
+        }
+        player->play();
+    }
+
 }

@@ -12,6 +12,7 @@
 #include "ui_menuwidget.h"
 #include "ui_pvpwidget.h"
 #include "ui_hswidget.h"
+#include "ui_optionwidget.h"
 #include "menu.h"
 
 
@@ -45,16 +46,22 @@ private slots:
 
     void on_pushButton_HSExport_clicked();
 
+    void on_pushButton_OptionBack_clicked();
+
+    void on_pushButton_OptionMusikLoad_clicked();
+
 private:
     QWidget *menuContainer = new QWidget();
     QWidget *gameContainer = new QWidget();
     QWidget *pvpContainer = new QWidget();
     QWidget *hsContainer = new QWidget();
+    QWidget *optionContainer = new QWidget();
     Ui::MainWindow *mainUI;
     Ui::GameWidget *gameWidget;
     Ui::MenuWidget *menuWidget;
     Ui::PvPWidget *pvpWidget;
     Ui::HSWidget *hsWidget;
+    Ui::OptionWidget *optionWidget;
     controllerField* controllField;
     menu* myMenu;
     bool menuIsInit = false, ingameOptionOn = false;
