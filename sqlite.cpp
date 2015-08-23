@@ -35,6 +35,25 @@ std::string SQLite::getHighscores()
     return buffer;
 }
 
+std::string SQLite::getHighscoreBySize(int size)
+{
+    std::string buffer = "";
+    QSqlQuery query;
+    std::cout << "[INFO] : Query to db" << std::endl;
+    QString queryString = "SELECT name, score FROM highscore WHERE fieldsize = " + QString::fromStdString(std::to_string(size)) + " ORDER BY score DESC LIMIT 12 ;";
+    query.exec(queryString);
+
+
+    while (query.next()) {
+        QString name = query.value(0).toString();
+        int score = query.value(1).toInt();
+        std::string nameBuffer = name.toStdString();
+        buffer += nameBuffer + "#" + std::to_string(score) + "\n";
+    }
+
+    return buffer;
+}
+
 void SQLite::insertPlayerHighscore(std::string playerName, int stoneCount, int fieldSize)
 {
     QSqlQuery query;

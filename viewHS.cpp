@@ -17,7 +17,7 @@ void ViewHS::clearField()
 
 void ViewHS::drawText(std::string text)
 {
-    int i, index = 0;
+    int i = 0, index = 0;
     std::string name = "";
     std::string score = "";
     std::string size = "";

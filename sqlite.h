@@ -13,6 +13,7 @@ public:
     ~SQLite();
     void insertPlayerHighscore(std::string playerName, int stoneCount, int fieldSize);
     std::string getHighscores();
+    std::string getHighscoreBySize(int size);
 
 private:
     QSqlDatabase myDB = QSqlDatabase::addDatabase("QSQLITE");

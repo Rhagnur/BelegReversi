@@ -27,6 +27,7 @@ public:
     int getGamingFieldMatrixSize();
     int getGamingFieldElementValue(int i, int j);
     std::string getHighscore();
+    std::string getHighscoreBySize(int size);
     bool evaluateClick(int x, int y);
     void checkWin();
     void stoneCount();

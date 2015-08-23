@@ -6,7 +6,7 @@
 class modelPlayer
 {
 public:
-    modelPlayer(std::string name, int stones);
+    modelPlayer();
     int getPlayerStoneCount();
     void setPlayerStoneCount(int count);
     std::string getPlayerName();

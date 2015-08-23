@@ -43,12 +43,11 @@ private slots:
     void on_pushButton_Highscore_clicked();
     void on_pushButton_HSBack_clicked();
     void on_pushButton_BackPVP_clicked();
-
     void on_pushButton_HSExport_clicked();
-
     void on_pushButton_OptionBack_clicked();
-
     void on_pushButton_OptionMusikLoad_clicked();
+
+    void on_comboBox_HSSotieren_activated(int index);
 
 private:
     QWidget *menuContainer = new QWidget();

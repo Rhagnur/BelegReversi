@@ -1,9 +1,7 @@
 #include "modelPlayer.h"
 
-modelPlayer::modelPlayer(std::string name, int stones)
+modelPlayer::modelPlayer()
 {
-    playerName = name;
-    stoneCount = stones;
 }
 
 //Start getter methods

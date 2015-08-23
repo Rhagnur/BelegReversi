@@ -9,6 +9,8 @@
 
 controllerField::controllerField()
 {
+    player[0] = new modelPlayer();
+    player[1] = new modelPlayer();
     viewGamingField = new viewField();
     isInit = false;
     showPossibleFields = false;
@@ -24,8 +26,6 @@ void controllerField::initControllerField(int fieldSize, int design)
 {
     skipped = false;
     isInit = true;
-    player[0] = new modelPlayer("Spieler 1", 0);
-    player[1] = new modelPlayer("Spieler 2", 0);
     activePlayer = 1;
     otherPlayer = 2;
     this->design = design;
@@ -37,6 +37,7 @@ void controllerField::initControllerField(int fieldSize, int design)
     player[0]->setPlayerStoneCount(2);
     player[1]->setPlayerStoneCount(2);
     infoText = player[activePlayer - 1]->getPlayerName() + " ist an der Reihe.";
+    infoBox->appendPlainText(QString::fromStdString(infoText));
 }
 
 void controllerField::startGame()
@@ -383,18 +384,8 @@ bool controllerField::evaluateClick(int x, int y)
 
         if (gamingField->getFieldValue(i, j) == 3)
         {
-            time_t currentTime;
-            struct tm *localTime;
-
-            time( &currentTime );
-            localTime = localtime( &currentTime );
-
-            int Hour   = localTime->tm_hour;
-            int Min    = localTime->tm_min;
-            int Sec    = localTime->tm_sec;
-            std::string timeString = "[" + std::to_string(Hour) + ":" + std::to_string(Min) + ":" + std::to_string(Sec) + "] ";
-
-            infoText = timeString + player[otherPlayer - 1]->getPlayerName() + " ist an der Reihe.";
+            infoText = "\n" + player[otherPlayer - 1]->getPlayerName() + " ist an der Reihe.";
+            infoBox->clear();
             infoBox->appendPlainText(QString::fromStdString(infoText));
             (turn(i, j));
             flipStones(i, j);
@@ -570,6 +561,11 @@ void controllerField::setShowPossTurns(bool setting)
 std::string controllerField::getHighscore()
 {
     return myDB->getHighscores();
+}
+
+std::string controllerField::getHighscoreBySize(int size)
+{
+    return myDB->getHighscoreBySize(size);
 }
 
 void controllerField::setLabelAndLCD(QPlainTextEdit *infoBox, QLCDNumber *lcdPlayer1, QLCDNumber *lcdPlayer2)

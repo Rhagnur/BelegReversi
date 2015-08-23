@@ -33,11 +33,19 @@ MainWindow::MainWindow(QWidget *parent) :
     pvpWidget->comboBox_PvPGamemode->addItem(tr("Bo5"));
     pvpWidget->comboBox_PvPGamemode->addItem(tr("Under Pressure"));
 
-    optionWidget->comboBox_OptionSprache->addItem("Deutsch", QVariant("de"));
-    optionWidget->comboBox_OptionSprache->addItem("English", QVariant("eng"));
+    optionWidget->comboBox_OptionSprache->addItem("Deutsch", QVariant(1));
+    optionWidget->comboBox_OptionSprache->addItem("English", QVariant(2));
     optionWidget->comboBox_OptionDesign->addItem("Klassisch", QVariant(1));
     optionWidget->comboBox_OptionDesign->addItem("Love", QVariant(2));
     optionWidget->comboBox_OptionDesign->addItem("Blabla", QVariant(3));
+
+    gameWidget->infoBox->setReadOnly(true);
+
+    hsWidget->comboBox_HSSotieren->addItem("normal", QVariant(1));
+    hsWidget->comboBox_HSSotieren->addItem("Feldgröße 4", QVariant(2));
+    hsWidget->comboBox_HSSotieren->addItem("Feldgröße 6", QVariant(3));
+    hsWidget->comboBox_HSSotieren->addItem("Feldgröße 8", QVariant(4));
+    hsWidget->comboBox_HSSotieren->addItem("Feldgröße 10", QVariant(5));
 
 
 
@@ -268,17 +276,17 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
     mainUI->gridLayout->addWidget(gameContainer);
     gameContainer->show();
 
-
+    gameWidget->labelPlayer1->setText(pvpWidget->lineEdit_Player1->text());
+    gameWidget->labelPlayer2->setText(pvpWidget->lineEdit_Player2->text());
+    controllField->setLabelAndLCD(gameWidget->infoBox, gameWidget->lcdNumber_Player1, gameWidget->lcdNumber_Player2);
+    controllField->setPlayer1Name(pvpWidget->lineEdit_Player1->text().toStdString());
+    controllField->setPlayer2Name(pvpWidget->lineEdit_Player2->text().toStdString());
     controllField->initControllerField(fieldSize, myMenu->designSlider->value());
 
     controllField->setPlayer1Name(player1Name);
     controllField->setPlayer2Name(player2Name);
     controllField->setShowPossTurns(pvpWidget->checkBox_showPossMoves->isChecked());
 
-    //gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
-    gameWidget->labelPlayer1->setText(pvpWidget->lineEdit_Player1->text());
-    gameWidget->labelPlayer2->setText(pvpWidget->lineEdit_Player2->text());
-    controllField->setLabelAndLCD(gameWidget->infoBox, gameWidget->lcdNumber_Player1, gameWidget->lcdNumber_Player2);
     gameWidget->graphicsViewField->setScene(controllField->passViewField());
     std::cout << "SetFieldSize to " + std::to_string(gameWidget->graphicsViewField->width()) + " x " + std::to_string(gameWidget->graphicsViewField->height()) << std::endl;
     controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
@@ -299,6 +307,7 @@ void MainWindow::on_pushButton_Highscore_clicked()
     hsContainer->show();
     this->connect(hsWidget->pushButton_HSBack, SIGNAL(clicked()), this, SLOT(on_pushButton_HSBack_clicked()));
     this->connect(hsWidget->pushButton_HSExport, SIGNAL(clicked()), this, SLOT(on_pushButton_HSExport_clicked()));
+    this->connect(hsWidget->comboBox_HSSotieren, SIGNAL(activated(int)), this, SLOT(on_comboBox_HSSotieren_activated(int)));
     hsWidget->graphicsViewHS->setScene(hsField->getViewField());
     hsField->clearField();
     hsField->drawText(controllField->getHighscore());
@@ -334,7 +343,7 @@ void MainWindow::on_pushButton_BackPVP_clicked()
 
 void MainWindow::on_pushButton_HSExport_clicked()
 {
-    QString filePath = QFileDialog::getSaveFileName(this, tr("Speichern als..."),
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Exportiere Highscore(normal)"),
                                                   QString(), tr("TXT-Files (*.txt);;All Files (*)"));
     if (!filePath.endsWith(".txt"))
     {
@@ -402,4 +411,28 @@ void MainWindow::on_pushButton_OptionMusikLoad_clicked()
         player->play();
     }
 
+}
+
+void MainWindow::on_comboBox_HSSotieren_activated(int index)
+{
+    if(index == 0) {
+        hsField->clearField();
+        hsField->drawText(controllField->getHighscore());
+    }
+    if(index == 1) {
+        hsField->clearField();
+        hsField->drawText(controllField->getHighscoreBySize(4));
+    }
+    if(index == 2) {
+        hsField->clearField();
+        hsField->drawText(controllField->getHighscoreBySize(6));
+    }
+    if(index == 3) {
+        hsField->clearField();
+        hsField->drawText(controllField->getHighscoreBySize(8));
+    }
+    if(index == 4) {
+        hsField->clearField();
+        hsField->drawText(controllField->getHighscoreBySize(10));
+    }
 }

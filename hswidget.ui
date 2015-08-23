@@ -55,19 +55,34 @@ margin-bottom: 6px;</string>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_HSInfo">
-       <property name="styleSheet">
-        <string notr="true">font: 75 12pt &quot;Verdana&quot;;
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLabel" name="label_HSSortieren">
+         <property name="styleSheet">
+          <string notr="true">font: 75 12pt &quot;Verdana&quot;;
 color: #FFF;
 margin-bottom: 6px;</string>
-       </property>
-       <property name="text">
-        <string>Name - Punktzahl - Feldgröße</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
+         </property>
+         <property name="text">
+          <string>Anzeigefilter</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_HSSotieren">
+         <property name="styleSheet">
+          <string notr="true">background-color: #636363;
+font: 75 12pt &quot;Verdana&quot;;
+color: #FFF;
+height: 25px;
+padding: 0px;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
       <widget class="QGraphicsView" name="graphicsViewHS"/>
