@@ -103,25 +103,18 @@ void MainWindow::on_pushButton_IngameSkip_clicked()
 //IngameOption Menu noch deutlich besser machen!
 void MainWindow::on_pushButton_IngameOptions_clicked()
 {
-    if (ingameOptionOn)
-    {
-        this->disconnect(myMenu->volSlider, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
-        this->disconnect(myMenu->volOnOff, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
-        this->disconnect(myMenu->designSlider, SIGNAL(valueChanged(int)), this, SLOT(changeDesign(int)));
-        gameWidget->pushButton_IngameOptions->setText("Optionen");
-        gameWidget->graphicsViewField->setScene(controllField->passViewField());
-        gameWidget->graphicsViewField->viewport()->installEventFilter(this);
-        ingameOptionOn = false;
-    }
-    else {
-        gameWidget->pushButton_IngameOptions->setText("Zurück");
-        gameWidget->graphicsViewField->viewport()->removeEventFilter(this);
-        gameWidget->graphicsViewField->setScene(myMenu);
-        this->connect(myMenu->volSlider, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
-        this->connect(myMenu->volOnOff, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
-        this->connect(myMenu->designSlider, SIGNAL(valueChanged(int)), this, SLOT(changeDesign(int)));
-        ingameOptionOn = true;
-    }
+    this->disconnect(gameWidget->pushButton_IngameBack, SIGNAL(clicked()), this, SLOT(on_pushButton_IngameBack_clicked()));
+    this->disconnect(gameWidget->pushButton_IngameSkip, SIGNAL(clicked()), this, SLOT(on_pushButton_IngameSkip_clicked()));
+    this->disconnect(gameWidget->pushButton_IngameOptions, SIGNAL(clicked()), this, SLOT(on_pushButton_IngameOptions_clicked()));
+    mainUI->gridLayout->removeWidget(gameContainer);
+    gameContainer->hide();
+    mainUI->gridLayout->addWidget(optionContainer);
+    optionContainer->show();
+    this->connect(optionWidget->pushButton_OptionBack, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionBack_clicked()));
+    this->connect(optionWidget->pushButton_OptionMusikLoad, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionMusikLoad_clicked()));
+    this->connect(optionWidget->horizontalSlider_OptionVolume, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
+    this->connect(optionWidget->checkBox, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
+    ingameOptionOn = true;
 }
 
 void MainWindow::changeVolume(int value)
@@ -131,7 +124,7 @@ void MainWindow::changeVolume(int value)
 
 void MainWindow::toggleVolume(bool checked)
 {
-    if (checked) {
+    if (!checked) {
         player->setVolume(myMenu->volSlider->value());
     }
     else {
@@ -239,6 +232,8 @@ void MainWindow::on_pushButton_optionsMenu_clicked()
     optionContainer->show();
     this->connect(optionWidget->pushButton_OptionBack, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionBack_clicked()));
     this->connect(optionWidget->pushButton_OptionMusikLoad, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionMusikLoad_clicked()));
+    this->connect(optionWidget->horizontalSlider_OptionVolume, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
+    this->connect(optionWidget->checkBox, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
 }
 
 
@@ -362,6 +357,34 @@ void MainWindow::on_pushButton_HSExport_clicked()
 
 void MainWindow::on_pushButton_OptionBack_clicked()
 {
+    if (ingameOptionOn) {
+        this->disconnect(optionWidget->pushButton_OptionBack, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionBack_clicked()));
+        this->disconnect(optionWidget->pushButton_OptionMusikLoad, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionMusikLoad_clicked()));
+        this->disconnect(optionWidget->horizontalSlider_OptionVolume, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
+        this->disconnect(optionWidget->checkBox, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
+        mainUI->gridLayout->removeWidget(optionContainer);
+        optionContainer->hide();
+        mainUI->gridLayout->addWidget(gameContainer);
+        gameContainer->show();
+        this->connect(gameWidget->pushButton_IngameBack, SIGNAL(clicked()), this, SLOT(on_pushButton_IngameBack_clicked()));
+        this->connect(gameWidget->pushButton_IngameSkip, SIGNAL(clicked()), this, SLOT(on_pushButton_IngameSkip_clicked()));
+        this->connect(gameWidget->pushButton_IngameOptions, SIGNAL(clicked()), this, SLOT(on_pushButton_IngameOptions_clicked()));
+        ingameOptionOn = false;
+    }
+    else {
+        this->disconnect(optionWidget->pushButton_OptionBack, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionBack_clicked()));
+        this->disconnect(optionWidget->pushButton_OptionMusikLoad, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionMusikLoad_clicked()));
+        this->disconnect(optionWidget->horizontalSlider_OptionVolume, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
+        this->disconnect(optionWidget->checkBox, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
+        mainUI->gridLayout->removeWidget(optionContainer);
+        optionContainer->hide();
+        mainUI->gridLayout->addWidget(menuContainer);
+        menuContainer->show();
+        this->connect(menuWidget->pushButton_StartPvP, SIGNAL(clicked()), this, SLOT(on_pushButton_StartPvP_clicked()));
+        this->connect(menuWidget->pushButton_StartAI, SIGNAL(clicked()), this, SLOT(on_pushButton_StartAI_clicked()));
+        this->connect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));
+        this->connect(menuWidget->pushButton_Highscore, SIGNAL(clicked()), this, SLOT(on_pushButton_Highscore_clicked()));
+    }
 
 }
 
