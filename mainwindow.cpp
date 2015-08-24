@@ -72,6 +72,17 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete mainUI;
+    delete gameWidget;
+    delete pvpWidget;
+    delete menuWidget;
+    delete optionWidget;
+    delete hsWidget;
+    delete hsField;
+    delete player;
+    delete playList;
+    delete dict;
+    delete timer;
+    delete controllField;
 }
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
@@ -86,6 +97,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
                 timer->stop();
                 timeCount = 15;
                 timer->start(timePeriod);
+                gameWidget->infoBox->appendPlainText(QString::fromStdString("15 " + myDict[28]));
             }
         }
         return true;
@@ -394,7 +406,7 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
     controllField->setPlayer2Name(player2Name);
     controllField->setShowPossTurns(pvpWidget->checkBox_showPossMoves->isChecked());
 
-    gameWidget->graphicsViewField->setScene(controllField->passViewField());
+    gameWidget->graphicsViewField->setScene(controllField->getViewField());
     std::cout << "SetFieldSize to " + std::to_string(gameWidget->graphicsViewField->width()) + " x " + std::to_string(gameWidget->graphicsViewField->height()) << std::endl;
     controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
     controllField->startGame();
@@ -432,7 +444,7 @@ void MainWindow::on_pushButton_StartAI_clicked()
     gameWidget->labelPlayer1->setText(pvpWidget->lineEdit_Player1->text());
     gameWidget->labelPlayer2->setText(pvpWidget->lineEdit_Player2->text());
     gameWidget->graphicsViewField->viewport()->installEventFilter(this);
-    gameWidget->graphicsViewField->setScene(controllField->passViewField());
+    gameWidget->graphicsViewField->setScene(controllField->getViewField());
     std::cout << "SetFieldSize to " + std::to_string(gameWidget->graphicsViewField->width()) + " x " + std::to_string(gameWidget->graphicsViewField->height()) << std::endl;
     controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
     controllField->startGame();

@@ -2,7 +2,14 @@
 
 viewField::viewField()
 {
+    pixmapItemList = new QList<QGraphicsPixmapItem*>();
+    pixmapList = new QList<QPixmap*>();
+}
 
+viewField::~viewField()
+{
+    delete pixmapItemList;
+    delete pixmapList;
 }
 
 viewField* viewField::getViewField()
@@ -17,19 +24,20 @@ void viewField::clearField()
 
 void viewField::drawText(std::string text)
 {
-    std::cout << text << std::endl;
-    QFont f;
-    f.setPointSize(40);
-    f.setBold(true);
-    f.setFamily("Verdana");
-    QGraphicsTextItem * io = new QGraphicsTextItem;
-    io->setTextWidth(400);
-    io->setPos(0,100);
-    io->setFont(f);
-    io->setPlainText(QString::fromStdString(text));
-    io->setDefaultTextColor(Qt::white);
+    QFont font;
+    QGraphicsTextItem * textitem = new QGraphicsTextItem;
+    QString textString = "<p style='text-align: center;'>" + QString::fromStdString(text) + "</p>";
 
-    this->addItem(io);
+    font.setPointSize(30);
+    font.setBold(true);
+    font.setFamily("Verdana");
+    textitem->setTextWidth(this->width());
+    textitem->setPos(0,100);
+    textitem->setFont(font);
+    textitem->setDefaultTextColor(Qt::white);
+    textitem->setHtml(textString);
+
+    this->addItem(textitem);
 }
 
 void viewField::drawElement(int x, int y, int width, int height, int value, int design, bool showPossTurns)
@@ -80,6 +88,11 @@ void viewField::drawElement(int x, int y, int width, int height, int value, int 
         }
     }
 
+    pixmapList->append(empty);
+    pixmapList->append(player1);
+    pixmapList->append(player2);
+    pixmapList->append(possible);
+
 
     if ( value == 0 )
     {
@@ -109,4 +122,6 @@ void viewField::drawElement(int x, int y, int width, int height, int value, int 
 
     field->setPos(x, y);
     this->addItem(field);
+    pixmapItemList->append(field);
+
 }

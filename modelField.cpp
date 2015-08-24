@@ -14,6 +14,14 @@ modelField::modelField(int fieldSize)
     }
 }
 
+modelField::~modelField()
+{
+    for (int i = 0; i < fieldSize; i++) {
+        delete[] field[i];
+    }
+    delete[] field;
+}
+
 void modelField::setFieldValue(int i, int j, int value)
 {
     field[i][j] = value;

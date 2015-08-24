@@ -7,6 +7,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsTextItem>
+#include <QTextBlockFormat>
 
 #include <string>
 #include <iostream>
@@ -21,6 +22,9 @@ class viewField : public QGraphicsScene
 public:
     //! Constructor
     viewField();
+
+    //! Constructor
+    ~viewField();
 
     //! Clear method
     /*!
@@ -64,6 +68,8 @@ public:
 private:
 
     QGraphicsPixmapItem *field;
+    QList<QGraphicsPixmapItem*> *pixmapItemList;
+    QList<QPixmap*> *pixmapList;
 
 };
 

@@ -72,7 +72,6 @@ private slots:
     void on_pushButton_OptionMusikLoad_clicked();
     void on_comboBox_HSSotieren_activated(int index);
     void on_comboBox_OptionSprache_activated(int index);
-
     void on_comboBox_PvPGamemode_activated(int index);
 
 private:

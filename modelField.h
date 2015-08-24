@@ -18,6 +18,9 @@ public:
      */
     modelField(int fieldSize);
 
+    //! Deconstructor
+    ~modelField();
+
     //! Set method
     /*!
      * \brief Sets the new height of the field

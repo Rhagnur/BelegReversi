@@ -5,8 +5,8 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsItem>
-#include <string>
 
+#include <string>
 #include <iostream>
 
 //! Highscore View
