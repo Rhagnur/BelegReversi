@@ -36,7 +36,8 @@ void controllerField::initControllerField(int fieldSize, int design)
     gamingField->setFieldValue(gamingField->getFieldSize()/2 - 1,gamingField->getFieldSize()/2, otherPlayer);
     player[0]->setPlayerStoneCount(2);
     player[1]->setPlayerStoneCount(2);
-    infoText = player[activePlayer - 1]->getPlayerName() + " ist an der Reihe.";
+    infoText = player[activePlayer - 1]->getPlayerName() + " " + myDict[8];
+    infoBox->clear();
     infoBox->appendPlainText(QString::fromStdString(infoText));
 }
 
@@ -384,7 +385,7 @@ bool controllerField::evaluateClick(int x, int y)
 
         if (gamingField->getFieldValue(i, j) == 3)
         {
-            infoText = "\n" + player[otherPlayer - 1]->getPlayerName() + " ist an der Reihe.";
+            infoText = "\n" + player[otherPlayer - 1]->getPlayerName() + + " " + myDict[8];
             infoBox->clear();
             infoBox->appendPlainText(QString::fromStdString(infoText));
             (turn(i, j));
@@ -413,69 +414,69 @@ void controllerField::checkWin()
     {
         if (player[0]->getPlayerStoneCount() > player[1]->getPlayerStoneCount())
         {
-            infoText = player[0]->getPlayerName() + " hat gewonnen!";
+            infoText = player[0]->getPlayerName() + + " " + myDict[6];
             viewGamingField->clearField();
-            viewGamingField->drawText(player[0]->getPlayerName() + " hat gewonnen!");
+            viewGamingField->drawText(player[0]->getPlayerName() + + " " + myDict[6]);
             myDB->insertPlayerHighscore(player[0]->getPlayerName(), player[0]->getPlayerStoneCount(), gamingField->getFieldSize());
             applause->play();
         }
         else if (player[0]->getPlayerStoneCount() < player[1]->getPlayerStoneCount())
         {
-            infoText = player[1]->getPlayerName() + " hat gewonnen!";
+            infoText = player[1]->getPlayerName() + + " " + myDict[6];
             viewGamingField->clearField();
-            viewGamingField->drawText(player[1]->getPlayerName() + " hat gewonnen!");
+            viewGamingField->drawText(player[1]->getPlayerName() + + " " + myDict[6]);
             myDB->insertPlayerHighscore(player[1]->getPlayerName(), player[1]->getPlayerStoneCount(), gamingField->getFieldSize());
             applause->play();
         }
         else
         {
-            infoText = "Unentschieden!!!";
+            infoText = myDict[25];
             viewGamingField->clearField();
-            viewGamingField->drawText("Unentschieden!!!");
+            viewGamingField->drawText(myDict[25]);
             applauseLight->play();
         }
     }
     else if (player[0]->getPlayerStoneCount() == 0)
     {
-        infoText = player[1]->getPlayerName() + " hat gewonnen!";
+        infoText = player[1]->getPlayerName() + + " " + myDict[6];
         viewGamingField->clearField();
-        viewGamingField->drawText(player[1]->getPlayerName() + " hat gewonnen!");
+        viewGamingField->drawText(player[1]->getPlayerName() + + " " + myDict[6]);
         myDB->insertPlayerHighscore(player[1]->getPlayerName(), player[1]->getPlayerStoneCount(), gamingField->getFieldSize());
         applause->play();
     }
     else if (player[1]->getPlayerStoneCount() == 0)
     {
-        infoText = player[0]->getPlayerName() + " hat gewonnen!";
+        infoText = player[0]->getPlayerName() + + " " + myDict[6];
         viewGamingField->clearField();
-        viewGamingField->drawText(player[0]->getPlayerName() + " hat gewonnen!");
+        viewGamingField->drawText(player[0]->getPlayerName() + + " " + myDict[6]);
         myDB->insertPlayerHighscore(player[0]->getPlayerName(), player[0]->getPlayerStoneCount(), gamingField->getFieldSize());
         applause->play();
     }
     else if (skipped) {
         if (player[0]->getPlayerStoneCount() > player[1]->getPlayerStoneCount())
         {
-            infoText = player[0]->getPlayerName() + " hat gewonnen!";
+            infoText = player[0]->getPlayerName() + + " " + myDict[6];
             std::cout << infoText << std::endl;
             viewGamingField->clearField();
-            viewGamingField->drawText(player[0]->getPlayerName() + " hat gewonnen!");
+            viewGamingField->drawText(player[0]->getPlayerName() + + " " + myDict[6]);
             myDB->insertPlayerHighscore(player[0]->getPlayerName(), player[0]->getPlayerStoneCount(), gamingField->getFieldSize());
             applause->play();
         }
         else if (player[1]->getPlayerStoneCount() > player[0]->getPlayerStoneCount())
         {
-            infoText = player[1]->getPlayerName() + " hat gewonnen!";
+            infoText = player[1]->getPlayerName() + + " " + myDict[6];
             std::cout << infoText << std::endl;
             viewGamingField->clearField();
-            viewGamingField->drawText(player[1]->getPlayerName() + " hat gewonnen!");
+            viewGamingField->drawText(player[1]->getPlayerName() + + " " + myDict[6]);
             myDB->insertPlayerHighscore(player[1]->getPlayerName(), player[1]->getPlayerStoneCount(), gamingField->getFieldSize());
             applause->play();
         }
         else
         {
-            infoText = "Unentschieden!";
+            infoText = myDict[25];
             std::cout << infoText << std::endl;
             viewGamingField->clearField();
-            viewGamingField->drawText("Unentschieden!");
+            viewGamingField->drawText(myDict[25]);
             applauseLight->play();
         }
     }
@@ -522,7 +523,9 @@ std::string controllerField::getInfoText()
 
 void controllerField::skipTurn()
 {
-    infoText = player[activePlayer - 1]->getPlayerName() + " konnte nicht ziehen. \n" + player[otherPlayer - 1]->getPlayerName() + " ist wieder dran. ";
+    infoText = player[activePlayer - 1]->getPlayerName() + " " + myDict[10] + "\n" + player[otherPlayer - 1]->getPlayerName() + " " + myDict[9];
+    infoBox->clear();
+    infoBox->appendPlainText(QString::fromStdString(infoText));
     changeActivePlayer();
     searchPossibleTurns();
     drawField();
@@ -573,4 +576,9 @@ void controllerField::setLabelAndLCD(QPlainTextEdit *infoBox, QLCDNumber *lcdPla
     this->infoBox = infoBox;
     this->lcdPlayer1 = lcdPlayer1;
     this->lcdPLayer2 = lcdPlayer2;
+}
+
+void controllerField::changeDict(std::string *newDict)
+{
+    myDict = newDict;
 }

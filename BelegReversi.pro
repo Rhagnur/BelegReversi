@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     viewField.cpp \
     menu.cpp \
     sqlite.cpp \
-    viewHS.cpp
+    viewHS.cpp \
+    mydict.cpp
 
 HEADERS  += mainwindow.h \
     modelField.h \
@@ -29,7 +30,8 @@ HEADERS  += mainwindow.h \
     viewField.h \
     menu.h \
     sqlite.h \
-    viewHS.h
+    viewHS.h \
+    mydict.h
 
 FORMS    += mainwindow.ui \
     gamewidget.ui \

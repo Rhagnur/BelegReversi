@@ -14,6 +14,7 @@
 #include "ui_hswidget.h"
 #include "ui_optionwidget.h"
 #include "menu.h"
+#include "mydict.h"
 
 
 namespace Ui {
@@ -46,8 +47,8 @@ private slots:
     void on_pushButton_HSExport_clicked();
     void on_pushButton_OptionBack_clicked();
     void on_pushButton_OptionMusikLoad_clicked();
-
     void on_comboBox_HSSotieren_activated(int index);
+    void on_comboBox_OptionSprache_activated(int index);
 
 private:
     QWidget *menuContainer = new QWidget();
@@ -68,6 +69,9 @@ private:
     QMediaPlaylist *playList;
     ViewHS *hsField;
     int w = 500,h = 500, offset;
+    MyDict *dict;
+    std::string *myDict;
+    void changeLanguage();
 
 };
 

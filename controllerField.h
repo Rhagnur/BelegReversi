@@ -43,6 +43,7 @@ public:
     bool getSkipped();
     void setDesign(int design);
     void setLabelAndLCD(QPlainTextEdit *infoBox, QLCDNumber *lcdPlayer1, QLCDNumber *lcdPlayer2);
+    void changeDict(std::string *newDict);
 
 
 private:
@@ -56,6 +57,7 @@ private:
     QSound *set1, *set2, *wrong, *applause, *applauseLight;
     QPlainTextEdit *infoBox;
     QLCDNumber *lcdPlayer1, *lcdPLayer2;
+    std::string *myDict;
 };
 
 #endif // CONTROLLERFIELD_H

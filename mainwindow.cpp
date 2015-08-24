@@ -10,7 +10,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     mainUI->setupUi(this);
 
+
+    dict = new MyDict();
     controllField = new controllerField();
+    controllField->changeDict(dict->getDict("deu"));
 
     myMenu = new menu();
     myMenu->addOptionElements();
@@ -242,6 +245,7 @@ void MainWindow::on_pushButton_optionsMenu_clicked()
     this->connect(optionWidget->pushButton_OptionMusikLoad, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionMusikLoad_clicked()));
     this->connect(optionWidget->horizontalSlider_OptionVolume, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
     this->connect(optionWidget->checkBox, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
+    this->connect(optionWidget->comboBox_OptionSprache, SIGNAL(activated(int)), this, SLOT(on_comboBox_OptionSprache_activated(int)));
 }
 
 
@@ -343,7 +347,7 @@ void MainWindow::on_pushButton_BackPVP_clicked()
 
 void MainWindow::on_pushButton_HSExport_clicked()
 {
-    QString filePath = QFileDialog::getSaveFileName(this, tr("Exportiere Highscore(normal)"),
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Export Highscore(normal)"),
                                                   QString(), tr("TXT-Files (*.txt);;All Files (*)"));
     if (!filePath.endsWith(".txt"))
     {
@@ -371,6 +375,7 @@ void MainWindow::on_pushButton_OptionBack_clicked()
         this->disconnect(optionWidget->pushButton_OptionMusikLoad, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionMusikLoad_clicked()));
         this->disconnect(optionWidget->horizontalSlider_OptionVolume, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
         this->disconnect(optionWidget->checkBox, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
+        this->disconnect(optionWidget->comboBox_OptionSprache, SIGNAL(activated(int)), this, SLOT(on_comboBox_OptionSprache_activated(int)));
         mainUI->gridLayout->removeWidget(optionContainer);
         optionContainer->hide();
         mainUI->gridLayout->addWidget(gameContainer);
@@ -385,6 +390,7 @@ void MainWindow::on_pushButton_OptionBack_clicked()
         this->disconnect(optionWidget->pushButton_OptionMusikLoad, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionMusikLoad_clicked()));
         this->disconnect(optionWidget->horizontalSlider_OptionVolume, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
         this->disconnect(optionWidget->checkBox, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
+        this->disconnect(optionWidget->comboBox_OptionSprache, SIGNAL(activated(int)), this, SLOT(on_comboBox_OptionSprache_activated(int)));
         mainUI->gridLayout->removeWidget(optionContainer);
         optionContainer->hide();
         mainUI->gridLayout->addWidget(menuContainer);
@@ -401,11 +407,10 @@ void MainWindow::on_pushButton_OptionMusikLoad_clicked()
 {
     QStringList files = QFileDialog::getOpenFileNames(this, tr("Laden"), QString(), tr("MP3-Files (*.mp3)"));
     if (files.length() > 0) {
-        std::cout << "Musik laden" << std::endl;
         player->stop();
         playList->clear();
         for (QString file : files) {
-            std::cout << "add " + file.toStdString() << std::endl;
+            std::cout << "[INFO] Add to musicqueue: " + file.toStdString() << std::endl;
             playList->addMedia(QUrl::fromLocalFile(file));
         }
         player->play();
@@ -435,4 +440,61 @@ void MainWindow::on_comboBox_HSSotieren_activated(int index)
         hsField->clearField();
         hsField->drawText(controllField->getHighscoreBySize(10));
     }
+}
+
+void MainWindow::on_comboBox_OptionSprache_activated(int index)
+{
+
+    std::string sprache = "";
+
+    if (index == 0) {
+        sprache = "deu";
+    }
+    else {
+        sprache = "eng";
+    }
+
+    std::cout << "[INFO] Change language to " + sprache << std::endl;
+
+    myDict = dict->getDict(sprache);
+    controllField->changeDict(myDict);
+    changeLanguage();
+}
+
+void MainWindow::changeLanguage()
+{
+    std::cout << "[INFO] Change text from elements" << std::endl;
+
+    optionWidget->checkBox->setText(QString::fromStdString(myDict[24]));
+    optionWidget->label_OptionDesign->setText(QString::fromStdString(myDict[3]));
+    optionWidget->label_OptionMusikLoad->setText(QString::fromStdString(myDict[4]));
+    optionWidget->label_OptionSprache->setText(QString::fromStdString(myDict[23]));
+    optionWidget->label_OptionVolumeLevel->setText(QString::fromStdString(myDict[11]));
+    optionWidget->label_OptionVolumeOnOff->setText(QString::fromStdString(myDict[14]));
+    optionWidget->pushButton_OptionBack->setText(QString::fromStdString(myDict[27]));
+    optionWidget->pushButton_OptionMusikLoad->setText(QString::fromStdString(myDict[13]));
+
+    menuWidget->pushButton_Credits->setText(QString::fromStdString(myDict[2]));
+    menuWidget->pushButton_Highscore->setText(QString::fromStdString(myDict[7]));
+    menuWidget->pushButton_optionsMenu->setText(QString::fromStdString(myDict[17]));
+    menuWidget->pushButton_StartAI->setText(QString::fromStdString(myDict[18]));
+    menuWidget->pushButton_StartPvP->setText(QString::fromStdString(myDict[19]));
+
+    gameWidget->pushButton_IngameBack->setText(QString::fromStdString(myDict[27]));
+    gameWidget->pushButton_IngameOptions->setText(QString::fromStdString(myDict[17]));
+    gameWidget->pushButton_IngameSkip->setText(QString::fromStdString(myDict[26]));
+
+    hsWidget->label_HSSortieren->setText(QString::fromStdString(myDict[1]));
+    hsWidget->label_HSTitle->setText(QString::fromStdString(myDict[7]));
+    hsWidget->pushButton_HSBack->setText(QString::fromStdString(myDict[27]));
+    hsWidget->pushButton_HSExport->setText(QString::fromStdString(myDict[5]));
+
+    pvpWidget->checkBox_showPossMoves->setText(QString::fromStdString(myDict[0]));
+    pvpWidget->pushButton_BackPVP->setText(QString::fromStdString(myDict[27]));
+    pvpWidget->pushButton_StartGamePvP->setText(QString::fromStdString(myDict[22]));
+    pvpWidget->label->setText(QString::fromStdString(myDict[20]));
+    pvpWidget->label_GameMode->setText(QString::fromStdString(myDict[21]));
+    pvpWidget->label_Player1->setText(QString::fromStdString(myDict[15]));
+    pvpWidget->label_Player2->setText(QString::fromStdString(myDict[16]));
+    pvpWidget->label_PossMoves->setText(QString::fromStdString(myDict[12]));
 }
