@@ -15,9 +15,6 @@ MainWindow::MainWindow(QWidget *parent) :
     controllField = new controllerField();
     controllField->changeDict(dict->getDict("deu"));
 
-    myMenu = new menu();
-    myMenu->addOptionElements();
-
     hsField = new ViewHS();
 
     menuWidget->setupUi(menuContainer);
@@ -36,11 +33,11 @@ MainWindow::MainWindow(QWidget *parent) :
     pvpWidget->comboBox_PvPGamemode->addItem(tr("Bo5"));
     pvpWidget->comboBox_PvPGamemode->addItem(tr("Under Pressure"));
 
-    optionWidget->comboBox_OptionSprache->addItem("Deutsch", QVariant(1));
-    optionWidget->comboBox_OptionSprache->addItem("English", QVariant(2));
-    optionWidget->comboBox_OptionDesign->addItem("Klassisch", QVariant(1));
-    optionWidget->comboBox_OptionDesign->addItem("Love", QVariant(2));
-    optionWidget->comboBox_OptionDesign->addItem("Blabla", QVariant(3));
+    optionWidget->comboBox_OptionSprache->addItem("Deutsch");
+    optionWidget->comboBox_OptionSprache->addItem("English");
+    optionWidget->comboBox_OptionDesign->addItem("Classic");
+    optionWidget->comboBox_OptionDesign->addItem("Love");
+    optionWidget->comboBox_OptionDesign->addItem("Blabla");
 
     gameWidget->infoBox->setReadOnly(true);
 
@@ -125,6 +122,9 @@ void MainWindow::on_pushButton_IngameOptions_clicked()
     this->connect(optionWidget->pushButton_OptionMusikLoad, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionMusikLoad_clicked()));
     this->connect(optionWidget->horizontalSlider_OptionVolume, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
     this->connect(optionWidget->checkBox, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
+    this->connect(optionWidget->comboBox_OptionDesign, SIGNAL(activated(int)), this, SLOT(changeDesign(int)));
+    optionWidget->label_OptionSprache->hide();
+    optionWidget->comboBox_OptionSprache->hide();
     ingameOptionOn = true;
 }
 
@@ -136,7 +136,7 @@ void MainWindow::changeVolume(int value)
 void MainWindow::toggleVolume(bool checked)
 {
     if (!checked) {
-        player->setVolume(myMenu->volSlider->value());
+        player->setVolume(optionWidget->horizontalSlider_OptionVolume->value());
     }
     else {
         player->setVolume(0);
@@ -145,6 +145,8 @@ void MainWindow::toggleVolume(bool checked)
 
 void MainWindow::changeDesign(int design)
 {
+    std::cout << "[INFO] Change design :" + std::to_string(design) << std::endl;
+    this->design = design;
     controllField->setDesign(design);
 }
 
@@ -162,7 +164,6 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
             //gameWidget->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
             std::cout << "Click" << std::endl;
         }
-        //gameWidget->graphicsViewField->setGeometry(offset,48,w,h);
         return true;
     }
     if (event->type() == QEvent::Resize)
@@ -219,7 +220,7 @@ void MainWindow::on_pushButton_StartAI_clicked()
     gameContainer->show();
 
 
-    controllField->initControllerField(4, myMenu->designSlider->value());
+    controllField->initControllerField(4, design);
     //gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
     gameWidget->labelPlayer1->setText(pvpWidget->lineEdit_Player1->text());
     gameWidget->labelPlayer2->setText(pvpWidget->lineEdit_Player2->text());
@@ -246,6 +247,7 @@ void MainWindow::on_pushButton_optionsMenu_clicked()
     this->connect(optionWidget->horizontalSlider_OptionVolume, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
     this->connect(optionWidget->checkBox, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
     this->connect(optionWidget->comboBox_OptionSprache, SIGNAL(activated(int)), this, SLOT(on_comboBox_OptionSprache_activated(int)));
+    this->connect(optionWidget->comboBox_OptionDesign, SIGNAL(activated(int)), this, SLOT(changeDesign(int)));
 }
 
 
@@ -285,7 +287,7 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
     controllField->setLabelAndLCD(gameWidget->infoBox, gameWidget->lcdNumber_Player1, gameWidget->lcdNumber_Player2);
     controllField->setPlayer1Name(pvpWidget->lineEdit_Player1->text().toStdString());
     controllField->setPlayer2Name(pvpWidget->lineEdit_Player2->text().toStdString());
-    controllField->initControllerField(fieldSize, myMenu->designSlider->value());
+    controllField->initControllerField(fieldSize, design);
 
     controllField->setPlayer1Name(player1Name);
     controllField->setPlayer2Name(player2Name);
@@ -370,14 +372,18 @@ void MainWindow::on_pushButton_HSExport_clicked()
 
 void MainWindow::on_pushButton_OptionBack_clicked()
 {
+    this->disconnect(optionWidget->pushButton_OptionBack, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionBack_clicked()));
+    this->disconnect(optionWidget->pushButton_OptionMusikLoad, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionMusikLoad_clicked()));
+    this->disconnect(optionWidget->horizontalSlider_OptionVolume, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
+    this->disconnect(optionWidget->checkBox, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
+    this->disconnect(optionWidget->comboBox_OptionSprache, SIGNAL(activated(int)), this, SLOT(on_comboBox_OptionSprache_activated(int)));
+    this->disconnect(optionWidget->comboBox_OptionDesign, SIGNAL(activated(int)), this, SLOT(changeDesign(int)));
+    mainUI->gridLayout->removeWidget(optionContainer);
+    optionContainer->hide();
+
     if (ingameOptionOn) {
-        this->disconnect(optionWidget->pushButton_OptionBack, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionBack_clicked()));
-        this->disconnect(optionWidget->pushButton_OptionMusikLoad, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionMusikLoad_clicked()));
-        this->disconnect(optionWidget->horizontalSlider_OptionVolume, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
-        this->disconnect(optionWidget->checkBox, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
-        this->disconnect(optionWidget->comboBox_OptionSprache, SIGNAL(activated(int)), this, SLOT(on_comboBox_OptionSprache_activated(int)));
-        mainUI->gridLayout->removeWidget(optionContainer);
-        optionContainer->hide();
+        optionWidget->label_OptionSprache->show();
+        optionWidget->comboBox_OptionSprache->show();
         mainUI->gridLayout->addWidget(gameContainer);
         gameContainer->show();
         this->connect(gameWidget->pushButton_IngameBack, SIGNAL(clicked()), this, SLOT(on_pushButton_IngameBack_clicked()));
@@ -386,13 +392,6 @@ void MainWindow::on_pushButton_OptionBack_clicked()
         ingameOptionOn = false;
     }
     else {
-        this->disconnect(optionWidget->pushButton_OptionBack, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionBack_clicked()));
-        this->disconnect(optionWidget->pushButton_OptionMusikLoad, SIGNAL(clicked()), this, SLOT(on_pushButton_OptionMusikLoad_clicked()));
-        this->disconnect(optionWidget->horizontalSlider_OptionVolume, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
-        this->disconnect(optionWidget->checkBox, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
-        this->disconnect(optionWidget->comboBox_OptionSprache, SIGNAL(activated(int)), this, SLOT(on_comboBox_OptionSprache_activated(int)));
-        mainUI->gridLayout->removeWidget(optionContainer);
-        optionContainer->hide();
         mainUI->gridLayout->addWidget(menuContainer);
         menuContainer->show();
         this->connect(menuWidget->pushButton_StartPvP, SIGNAL(clicked()), this, SLOT(on_pushButton_StartPvP_clicked()));

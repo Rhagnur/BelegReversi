@@ -13,7 +13,6 @@
 #include "ui_pvpwidget.h"
 #include "ui_hswidget.h"
 #include "ui_optionwidget.h"
-#include "menu.h"
 #include "mydict.h"
 
 
@@ -21,13 +20,28 @@ namespace Ui {
 class MainWindow;
 }
 
+//! Main GUI class
+/*!
+ * \brief Main class of the GUI
+ */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
+    //! Constructor
     explicit MainWindow(QWidget *parent = 0);
+
+    //! Deconstructor
     ~MainWindow();
+
+    //! Eventfilter
+    /*!
+     * \brief Needed for resize and Mouseclick event
+     * \param target
+     * \param event
+     * \return bool
+     */
     bool eventFilter(QObject *target, QEvent *event);
 
 private slots:
@@ -63,12 +77,11 @@ private:
     Ui::HSWidget *hsWidget;
     Ui::OptionWidget *optionWidget;
     controllerField* controllField;
-    menu* myMenu;
     bool menuIsInit = false, ingameOptionOn = false;
     QMediaPlayer *player;
     QMediaPlaylist *playList;
     ViewHS *hsField;
-    int w = 500,h = 500, offset;
+    int w = 500,h = 500, offset, design = 0;
     MyDict *dict;
     std::string *myDict;
     void changeLanguage();

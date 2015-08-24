@@ -39,7 +39,7 @@ void viewField::drawElement(int x, int y, int width, int height, int value, int 
 {
     QPixmap *empty, *player1, *player2, *possible;
 
-    if (design == 1)
+    if (design == 0)
     {
         empty = new QPixmap(":/img/design1/emptyField.png");
         player1 = new QPixmap(":/img/design1/greyStone.png");
@@ -54,7 +54,7 @@ void viewField::drawElement(int x, int y, int width, int height, int value, int 
         }
 
     }
-    if (design == 2)
+    if (design == 1)
     {
         empty = new QPixmap(":/img/design2/emptyField.png");
         player1 = new QPixmap(":/img/design2/whiteStone.png");
@@ -68,7 +68,7 @@ void viewField::drawElement(int x, int y, int width, int height, int value, int 
             possible = new QPixmap(":/img/design2/emptyField.png");
         }
     }
-    if (design == 3)
+    if (design == 2)
     {
         empty = new QPixmap(":/img/design3/emptyField.png");
         player1 = new QPixmap(":/img/design3/greyStone.png");

@@ -499,6 +499,7 @@ viewField* controllerField::passViewField()
 void controllerField::drawField()
 {
     viewGamingField->clearField();
+    std::cout << "Zeichne mit Design " + std::to_string(design) << std::endl;
 
     for (int j = 0; j < gamingField->getFieldSize(); j++)
     {

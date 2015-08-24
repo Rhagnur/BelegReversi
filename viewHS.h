@@ -5,14 +5,38 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsItem>
 #include <string>
-
+//! Highscore View
+/*!
+ * \brief View for the Highscore
+ * inherits from QGraphicsScene
+ */
 class ViewHS : public QGraphicsScene
 {
 public:
+    //!Constructor
     ViewHS();
-    void drawText(std::string text);
-    ViewHS* getViewField();
+
+    //! Clear method
+    /*!
+     * \brief Clears the complete Highscore Scene
+     */
     void clearField();
+
+    //! Draw method
+    /*!
+     * \brief draws piece of text for highscore output
+     * \param text
+     * complete highscore query as string
+     */
+    void drawText(std::string text);
+
+    //! Get method
+    /*!
+     * \brief getViewField
+     * \return ViewHS object
+     */
+    ViewHS* getViewField();
+
 };
 
 #endif // VIEWHS_H

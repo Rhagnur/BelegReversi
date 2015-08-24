@@ -18,7 +18,6 @@ SOURCES += main.cpp\
     controllerField.cpp \
     modelPlayer.cpp \
     viewField.cpp \
-    menu.cpp \
     sqlite.cpp \
     viewHS.cpp \
     mydict.cpp
@@ -28,7 +27,6 @@ HEADERS  += mainwindow.h \
     controllerField.h \
     modelPlayer.h \
     viewField.h \
-    menu.h \
     sqlite.h \
     viewHS.h \
     mydict.h
