@@ -1,7 +1,4 @@
 #include "viewField.h"
-#include <iostream>
-#include <QGraphicsPixmapItem>
-#include <QGraphicsTextItem>
 
 viewField::viewField()
 {

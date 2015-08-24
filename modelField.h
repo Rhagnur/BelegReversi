@@ -1,6 +1,8 @@
 #ifndef MODELFIELD_H
 #define MODELFIELD_H
 
+#include <iostream>
+
 //! Field Model Class
 /*!
  * \brief The field model class
@@ -76,10 +78,8 @@ public:
     void showFieldDebug();
 
 private:
-    int** field;
-    int fieldSize;
-    int fieldWidth;
-    int fieldHeight;
+
+    int** field, fieldSize, fieldWidth, fieldHeight;
 };
 
 #endif // MODELFIELD_H

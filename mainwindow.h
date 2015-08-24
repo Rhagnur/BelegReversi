@@ -5,16 +5,22 @@
 #include <QMouseEvent>
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
+#include <QDialog>
+#include <QFileDialog>
+
+#include <iostream>
+#include <string>
+
 #include "controllerField.h"
 #include "viewHS.h"
+#include "mydict.h"
+
 #include "ui_mainwindow.h"
 #include "ui_gamewidget.h"
 #include "ui_menuwidget.h"
 #include "ui_pvpwidget.h"
 #include "ui_hswidget.h"
 #include "ui_optionwidget.h"
-#include "mydict.h"
-
 
 namespace Ui {
 class MainWindow;
@@ -45,19 +51,20 @@ public:
     bool eventFilter(QObject *target, QEvent *event);
 
 private slots:
-    void on_pushButton_IngameBack_clicked();
-    void on_pushButton_IngameSkip_clicked();
-    void on_pushButton_StartPvP_clicked();
-    void on_pushButton_optionsMenu_clicked();
-    void on_pushButton_IngameOptions_clicked();
+
     void changeVolume(int value);
     void toggleVolume(bool checked);
     void changeDesign(int design);
+    void on_pushButton_IngameBack_clicked();
+    void on_pushButton_IngameSkip_clicked();
+    void on_pushButton_IngameOptions_clicked();
+    void on_pushButton_StartPvP_clicked();
+    void on_pushButton_BackPVP_clicked();
     void on_pushButton_StartAI_clicked();
     void on_pushButton_StartGamePvP_clicked();
+    void on_pushButton_optionsMenu_clicked();       
     void on_pushButton_Highscore_clicked();
     void on_pushButton_HSBack_clicked();
-    void on_pushButton_BackPVP_clicked();
     void on_pushButton_HSExport_clicked();
     void on_pushButton_OptionBack_clicked();
     void on_pushButton_OptionMusikLoad_clicked();
@@ -70,20 +77,25 @@ private:
     QWidget *pvpContainer = new QWidget();
     QWidget *hsContainer = new QWidget();
     QWidget *optionContainer = new QWidget();
+
     Ui::MainWindow *mainUI;
     Ui::GameWidget *gameWidget;
     Ui::MenuWidget *menuWidget;
     Ui::PvPWidget *pvpWidget;
     Ui::HSWidget *hsWidget;
     Ui::OptionWidget *optionWidget;
-    controllerField* controllField;
-    bool menuIsInit = false, ingameOptionOn = false;
+
+    std::string *myDict;
     QMediaPlayer *player;
     QMediaPlaylist *playList;
-    ViewHS *hsField;
     int w = 500,h = 500, offset, design = 0;
+    bool menuIsInit = false, ingameOptionOn = false;
+
     MyDict *dict;
-    std::string *myDict;
+    ViewHS *hsField;
+    controllerField* controllField;
+
+
     void changeLanguage();
 
 };

@@ -1,10 +1,11 @@
 #ifndef SQLITE_H
 #define SQLITE_H
 
-#include <iostream>
 #include <QtSql>
 #include <QtDebug>
 #include <QFileInfo>
+
+#include <iostream>
 
 //! Database class
 /*!
@@ -52,7 +53,10 @@ public:
     std::string getHighscoreBySize(int size);
 
 private:
+
     QSqlDatabase myDB = QSqlDatabase::addDatabase("QSQLITE");
+
+    //Nur für Debugzwecke
     void writePlaceholder();
     void deleteAllData();
 

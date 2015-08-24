@@ -1,4 +1,5 @@
 #include "mydict.h"
+
 MyDict::MyDict()
 {
     deutsch[0] = "aktiviert";

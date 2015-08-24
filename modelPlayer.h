@@ -2,6 +2,7 @@
 #define MODELPLAYER_H
 
 #include <string>
+
 //! Player Model Class
 /*!
  * \brief The player model class
@@ -42,6 +43,7 @@ public:
     std::string getPlayerName();
 
 private:
+
     int stoneCount;
     std::string playerName;
 

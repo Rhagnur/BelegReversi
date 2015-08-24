@@ -1,0 +1,135 @@
+\hypertarget{classviewField}{\section{view\+Field Class Reference}
+\label{classviewField}\index{view\+Field@{view\+Field}}
+}
+
+
+Field View.  
+
+
+
+
+{\ttfamily \#include $<$view\+Field.\+h$>$}
+
+
+
+Inheritance diagram for view\+Field\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=171pt]{classviewField__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for view\+Field\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=171pt]{classviewField__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classviewField_a2d66d79d5b2ef951572b34d4ead4765f}{\hyperlink{classviewField_a2d66d79d5b2ef951572b34d4ead4765f}{view\+Field} ()}\label{classviewField_a2d66d79d5b2ef951572b34d4ead4765f}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \hyperlink{classviewField_a473626a4891aa58b7db2b5504c4e27be}{clear\+Field} ()
+\begin{DoxyCompactList}\small\item\em Clear method. \end{DoxyCompactList}\item 
+void \hyperlink{classviewField_a2616089553a98834a84524460aceae16}{draw\+Element} (int x, int y, int width, int height, int value, int design, bool show\+Poss\+Turns)
+\begin{DoxyCompactList}\small\item\em Draw method for single elemtn. \end{DoxyCompactList}\item 
+void \hyperlink{classviewField_a15947b1c9f5f01bffc5263238e36ee98}{draw\+Text} (std\+::string text)
+\begin{DoxyCompactList}\small\item\em Draw method for text. \end{DoxyCompactList}\item 
+\hyperlink{classviewField}{view\+Field} $\ast$ \hyperlink{classviewField_aef0bf7d75efa322d40a8ae138fd6cb41}{get\+View\+Field} ()
+\begin{DoxyCompactList}\small\item\em Get method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Field View. 
+
+View for the Gamingfield inherits from Q\+Graphics\+Scene 
+
+\subsection{Member Function Documentation}
+\hypertarget{classviewField_a473626a4891aa58b7db2b5504c4e27be}{\index{view\+Field@{view\+Field}!clear\+Field@{clear\+Field}}
+\index{clear\+Field@{clear\+Field}!view\+Field@{view\+Field}}
+\subsubsection[{clear\+Field}]{\setlength{\rightskip}{0pt plus 5cm}void view\+Field\+::clear\+Field (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classviewField_a473626a4891aa58b7db2b5504c4e27be}
+
+
+Clear method. 
+
+Clears the complete scene \hypertarget{classviewField_a2616089553a98834a84524460aceae16}{\index{view\+Field@{view\+Field}!draw\+Element@{draw\+Element}}
+\index{draw\+Element@{draw\+Element}!view\+Field@{view\+Field}}
+\subsubsection[{draw\+Element}]{\setlength{\rightskip}{0pt plus 5cm}void view\+Field\+::draw\+Element (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{width, }
+\item[{int}]{height, }
+\item[{int}]{value, }
+\item[{int}]{design, }
+\item[{bool}]{show\+Poss\+Turns}
+\end{DoxyParamCaption}
+)}}\label{classviewField_a2616089553a98834a84524460aceae16}
+
+
+Draw method for single elemtn. 
+
+Draws a single element from the field 
+\begin{DoxyParams}{Parameters}
+{\em x} & starting x coord \\
+\hline
+{\em y} & starting y coord \\
+\hline
+{\em width} & \\
+\hline
+{\em height} & \\
+\hline
+{\em value} & value of the element, important for choosing the right image to drawn \\
+\hline
+{\em design} & important for choosing the right desing of the image \\
+\hline
+{\em show\+Poss\+Turns} & if false then possible\+Moves will be drawn as empty field \\
+\hline
+\end{DoxyParams}
+\hypertarget{classviewField_a15947b1c9f5f01bffc5263238e36ee98}{\index{view\+Field@{view\+Field}!draw\+Text@{draw\+Text}}
+\index{draw\+Text@{draw\+Text}!view\+Field@{view\+Field}}
+\subsubsection[{draw\+Text}]{\setlength{\rightskip}{0pt plus 5cm}void view\+Field\+::draw\+Text (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{text}
+\end{DoxyParamCaption}
+)}}\label{classviewField_a15947b1c9f5f01bffc5263238e36ee98}
+
+
+Draw method for text. 
+
+Draws the winning or draw text 
+\begin{DoxyParams}{Parameters}
+{\em text} & text which should be shown in the scene \\
+\hline
+\end{DoxyParams}
+\hypertarget{classviewField_aef0bf7d75efa322d40a8ae138fd6cb41}{\index{view\+Field@{view\+Field}!get\+View\+Field@{get\+View\+Field}}
+\index{get\+View\+Field@{get\+View\+Field}!view\+Field@{view\+Field}}
+\subsubsection[{get\+View\+Field}]{\setlength{\rightskip}{0pt plus 5cm}{\bf view\+Field} $\ast$ view\+Field\+::get\+View\+Field (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classviewField_aef0bf7d75efa322d40a8ae138fd6cb41}
+
+
+Get method. 
+
+Gets the complete scene \begin{DoxyReturn}{Returns}
+\hyperlink{classviewField}{view\+Field} object 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+view\+Field.\+h\item 
+view\+Field.\+cpp\end{DoxyCompactItemize}

@@ -1,10 +1,14 @@
 #ifndef VIEWHS_H
 #define VIEWHS_H
+
 #include <QImage>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsItem>
 #include <string>
+
+#include <iostream>
+
 //! Highscore View
 /*!
  * \brief View for the Highscore

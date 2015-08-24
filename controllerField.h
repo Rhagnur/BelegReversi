@@ -1,14 +1,23 @@
 #ifndef CONTROLLERFIELD_H
 #define CONTROLLERFIELD_H
 
-#include "modelField.h"
-#include "modelPlayer.h"
-#include "viewField.h"
-#include "sqlite.h"
 #include <QSound>
 #include <QLabel>
 #include <QLCDNumber>
 #include <QPlainTextEdit>
+
+#include <iostream>
+#include <ostream>
+#include <istream>
+#include <stdio.h>
+#include <string>
+
+#include "modelField.h"
+#include "modelPlayer.h"
+#include "viewField.h"
+#include "sqlite.h"
+
+
 
 class controllerField
 {

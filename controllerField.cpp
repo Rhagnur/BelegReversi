@@ -1,11 +1,5 @@
 #include "controllerField.h"
-#include <iostream>
-#include <ostream>
-#include <istream>
-#include <stdio.h>
-#include <string>
-#include <QSound>
-#include <ctime>
+
 
 controllerField::controllerField()
 {

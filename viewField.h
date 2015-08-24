@@ -5,7 +5,11 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsItem>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsTextItem>
+
 #include <string>
+#include <iostream>
 
 //! Field View
 /*!
@@ -58,6 +62,7 @@ public:
     viewField* getViewField();
 
 private:
+
     QGraphicsPixmapItem *field;
 
 };

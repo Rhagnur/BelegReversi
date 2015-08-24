@@ -1,0 +1,98 @@
+\hypertarget{classSQLite}{\section{S\+Q\+Lite Class Reference}
+\label{classSQLite}\index{S\+Q\+Lite@{S\+Q\+Lite}}
+}
+
+
+Database class.  
+
+
+
+
+{\ttfamily \#include $<$sqlite.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSQLite_ae7b35dc7e3c41543a0acde669ad4ba0d}{\hyperlink{classSQLite_ae7b35dc7e3c41543a0acde669ad4ba0d}{S\+Q\+Lite} ()}\label{classSQLite_ae7b35dc7e3c41543a0acde669ad4ba0d}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hypertarget{classSQLite_a5b30b82149fe1cc07046f25a9935747f}{\hyperlink{classSQLite_a5b30b82149fe1cc07046f25a9935747f}{$\sim$\+S\+Q\+Lite} ()}\label{classSQLite_a5b30b82149fe1cc07046f25a9935747f}
+
+\begin{DoxyCompactList}\small\item\em Deconstructor. \end{DoxyCompactList}\item 
+void \hyperlink{classSQLite_a8d80873b93e5df5cad36e06ed2f20029}{insert\+Player\+Highscore} (std\+::string player\+Name, int stone\+Count, int field\+Size)
+\begin{DoxyCompactList}\small\item\em Insert method. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classSQLite_a926d09cf749d8f28dda24c9201a6db38}{get\+Highscores} ()
+\begin{DoxyCompactList}\small\item\em Get method. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classSQLite_a2a38752e1a839bf2895c6f19ab82d913}{get\+Highscore\+By\+Size} (int size)
+\begin{DoxyCompactList}\small\item\em Get method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Database class. 
+
+Class for creating and getting access to \hyperlink{classSQLite}{S\+Q\+Lite} database 
+
+\subsection{Member Function Documentation}
+\hypertarget{classSQLite_a2a38752e1a839bf2895c6f19ab82d913}{\index{S\+Q\+Lite@{S\+Q\+Lite}!get\+Highscore\+By\+Size@{get\+Highscore\+By\+Size}}
+\index{get\+Highscore\+By\+Size@{get\+Highscore\+By\+Size}!S\+Q\+Lite@{S\+Q\+Lite}}
+\subsubsection[{get\+Highscore\+By\+Size}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string S\+Q\+Lite\+::get\+Highscore\+By\+Size (
+\begin{DoxyParamCaption}
+\item[{int}]{size}
+\end{DoxyParamCaption}
+)}}\label{classSQLite_a2a38752e1a839bf2895c6f19ab82d913}
+
+
+Get method. 
+
+Gets the highscore data Highscore data format is (name -\/ score), returns only the 12 best player sort by score for the choosen fiedsize 
+\begin{DoxyParams}{Parameters}
+{\em size} & Choosen fieldsize \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+highscore\+String complete data as string, lines seperated with '~\newline
+’ 
+\end{DoxyReturn}
+\hypertarget{classSQLite_a926d09cf749d8f28dda24c9201a6db38}{\index{S\+Q\+Lite@{S\+Q\+Lite}!get\+Highscores@{get\+Highscores}}
+\index{get\+Highscores@{get\+Highscores}!S\+Q\+Lite@{S\+Q\+Lite}}
+\subsubsection[{get\+Highscores}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string S\+Q\+Lite\+::get\+Highscores (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSQLite_a926d09cf749d8f28dda24c9201a6db38}
+
+
+Get method. 
+
+Gets the highscore data Highscore data format is (name -\/ score -\/ fieldsize), returns only the 12 best player sort by score \begin{DoxyReturn}{Returns}
+highscore\+String complete data as string, lines seperated with '~\newline
+’ 
+\end{DoxyReturn}
+\hypertarget{classSQLite_a8d80873b93e5df5cad36e06ed2f20029}{\index{S\+Q\+Lite@{S\+Q\+Lite}!insert\+Player\+Highscore@{insert\+Player\+Highscore}}
+\index{insert\+Player\+Highscore@{insert\+Player\+Highscore}!S\+Q\+Lite@{S\+Q\+Lite}}
+\subsubsection[{insert\+Player\+Highscore}]{\setlength{\rightskip}{0pt plus 5cm}void S\+Q\+Lite\+::insert\+Player\+Highscore (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{player\+Name, }
+\item[{int}]{stone\+Count, }
+\item[{int}]{field\+Size}
+\end{DoxyParamCaption}
+)}}\label{classSQLite_a8d80873b93e5df5cad36e06ed2f20029}
+
+
+Insert method. 
+
+Insert new data in db 
+\begin{DoxyParams}{Parameters}
+{\em player\+Name} & Name of the Player \\
+\hline
+{\em stone\+Count} & Stonecount of the player \\
+\hline
+{\em field\+Size} & Size of the gamingfield \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+sqlite.\+h\item 
+sqlite.\+cpp\end{DoxyCompactItemize}
