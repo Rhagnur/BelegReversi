@@ -6,8 +6,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     mainUI->setupUi(this);
 
+    timer = new QTimer(this);
 
     dict = new MyDict();
+    myDict = dict->getDict("deu");
     controllField = new controllerField();
     controllField->changeDict(dict->getDict("deu"));
 
@@ -79,11 +81,12 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
         QPoint coordinates = me->pos();
         if (controllField->evaluateClick(coordinates.x(), coordinates.y()))
         {
-            //gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
-            //gameWidget->label->update();
-            //gameWidget->labelPlayer1->setText(QString::fromStdString(controllField->getPlayer1Text()));
-            //gameWidget->labelPlayer2->setText(QString::fromStdString(controllField->getPlayer2Text()));
-            std::cout << "Click" << std::endl;
+            if (gameMode == 3)
+            {
+                timer->stop();
+                timeCount = 15;
+                timer->start(timePeriod);
+            }
         }
         return true;
     }
@@ -109,6 +112,24 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
     }
 
     return false;
+}
+
+void MainWindow::timeUp()
+{
+    timeCount -= 1;
+    timer->start(timePeriod);
+    if(timeCount == 0) {
+        timer->stop();
+        gameWidget->infoBox->clear();
+        gameWidget->infoBox->appendPlainText(QString::fromStdString(std::to_string(timeCount) + " " + myDict[28]));
+        controllField->timeUpWin();
+        gameWidget->graphicsViewField->viewport()->removeEventFilter(this);
+    }
+    if(timeCount == 10 || timeCount == 5 || timeCount == 4 || timeCount == 3 || timeCount == 2 || timeCount == 1) {
+        gameWidget->infoBox->clear();
+        gameWidget->infoBox->appendPlainText(QString::fromStdString(std::to_string(timeCount) + " " + myDict[28]));
+    }
+
 }
 
 void MainWindow::changeVolume(int value)
@@ -316,6 +337,7 @@ void MainWindow::on_pushButton_StartPvP_clicked()
     pvpContainer->show();
     this->connect(pvpWidget->pushButton_StartGamePvP, SIGNAL(clicked()), this, SLOT(on_pushButton_StartGamePvP_clicked()));
     this->connect(pvpWidget->pushButton_BackPVP, SIGNAL(clicked()), this, SLOT(on_pushButton_BackPVP_clicked()));
+    this->connect(pvpWidget->comboBox_PvPGamemode, SIGNAL(activated(int)), this, SLOT(on_comboBox_PvPGamemode_activated(int)));
 
 }
 
@@ -377,6 +399,15 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
     controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
     controllField->startGame();
     controllField->drawField();
+
+    if (gameMode == 3)
+    {
+        this->connect(timer, SIGNAL(timeout()), this, SLOT(timeUp()));
+        timeCount = 15;
+        timer->start(timePeriod);
+        gameWidget->infoBox->appendPlainText(QString::fromStdString("15 " + myDict[28]));
+    }
+
     gameWidget->graphicsViewField->viewport()->installEventFilter(this);
 }
 
@@ -485,4 +516,9 @@ void MainWindow::on_comboBox_HSSotieren_activated(int index)
         hsField->clearField();
         hsField->drawText(controllField->getHighscoreBySize(10));
     }
+}
+
+void MainWindow::on_comboBox_PvPGamemode_activated(int index)
+{
+    gameMode = index;
 }

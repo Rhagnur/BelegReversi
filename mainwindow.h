@@ -7,6 +7,7 @@
 #include <QMediaPlaylist>
 #include <QDialog>
 #include <QFileDialog>
+#include <QTimer>
 
 #include <iostream>
 #include <string>
@@ -52,6 +53,7 @@ public:
 
 private slots:
 
+    void timeUp();
     void changeVolume(int value);
     void toggleVolume(bool checked);
     void changeDesign(int design);
@@ -71,12 +73,15 @@ private slots:
     void on_comboBox_HSSotieren_activated(int index);
     void on_comboBox_OptionSprache_activated(int index);
 
+    void on_comboBox_PvPGamemode_activated(int index);
+
 private:
     QWidget *menuContainer = new QWidget();
     QWidget *gameContainer = new QWidget();
     QWidget *pvpContainer = new QWidget();
     QWidget *hsContainer = new QWidget();
     QWidget *optionContainer = new QWidget();
+    QTimer *timer;
 
     Ui::MainWindow *mainUI;
     Ui::GameWidget *gameWidget;
@@ -88,7 +93,7 @@ private:
     std::string *myDict;
     QMediaPlayer *player;
     QMediaPlaylist *playList;
-    int w = 500,h = 500, offset, design = 0;
+    int w = 500,h = 500, offset, design = 0, timePeriod = 1000, timeCount, gameMode = 0;
     bool menuIsInit = false, ingameOptionOn = false;
 
     MyDict *dict;
@@ -97,6 +102,7 @@ private:
 
 
     void changeLanguage();
+
 
 };
 

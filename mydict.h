@@ -29,7 +29,7 @@ public:
 private:
 
     std::map<std::string, std::string*> dict;
-    std::string deutsch[28], english[28];
+    std::string deutsch[29], english[29];
 };
 
 #endif // MYDICT_H

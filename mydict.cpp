@@ -30,6 +30,7 @@ MyDict::MyDict()
     deutsch[25] = "Unentschieden!!!";
     deutsch[26] = "Zug aussetzen";
     deutsch[27] = "Zurück";
+    deutsch[28] = "Sekunden übrig";
 
     english[0] = "activated";
     english[1] = "Filter output";
@@ -59,6 +60,7 @@ MyDict::MyDict()
     english[25] = "Draw!!!";
     english[26] = "Skip turn";
     english[27] = "Back";
+    english[28] = "seconds left";
 
     dict["deu"] = deutsch;
     dict["eng"] = english;

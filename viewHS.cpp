@@ -1,5 +1,4 @@
 #include "viewHS.h"
-#include <iostream>
 
 ViewHS::ViewHS()
 {

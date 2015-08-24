@@ -53,20 +53,24 @@ public:
     void setDesign(int design);
     void setLabelAndLCD(QPlainTextEdit *infoBox, QLCDNumber *lcdPlayer1, QLCDNumber *lcdPlayer2);
     void changeDict(std::string *newDict);
+    void timeUpWin();
 
 
 private:
+
+    SQLite *myDB;
+    QPlainTextEdit *infoBox;
+    QLCDNumber *lcdPlayer1, *lcdPLayer2;
+    QSound *set1, *set2, *wrong, *applause, *applauseLight;
+
+    std::string infoText, *myDict;
+    bool skipped, showPossibleFields;
+    int activePlayer, otherPlayer, design;
+
     viewField *viewGamingField;
     modelField *gamingField;
     modelPlayer *player[2];
-    SQLite *myDB;
-    int activePlayer, otherPlayer, design;
-    std::string infoText;
-    bool skipped, showPossibleFields;
-    QSound *set1, *set2, *wrong, *applause, *applauseLight;
-    QPlainTextEdit *infoBox;
-    QLCDNumber *lcdPlayer1, *lcdPLayer2;
-    std::string *myDict;
+
 };
 
 #endif // CONTROLLERFIELD_H

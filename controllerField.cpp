@@ -41,6 +41,12 @@ void controllerField::startGame()
     gamingField->showFieldDebug();
 }
 
+void controllerField::timeUpWin()
+{
+    viewGamingField->clearField();
+    viewGamingField->drawText(player[otherPlayer - 1]->getPlayerName() + + " " + myDict[6]);
+}
+
 void controllerField::turn(int i, int j)
 {
     gamingField->setFieldValue(i, j , activePlayer);

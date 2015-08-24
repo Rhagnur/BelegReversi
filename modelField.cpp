@@ -1,5 +1,4 @@
 #include "modelField.h"
-#include <iostream>
 
 modelField::modelField(int fieldSize)
 {
