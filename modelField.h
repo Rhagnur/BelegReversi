@@ -82,7 +82,7 @@ public:
 
 private:
 
-    int** field, fieldSize, fieldWidth, fieldHeight;
+    int** field = NULL, fieldSize, fieldWidth, fieldHeight;
 };
 
 #endif // MODELFIELD_H

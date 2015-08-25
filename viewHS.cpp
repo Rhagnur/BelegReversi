@@ -2,8 +2,14 @@
 
 ViewHS::ViewHS()
 {
-
+    textitemList = new QList<QGraphicsTextItem*>();
 }
+
+ViewHS::~ViewHS()
+{
+    delete textitemList;
+}
+
 ViewHS* ViewHS::getViewField()
 {
     return this;
@@ -74,6 +80,9 @@ void ViewHS::drawText(std::string text)
             name = "";
             score = "";
             size = "";
+            textitemList->append(nameIO);
+            textitemList->append(scoreIO);
+            textitemList->append(sizeIO);
         }
     }
 

@@ -2,6 +2,7 @@
 #define VIEWHS_H
 
 #include <QImage>
+#include <QList>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsItem>
@@ -19,6 +20,9 @@ class ViewHS : public QGraphicsScene
 public:
     //!Constructor
     ViewHS();
+
+    //!Deconstructor
+    ~ViewHS();
 
     //! Clear method
     /*!
@@ -40,6 +44,9 @@ public:
      * \return ViewHS object
      */
     ViewHS* getViewField();
+
+private:
+    QList <QGraphicsTextItem*> *textitemList = NULL;
 
 };
 

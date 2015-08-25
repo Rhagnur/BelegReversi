@@ -80,24 +80,24 @@ private:
     QWidget *pvpContainer = new QWidget();
     QWidget *hsContainer = new QWidget();
     QWidget *optionContainer = new QWidget();
-    QTimer *timer;
+    QTimer *timer = NULL;
 
-    Ui::MainWindow *mainUI;
-    Ui::GameWidget *gameWidget;
-    Ui::MenuWidget *menuWidget;
-    Ui::PvPWidget *pvpWidget;
-    Ui::HSWidget *hsWidget;
-    Ui::OptionWidget *optionWidget;
+    Ui::MainWindow *mainUI = NULL;
+    Ui::GameWidget *gameWidget = NULL;
+    Ui::MenuWidget *menuWidget = NULL;
+    Ui::PvPWidget *pvpWidget = NULL;
+    Ui::HSWidget *hsWidget = NULL;
+    Ui::OptionWidget *optionWidget = NULL;
 
-    std::string *myDict;
-    QMediaPlayer *player;
-    QMediaPlaylist *playList;
+    std::string *myDict = NULL;
+    QMediaPlayer *player = NULL;
+    QMediaPlaylist *playList = NULL;
     int w = 500,h = 500, offset, design = 0, timePeriod = 1000, timeCount, gameMode = 0;
     bool menuIsInit = false, ingameOptionOn = false;
 
-    MyDict *dict;
-    ViewHS *hsField;
-    controllerField* controllField;
+    MyDict *dict = NULL;
+    ViewHS *hsField = NULL;
+    controllerField* controllField = NULL;
 
 
     void changeLanguage();

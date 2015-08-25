@@ -62,17 +62,17 @@ public:
 
 private:
 
-    SQLite *myDB;
-    QPlainTextEdit *infoBox;
-    QLCDNumber *lcdPlayer1, *lcdPLayer2;
-    QSound *set1, *set2, *wrong, *applause, *applauseLight;
+    SQLite *myDB = NULL;
+    QPlainTextEdit *infoBox = NULL;
+    QLCDNumber *lcdPlayer1 = NULL, *lcdPLayer2 = NULL;
+    QSound *set1 = NULL, *set2 = NULL, *wrong = NULL, *applause = NULL, *applauseLight = NULL;
 
-    std::string infoText, *myDict;
+    std::string infoText, *myDict = NULL;
     bool skipped, showPossibleFields;
     int activePlayer, otherPlayer, design;
 
-    viewField *viewGamingField;
-    modelField *gamingField;
+    viewField *viewGamingField = NULL;
+    modelField *gamingField = NULL;
     modelPlayer *player[2];
 
 };

@@ -67,9 +67,9 @@ public:
 
 private:
 
-    QGraphicsPixmapItem *field;
+    QGraphicsPixmapItem *field = NULL;
     QList<QGraphicsPixmapItem*> *pixmapItemList;
-    QList<QPixmap*> *pixmapList;
+    QGraphicsTextItem *textitem = NULL;
 
 };
 
