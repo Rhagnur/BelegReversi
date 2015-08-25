@@ -42,7 +42,6 @@ public:
     //! Deconstructor
     ~MainWindow();
 
-    //! Eventfilter
     /*!
      * \brief Needed for resize and Mouseclick event
      * \param target

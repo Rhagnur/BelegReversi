@@ -42,8 +42,10 @@ void controllerField::changeDict(std::string *newDict)
     myDict = newDict;
 }
 
-void controllerField::checkWin()
+bool controllerField::checkWin()
 {
+    bool gameEnd = false;
+
     if (player[0]->getPlayerStoneCount() + player[1]->getPlayerStoneCount() == gamingField->getFieldSize() * gamingField->getFieldSize())
     {
         if (player[0]->getPlayerStoneCount() > player[1]->getPlayerStoneCount())
@@ -53,6 +55,7 @@ void controllerField::checkWin()
             viewGamingField->drawText(player[0]->getPlayerName() + + " " + myDict[6]);
             myDB->insertPlayerHighscore(player[0]->getPlayerName(), player[0]->getPlayerStoneCount(), gamingField->getFieldSize());
             applause->play();
+            gameEnd = true;
         }
         else if (player[0]->getPlayerStoneCount() < player[1]->getPlayerStoneCount())
         {
@@ -61,6 +64,7 @@ void controllerField::checkWin()
             viewGamingField->drawText(player[1]->getPlayerName() + + " " + myDict[6]);
             myDB->insertPlayerHighscore(player[1]->getPlayerName(), player[1]->getPlayerStoneCount(), gamingField->getFieldSize());
             applause->play();
+            gameEnd = true;
         }
         else
         {
@@ -68,6 +72,7 @@ void controllerField::checkWin()
             viewGamingField->clearField();
             viewGamingField->drawText(myDict[25]);
             applauseLight->play();
+            gameEnd = true;
         }
     }
     else if (player[0]->getPlayerStoneCount() == 0)
@@ -77,6 +82,7 @@ void controllerField::checkWin()
         viewGamingField->drawText(player[1]->getPlayerName() + + " " + myDict[6]);
         myDB->insertPlayerHighscore(player[1]->getPlayerName(), player[1]->getPlayerStoneCount(), gamingField->getFieldSize());
         applause->play();
+        gameEnd = true;
     }
     else if (player[1]->getPlayerStoneCount() == 0)
     {
@@ -85,6 +91,7 @@ void controllerField::checkWin()
         viewGamingField->drawText(player[0]->getPlayerName() + + " " + myDict[6]);
         myDB->insertPlayerHighscore(player[0]->getPlayerName(), player[0]->getPlayerStoneCount(), gamingField->getFieldSize());
         applause->play();
+        gameEnd = true;
     }
     else if (skipped) {
         if (player[0]->getPlayerStoneCount() > player[1]->getPlayerStoneCount())
@@ -95,6 +102,7 @@ void controllerField::checkWin()
             viewGamingField->drawText(player[0]->getPlayerName() + + " " + myDict[6]);
             myDB->insertPlayerHighscore(player[0]->getPlayerName(), player[0]->getPlayerStoneCount(), gamingField->getFieldSize());
             applause->play();
+            gameEnd = true;
         }
         else if (player[1]->getPlayerStoneCount() > player[0]->getPlayerStoneCount())
         {
@@ -104,6 +112,7 @@ void controllerField::checkWin()
             viewGamingField->drawText(player[1]->getPlayerName() + + " " + myDict[6]);
             myDB->insertPlayerHighscore(player[1]->getPlayerName(), player[1]->getPlayerStoneCount(), gamingField->getFieldSize());
             applause->play();
+            gameEnd = true;
         }
         else
         {
@@ -112,8 +121,11 @@ void controllerField::checkWin()
             viewGamingField->clearField();
             viewGamingField->drawText(myDict[25]);
             applauseLight->play();
+            gameEnd = true;
         }
     }
+
+    return gameEnd;
 }
 
 void controllerField::clearField()
@@ -168,7 +180,6 @@ bool controllerField::evaluateClick(int x, int y)
         {
             wrong->play();
         }
-        checkWin();
     }
     return value;
 }
@@ -579,6 +590,7 @@ void controllerField::timeUpWin()
 {
     viewGamingField->clearField();
     viewGamingField->drawText(player[otherPlayer - 1]->getPlayerName() + + " " + myDict[6]);
+    applauseLight->play();
 }
 
 void controllerField::turn(int i, int j)

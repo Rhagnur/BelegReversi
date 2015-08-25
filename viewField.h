@@ -26,13 +26,11 @@ public:
     //! Constructor
     ~viewField();
 
-    //! Clear method
     /*!
      * \brief Clears the complete scene
      */
     void clearField();
 
-    //! Draw method for single elemtn
     /*!
      * \brief Draws a single element from the field
      * \param x
@@ -50,7 +48,6 @@ public:
      */
     void drawElement(int x, int y, int width, int height, int value, int design, bool showPossTurns);
 
-    //! Draw method for text
     /*!
      * \brief Draws the winning or draw text
      * \param text
@@ -58,7 +55,6 @@ public:
      */
     void drawText(std::string text);
 
-    //! Get method
     /*!
      * \brief Gets the complete scene
      * \return viewField object

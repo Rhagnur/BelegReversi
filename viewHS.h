@@ -24,13 +24,11 @@ public:
     //!Deconstructor
     ~ViewHS();
 
-    //! Clear method
     /*!
      * \brief Clears the complete Highscore Scene
      */
     void clearField();
 
-    //! Draw method
     /*!
      * \brief draws piece of text for highscore output
      * \param text
@@ -38,7 +36,6 @@ public:
      */
     void drawText(std::string text);
 
-    //! Get method
     /*!
      * \brief getViewField
      * \return ViewHS object

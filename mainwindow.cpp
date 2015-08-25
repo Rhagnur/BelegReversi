@@ -94,10 +94,20 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
         {
             if (gameMode == 3)
             {
-                timer->stop();
-                timeCount = 15;
-                timer->start(timePeriod);
-                gameWidget->infoBox->appendPlainText(QString::fromStdString("15 " + myDict[28]));
+                if (controllField->checkWin()) {
+                    timer->stop();
+                }
+                else {
+                    timer->stop();
+                    timeCount = 15;
+                    timer->start(timePeriod);
+                    gameWidget->infoBox->appendPlainText(QString::fromStdString("15 " + myDict[28]));
+                }
+
+            }
+            else
+            {
+                controllField->checkWin();
             }
         }
         return true;
@@ -209,6 +219,10 @@ void MainWindow::on_pushButton_IngameBack_clicked()
     this->disconnect(gameWidget->pushButton_IngameBack, SIGNAL(clicked()), this, SLOT(on_pushButton_IngameBack_clicked()));
     this->disconnect(gameWidget->pushButton_IngameSkip, SIGNAL(clicked()), this, SLOT(on_pushButton_IngameSkip_clicked()));
     this->disconnect(gameWidget->pushButton_IngameOptions, SIGNAL(clicked()), this, SLOT(on_pushButton_IngameOptions_clicked()));
+    if (gameMode == 3) {
+        this->disconnect(timer, SIGNAL(timeout()), this, SLOT(timeUp()));
+        timer->stop();
+    }
     mainUI->gridLayout->removeWidget(gameContainer);
     gameContainer->hide();
     mainUI->gridLayout->addWidget(menuContainer);
@@ -223,14 +237,23 @@ void MainWindow::on_pushButton_IngameSkip_clicked()
 {
     if(controllField->isInit && !controllField->searchPossibleTurns())
     {
+
+
         if (controllField->getSkipped() && !controllField->searchPossibleTurns())
         {
-            controllField->checkWin();
+            if (controllField->checkWin()) {
+                timer->stop();
+            }
         }
         else
         {
             controllField->skipTurn();
-            //gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
+            if (gameMode == 3) {
+                timer->stop();
+                timeCount = 15;
+                timer->start(timePeriod);
+                gameWidget->infoBox->appendPlainText(QString::fromStdString("15 " + myDict[28]));
+            }
         }
     }
 }

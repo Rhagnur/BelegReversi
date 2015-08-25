@@ -20,7 +20,6 @@ public:
     //! Deconstructor
     ~SQLite();
 
-    //! Insert method
     /*!
      * \brief Insert new data in db
      * \param playerName
@@ -32,7 +31,6 @@ public:
      */
     void insertPlayerHighscore(std::string playerName, int stoneCount, int fieldSize);
 
-    //! Get method
     /*!
      * \brief Gets the highscore data
      * Highscore data format is (name - score - fieldsize), returns only the 12 best player sort by score
@@ -41,7 +39,6 @@ public:
      */
     std::string getHighscores();
 
-    //! Get method
     /*!
      * \brief Gets the highscore data
      * Highscore data format is (name - score), returns only the 12 best player sort by score for the choosen fiedsize

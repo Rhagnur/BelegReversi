@@ -16,7 +16,6 @@ public:
     //! Constructor
     MyDict();
 
-    //! Get method
     /*!
      * \brief Gets the choosen dict
      * \param sprache
