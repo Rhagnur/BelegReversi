@@ -22,6 +22,7 @@
 #include "ui_pvpwidget.h"
 #include "ui_hswidget.h"
 #include "ui_optionwidget.h"
+#include "ui_pvcwidget.h"
 
 namespace Ui {
 class MainWindow;
@@ -75,12 +76,19 @@ private slots:
 
     void on_checkBox_OptionVollbild_clicked(bool checked);
 
+    void on_pushButton_StartGamePvC_clicked();
+
+    void on_pushButton_BackPVC_clicked();
+
+    void on_comboBox_PvCGamemode_activated(int index);
+
 private:
     QWidget *menuContainer = new QWidget();
     QWidget *gameContainer = new QWidget();
     QWidget *pvpContainer = new QWidget();
     QWidget *hsContainer = new QWidget();
     QWidget *optionContainer = new QWidget();
+    QWidget *pvcContainer = new QWidget();
     QTimer *timer = NULL;
 
     Ui::MainWindow *mainUI = NULL;
@@ -89,6 +97,7 @@ private:
     Ui::PvPWidget *pvpWidget = NULL;
     Ui::HSWidget *hsWidget = NULL;
     Ui::OptionWidget *optionWidget = NULL;
+    Ui::PvCWidget *pvcWidget = NULL;
 
     std::string *myDict = NULL;
     QMediaPlayer *player = NULL;

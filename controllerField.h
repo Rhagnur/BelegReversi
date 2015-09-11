@@ -142,6 +142,12 @@ public:
     void initControllerField(int fieldSize, int design);
 
     /*!
+     * \brief initControllerFieldForTest
+     * \param size
+     */
+    void initControllerFieldForTest(int size);
+
+    /*!
      * \brief Checks if field is possible turn
      * \param i
      * \param j
@@ -154,6 +160,12 @@ public:
      * \return bool
      */
     bool searchPossibleTurns();
+
+    /*!
+     * \brief Sets bool variable so controller know, that game is vs AI and if AI will start
+     * \param isAiFirst
+     */
+    void setAiGame(bool isAiFirst);
 
     /*!
      * \brief Set new design as number
@@ -234,7 +246,7 @@ private:
     QSound *set1 = NULL, *set2 = NULL, *wrong = NULL, *applause = NULL, *applauseLight = NULL;
 
     std::string infoText, *myDict = NULL;
-    bool skipped, showPossibleFields;
+    bool skipped, showPossibleFields, isAiGame = false, aiFirst = false;
     int activePlayer, otherPlayer, design;
 
     viewField *viewGamingField = NULL;

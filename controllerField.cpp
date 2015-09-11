@@ -174,6 +174,10 @@ bool controllerField::evaluateClick(int x, int y)
             viewGamingField->clear();
             drawField();
 
+            if(isAiGame) {
+                std::cout << "Hier wäre jetzt der normale AI Zug" << std::endl;
+                //todo AI zug, playerwechsel, bla bla
+            }
 
         }
         else
@@ -397,6 +401,7 @@ void controllerField::initControllerField(int fieldSize, int design)
 {
     skipped = false;
     isInit = true;
+    isAiGame = false;
     activePlayer = 1;
     otherPlayer = 2;
     this->design = design;
@@ -410,6 +415,20 @@ void controllerField::initControllerField(int fieldSize, int design)
     infoText = player[activePlayer - 1]->getPlayerName() + " " + myDict[8];
     infoBox->clear();
     infoBox->appendPlainText(QString::fromStdString(infoText));
+
+}
+
+void controllerField::initControllerFieldForTest(int size)
+{
+    skipped = false;
+    isInit = true;
+    activePlayer = 1;
+    otherPlayer = 2;
+    gamingField = new modelField(size);
+    gamingField->setFieldValue(gamingField->getFieldSize()/2 - 1,gamingField->getFieldSize()/2 - 1, activePlayer);
+    gamingField->setFieldValue(gamingField->getFieldSize()/2,gamingField->getFieldSize()/2, activePlayer);
+    gamingField->setFieldValue(gamingField->getFieldSize()/2,gamingField->getFieldSize()/2 - 1, otherPlayer);
+    gamingField->setFieldValue(gamingField->getFieldSize()/2 - 1,gamingField->getFieldSize()/2, otherPlayer);
 }
 
 bool controllerField::isPossibleTurn(int i, int j)
@@ -524,6 +543,12 @@ bool controllerField::searchPossibleTurns()
     return foundPossibleTurn;
 }
 
+void controllerField::setAiGame(bool isAiFirst)
+{
+    isAiGame = true;
+    aiFirst = isAiFirst;
+}
+
 void controllerField::setDesign(int design)
 {
     this->design = design;
@@ -575,6 +600,10 @@ void controllerField::skipTurn()
 void controllerField::startGame()
 {
     searchPossibleTurns();
+    if (isAiGame) {
+        std::cout << "Hier wäre jetzt der Zug der AI, wenn AI beginnt" << std::endl;
+        //todo, AI Zug, Playerwechsel, Zugsuche
+    }
 }
 
 void controllerField::stoneCount()

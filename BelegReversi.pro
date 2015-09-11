@@ -36,7 +36,8 @@ FORMS    += mainwindow.ui \
     menuwidget.ui \
     pvpwidget.ui \
     hswidget.ui \
-    optionwidget.ui
+    optionwidget.ui \
+    pvcwidget.ui
 
 OTHER_FILES +=
 
@@ -45,7 +46,8 @@ RESOURCES += \
     music/music.qrc
 
 QMAKE_CXXFLAGS += -std=c++11
-
+QMAKE_CFLAGS+="-fsanitize=address -fno-omit-frame-pointer" \
+QMAKE_LFLAGS+="-fsanitize=address"
 
 DISTFILES +=
 

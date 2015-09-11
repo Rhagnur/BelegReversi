@@ -2,7 +2,7 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    mainUI(new Ui::MainWindow), gameWidget(new Ui::GameWidget), menuWidget(new Ui::MenuWidget), pvpWidget(new Ui::PvPWidget), hsWidget(new Ui::HSWidget), optionWidget(new Ui::OptionWidget)
+    mainUI(new Ui::MainWindow), gameWidget(new Ui::GameWidget), menuWidget(new Ui::MenuWidget), pvpWidget(new Ui::PvPWidget), hsWidget(new Ui::HSWidget), optionWidget(new Ui::OptionWidget), pvcWidget(new Ui::PvCWidget)
 {
     mainUI->setupUi(this);
 
@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     hsWidget->setupUi(hsContainer);
     pvpWidget->setupUi(pvpContainer);
     optionWidget->setupUi(optionContainer);
+    pvcWidget->setupUi(pvcContainer);
 
     pvpWidget->comboBox_PvPFieldsize->addItem("4x4", QVariant(4));
     pvpWidget->comboBox_PvPFieldsize->addItem("6x6", QVariant(6));
@@ -30,6 +31,18 @@ MainWindow::MainWindow(QWidget *parent) :
     pvpWidget->comboBox_PvPGamemode->addItem(tr("Bo3"));
     pvpWidget->comboBox_PvPGamemode->addItem(tr("Bo5"));
     pvpWidget->comboBox_PvPGamemode->addItem(tr("Under Pressure"));
+
+    pvcWidget->comboBox_PvCFieldsize->addItem("4x4", QVariant(4));
+    pvcWidget->comboBox_PvCFieldsize->addItem("6x6", QVariant(6));
+    pvcWidget->comboBox_PvCFieldsize->addItem("8x8", QVariant(8));
+    pvcWidget->comboBox_PvCFieldsize->addItem("10x10", QVariant(10));
+    pvcWidget->comboBox_PvCFieldsize->setCurrentIndex(2);
+    pvcWidget->comboBox_PvCGamemode->addItem(tr("normal"));
+    pvcWidget->comboBox_PvCGamemode->addItem(tr("Bo3"));
+    pvcWidget->comboBox_PvCGamemode->addItem(tr("Bo5"));
+    pvcWidget->comboBox_PvCGamemode->addItem(tr("Under Pressure"));
+    pvcWidget->comboBox_PvCBeginnt->addItem("Player");
+    pvcWidget->comboBox_PvCBeginnt->addItem("Computer");
 
     optionWidget->comboBox_OptionSprache->addItem("Deutsch");
     optionWidget->comboBox_OptionSprache->addItem("English");
@@ -385,8 +398,9 @@ void MainWindow::on_pushButton_StartPvP_clicked()
 
 void MainWindow::on_pushButton_BackPVP_clicked()
 {
-    this->connect(pvpWidget->pushButton_StartGamePvP, SIGNAL(clicked()), this, SLOT(on_pushButton_StartGamePvP_clicked()));
-    this->connect(pvpWidget->pushButton_BackPVP, SIGNAL(clicked()), this, SLOT(on_pushButton_BackPVP_clicked()));
+    this->disconnect(pvpWidget->pushButton_StartGamePvP, SIGNAL(clicked()), this, SLOT(on_pushButton_StartGamePvP_clicked()));
+    this->disconnect(pvpWidget->pushButton_BackPVP, SIGNAL(clicked()), this, SLOT(on_pushButton_BackPVP_clicked()));
+    this->disconnect(pvpWidget->comboBox_PvPGamemode, SIGNAL(activated(int)), this, SLOT(on_comboBox_PvPGamemode_activated(int)));
     mainUI->gridLayout->removeWidget(pvpContainer);
     pvpContainer->hide();
     mainUI->gridLayout->addWidget(menuContainer);
@@ -401,6 +415,7 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
 {
     this->disconnect(pvpWidget->pushButton_StartGamePvP, SIGNAL(clicked()), this, SLOT(on_pushButton_StartGamePvP_clicked()));
     this->disconnect(pvpWidget->pushButton_BackPVP, SIGNAL(clicked()), this, SLOT(on_pushButton_BackPVP_clicked()));
+    this->disconnect(pvpWidget->comboBox_PvPGamemode, SIGNAL(activated(int)), this, SLOT(on_comboBox_PvPGamemode_activated(int)));
 
     std::string player1Name = pvpWidget->lineEdit_Player1->text().toStdString();
     std::string player2Name = pvpWidget->lineEdit_Player2->text().toStdString();
@@ -425,11 +440,9 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
     mainUI->gridLayout->addWidget(gameContainer);
     gameContainer->show();
 
-    gameWidget->labelPlayer1->setText(pvpWidget->lineEdit_Player1->text());
-    gameWidget->labelPlayer2->setText(pvpWidget->lineEdit_Player2->text());
+    gameWidget->labelPlayer1->setText(QString::fromStdString(player1Name));
+    gameWidget->labelPlayer2->setText(QString::fromStdString(player2Name));
     controllField->setLabelAndLCD(gameWidget->infoBox, gameWidget->lcdNumber_Player1, gameWidget->lcdNumber_Player2);
-    controllField->setPlayer1Name(pvpWidget->lineEdit_Player1->text().toStdString());
-    controllField->setPlayer2Name(pvpWidget->lineEdit_Player2->text().toStdString());
     controllField->initControllerField(fieldSize, design);
 
     controllField->setPlayer1Name(player1Name);
@@ -467,20 +480,94 @@ void MainWindow::on_pushButton_StartAI_clicked()
 
     mainUI->gridLayout->removeWidget(menuContainer);
     menuContainer->hide();
+    mainUI->gridLayout->addWidget(pvcContainer);
+    pvcContainer->show();
+
+    this->connect(pvcWidget->pushButton_StartGamePvC, SIGNAL(clicked()), this, SLOT(on_pushButton_StartGamePvC_clicked()));
+    this->connect(pvcWidget->pushButton_BackPVC, SIGNAL(clicked()), this, SLOT(on_pushButton_BackPVC_clicked()));
+    this->connect(pvcWidget->comboBox_PvCGamemode, SIGNAL(activated(int)), this, SLOT(on_comboBox_PvCGamemode_activated(int)));
+}
+
+void MainWindow::on_pushButton_StartGamePvC_clicked()
+{
+    this->disconnect(pvcWidget->pushButton_StartGamePvC, SIGNAL(clicked()), this, SLOT(on_pushButton_StartGamePvC_clicked()));
+    this->disconnect(pvcWidget->pushButton_BackPVC, SIGNAL(clicked()), this, SLOT(on_pushButton_BackPVC_clicked()));
+    this->disconnect(pvcWidget->comboBox_PvCGamemode, SIGNAL(activated(int)), this, SLOT(on_comboBox_PvCGamemode_activated(int)));
+
+    std::string playerName = pvcWidget->lineEdit_PvCPlayer->text().toStdString();
+    QVariant sizeVariant = pvcWidget->comboBox_PvCFieldsize->itemData(pvcWidget->comboBox_PvCFieldsize->currentIndex());
+    int fieldSize = sizeVariant.toInt();
+
+    if (playerName == "" || playerName.length() < 2)
+    {
+        playerName = "Spieler";
+    }
+
+    this->connect(gameWidget->pushButton_IngameBack, SIGNAL(clicked()), this, SLOT(on_pushButton_IngameBack_clicked()));
+    this->connect(gameWidget->pushButton_IngameSkip, SIGNAL(clicked()), this, SLOT(on_pushButton_IngameSkip_clicked()));
+    this->connect(gameWidget->pushButton_IngameOptions, SIGNAL(clicked()), this, SLOT(on_pushButton_IngameOptions_clicked()));
+
+    mainUI->gridLayout->removeWidget(pvcContainer);
+    pvcContainer->hide();
     mainUI->gridLayout->addWidget(gameContainer);
     gameContainer->show();
 
+    QString beginner = pvcWidget->comboBox_PvCBeginnt->currentText();
+    bool isAiFirst = false;
 
-    controllField->initControllerField(4, design);
-    //gameWidget->label->setText(QString::fromStdString(controllField->getInfoText()));
-    gameWidget->labelPlayer1->setText(pvpWidget->lineEdit_Player1->text());
-    gameWidget->labelPlayer2->setText(pvpWidget->lineEdit_Player2->text());
-    gameWidget->graphicsViewField->viewport()->installEventFilter(this);
+    if (beginner == "Spieler" || beginner == "Player") {
+        gameWidget->labelPlayer1->setText(QString::fromStdString(playerName));
+        gameWidget->labelPlayer2->setText("Computer");
+        controllField->setPlayer1Name(playerName);
+        controllField->setPlayer2Name("Computer");
+    }
+    else {
+        gameWidget->labelPlayer1->setText("Computer");
+        gameWidget->labelPlayer2->setText(QString::fromStdString(playerName));
+        controllField->setPlayer2Name(playerName);
+        controllField->setPlayer1Name("Computer");
+        isAiFirst = true;
+
+    }
+
+
+    controllField->setLabelAndLCD(gameWidget->infoBox, gameWidget->lcdNumber_Player1, gameWidget->lcdNumber_Player2);
+    controllField->initControllerField(fieldSize, design);
+    controllField->setAiGame(isAiFirst);
+
+    controllField->setShowPossTurns(pvcWidget->checkBox_PvCshowPossMoves->isChecked());
+
     gameWidget->graphicsViewField->setScene(controllField->getViewField());
-    std::cout << "SetFieldSize to " + std::to_string(gameWidget->graphicsViewField->width()) + " x " + std::to_string(gameWidget->graphicsViewField->height()) << std::endl;
     controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
     controllField->startGame();
     controllField->drawField();
+    resizeMainWindow();
+
+
+    if (gameMode == 3)
+    {
+        this->connect(timer, SIGNAL(timeout()), this, SLOT(timeUp()));
+        timeCount = 15;
+        timer->start(timePeriod);
+        gameWidget->infoBox->appendPlainText(QString::fromStdString("15 " + myDict[28]));
+    }
+
+    gameWidget->graphicsViewField->viewport()->installEventFilter(this);
+}
+
+void MainWindow::on_pushButton_BackPVC_clicked()
+{
+    this->disconnect(pvcWidget->pushButton_StartGamePvC, SIGNAL(clicked()), this, SLOT(on_pushButton_StartGamePvC_clicked()));
+    this->disconnect(pvcWidget->pushButton_BackPVC, SIGNAL(clicked()), this, SLOT(on_pushButton_BackPVC_clicked()));
+    this->disconnect(pvcWidget->comboBox_PvCGamemode, SIGNAL(activated(int)), this, SLOT(on_comboBox_PvCGamemode_activated(int)));
+    mainUI->gridLayout->removeWidget(pvpContainer);
+    pvpContainer->hide();
+    mainUI->gridLayout->addWidget(menuContainer);
+    menuContainer->show();
+    this->connect(menuWidget->pushButton_StartPvP, SIGNAL(clicked()), this, SLOT(on_pushButton_StartPvP_clicked()));
+    this->connect(menuWidget->pushButton_StartAI, SIGNAL(clicked()), this, SLOT(on_pushButton_StartAI_clicked()));
+    this->connect(menuWidget->pushButton_optionsMenu, SIGNAL(clicked()), this, SLOT(on_pushButton_optionsMenu_clicked()));
+    this->connect(menuWidget->pushButton_Highscore, SIGNAL(clicked()), this, SLOT(on_pushButton_Highscore_clicked()));
 }
 
 void MainWindow::on_pushButton_Highscore_clicked()
@@ -576,4 +663,9 @@ void MainWindow::on_checkBox_OptionVollbild_clicked(bool checked)
     else {
         this->showNormal();
     }
+}
+
+void MainWindow::on_comboBox_PvCGamemode_activated(int index)
+{
+    gameMode = index;
 }
