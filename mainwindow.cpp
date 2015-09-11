@@ -114,26 +114,30 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
     }
     if (event->type() == QEvent::Resize)
     {
-        w = gameWidget->graphicsViewField->width();
-        h = gameWidget->graphicsViewField->height();
-        offset = 0;
-        if (w > h) {
-            w = h;
-        }
-        if (h > w) {
-            h = w;
-        }
-        offset = (this->width() - w) / 2;
-        offset -= 10;
-        gameWidget->graphicsViewField->setGeometry(offset,48,w,h);
-        std::cout << "Resize: " + std::to_string(this->width()) + " - " + std::to_string(w) << std::endl;
-        controllField->setFieldSize(w, h);
-        controllField->clearField();
-        controllField->drawField();
+        resizeMainWindow();
         return true;
     }
 
     return false;
+}
+
+void MainWindow::resizeMainWindow() {
+    w = gameWidget->graphicsViewField->width();
+    h = gameWidget->graphicsViewField->height();
+    offset = 0;
+    if (w > h) {
+        w = h;
+    }
+    if (h > w) {
+        h = w;
+    }
+    offset = (this->width() - w) / 2;
+    offset -= 10;
+    gameWidget->graphicsViewField->setGeometry(offset,48,w,h);
+    std::cout << "Resize: " + std::to_string(this->width()) + " - " + std::to_string(w) << std::endl;
+    controllField->setFieldSize(w, h);
+    controllField->clearField();
+    controllField->drawField();
 }
 
 void MainWindow::timeUp()
@@ -437,6 +441,8 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
     controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
     controllField->startGame();
     controllField->drawField();
+    resizeMainWindow();
+
 
     if (gameMode == 3)
     {

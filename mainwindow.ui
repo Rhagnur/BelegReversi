@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>640</height>
+    <width>480</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,8 +20,8 @@ border: 0;</string>
   <widget class="QWidget" name="centralWidget">
    <property name="minimumSize">
     <size>
-     <width>510</width>
-     <height>600</height>
+     <width>480</width>
+     <height>720</height>
     </size>
    </property>
    <property name="styleSheet">

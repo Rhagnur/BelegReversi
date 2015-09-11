@@ -102,6 +102,7 @@ private:
 
 
     void changeLanguage();
+    void resizeMainWindow();
 
 
 };
