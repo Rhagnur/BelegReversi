@@ -73,6 +73,8 @@ private slots:
     void on_comboBox_OptionSprache_activated(int index);
     void on_comboBox_PvPGamemode_activated(int index);
 
+    void on_checkBox_OptionVollbild_clicked(bool checked);
+
 private:
     QWidget *menuContainer = new QWidget();
     QWidget *gameContainer = new QWidget();

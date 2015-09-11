@@ -272,6 +272,7 @@ void MainWindow::on_pushButton_IngameOptions_clicked()
     this->connect(optionWidget->horizontalSlider_OptionVolume, SIGNAL(valueChanged(int)), this, SLOT(changeVolume(int)));
     this->connect(optionWidget->checkBox, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
     this->connect(optionWidget->comboBox_OptionDesign, SIGNAL(activated(int)), this, SLOT(changeDesign(int)));
+    this->connect(optionWidget->checkBox_OptionVollbild, SIGNAL(clicked(bool)), this, SLOT(on_checkBox_OptionVollbild_clicked(bool)));
     optionWidget->label_OptionSprache->hide();
     optionWidget->comboBox_OptionSprache->hide();
     ingameOptionOn = true;
@@ -293,6 +294,7 @@ void MainWindow::on_pushButton_optionsMenu_clicked()
     this->connect(optionWidget->checkBox, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
     this->connect(optionWidget->comboBox_OptionSprache, SIGNAL(activated(int)), this, SLOT(on_comboBox_OptionSprache_activated(int)));
     this->connect(optionWidget->comboBox_OptionDesign, SIGNAL(activated(int)), this, SLOT(changeDesign(int)));
+    this->connect(optionWidget->checkBox_OptionVollbild, SIGNAL(clicked(bool)), this, SLOT(on_checkBox_OptionVollbild_clicked(bool)));
 }
 
 void MainWindow::on_pushButton_OptionBack_clicked()
@@ -303,6 +305,7 @@ void MainWindow::on_pushButton_OptionBack_clicked()
     this->disconnect(optionWidget->checkBox, SIGNAL(toggled(bool)), this, SLOT(toggleVolume(bool)));
     this->disconnect(optionWidget->comboBox_OptionSprache, SIGNAL(activated(int)), this, SLOT(on_comboBox_OptionSprache_activated(int)));
     this->disconnect(optionWidget->comboBox_OptionDesign, SIGNAL(activated(int)), this, SLOT(changeDesign(int)));
+    this->disconnect(optionWidget->checkBox_OptionVollbild, SIGNAL(clicked(bool)), this, SLOT(on_checkBox_OptionVollbild_clicked(bool)));
     mainUI->gridLayout->removeWidget(optionContainer);
     optionContainer->hide();
 
@@ -556,4 +559,15 @@ void MainWindow::on_comboBox_HSSotieren_activated(int index)
 void MainWindow::on_comboBox_PvPGamemode_activated(int index)
 {
     gameMode = index;
+}
+
+void MainWindow::on_checkBox_OptionVollbild_clicked(bool checked)
+{
+    if (checked)
+    {
+        this->showFullScreen();
+    }
+    else {
+        this->showNormal();
+    }
 }

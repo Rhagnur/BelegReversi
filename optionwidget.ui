@@ -39,19 +39,6 @@ border: 0;</string>
    </item>
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <spacer name="verticalSpacer_6">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
      <item alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="label_OptionVolumeLevel">
        <property name="styleSheet">
@@ -240,6 +227,43 @@ padding: 0px;</string>
      </item>
      <item>
       <spacer name="verticalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_OptionVollbild">
+       <property name="styleSheet">
+        <string notr="true">font: 75 14pt &quot;Verdana&quot;;
+color: #FFF;
+margin-bottom: 6px;</string>
+       </property>
+       <property name="text">
+        <string>Vollbildmodus</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_OptionVollbild">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Verdana&quot;;
+color: #FFF;
+height: 35px;</string>
+       </property>
+       <property name="text">
+        <string>aktiv</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_6">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>

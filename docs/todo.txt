@@ -1,0 +1,17 @@
+1   Vollbild Modus
+4   Läuft auf Desktop, aber auch unter mobile Plattform getestet (Beleg in Doku)
+4   Doxygen mittels make
+5   Unit-Tests
+4   Valgrind / AddressSanitizer werfen keine Fehler Progausführung und Tests
+4   Tests laufen automatisch ab, Build Artafakte für Linux und für Win oder Mac (Docker)
+1   PvC Auswahl wer beginnt
+1   Animation Umdrehen Stein
+1   Save / Load Spiel
+1   Netzwerkspiel im selben Subnetz
+1   Client Server, Remote Verbindung
+1   Eingehende Verbindungswünsche nazeigen
+1   Server kann Wunsch annehmen oder ablehnen
+1   Client wird über Entscheidung informiert
+1   Verbindung halten bis Spiel zuende
+5   MinMax Algo CvP
+5   CvP Spielstärke Computer, einfach, mittel, schwer
