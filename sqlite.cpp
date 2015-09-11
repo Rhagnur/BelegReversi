@@ -4,7 +4,7 @@ SQLite::SQLite()
 {
     if (!QDir("db").exists())
     {
-        std::cout << "[INFO] : Create new db dir 'db/'" << std::endl;
+        std::cout << "[INFO] Create new db dir 'db/'" << std::endl;
         QDir().mkdir("db");
     }
     myDB.setDatabaseName("db/database.db");
@@ -20,7 +20,7 @@ std::string SQLite::getHighscores()
 {
     std::string buffer = "";
     QSqlQuery query;
-    std::cout << "[INFO] : Query to db" << std::endl;
+    std::cout << "[INFO] Query to db" << std::endl;
     query.exec("SELECT name, score, fieldsize FROM highscore ORDER BY score DESC LIMIT 12;");
 
 
@@ -39,7 +39,7 @@ std::string SQLite::getHighscoreBySize(int size)
 {
     std::string buffer = "";
     QSqlQuery query;
-    std::cout << "[INFO] : Query to db" << std::endl;
+    std::cout << "[INFO] Query to db" << std::endl;
     QString queryString = "SELECT name, score FROM highscore WHERE fieldsize = " + QString::fromStdString(std::to_string(size)) + " ORDER BY score DESC LIMIT 12 ;";
     query.exec(queryString);
 
@@ -69,7 +69,7 @@ void SQLite::insertPlayerHighscore(std::string playerName, int stoneCount, int f
     buffer = "INSERT INTO highscore (id, name, score, fieldsize) VALUES (" + std::to_string(id) + ",'" + playerName + "'," + std::to_string(stoneCount) + "," + std::to_string(fieldSize) + ");";
     queryMessage = QString::fromStdString(buffer);
 
-    std::cout << "[INFO] : Add new player score to db" << std::endl;
+    std::cout << "[INFO] Add new player score to db" << std::endl;
     myDB.exec(queryMessage);
 }
 

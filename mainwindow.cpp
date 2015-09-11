@@ -147,7 +147,7 @@ void MainWindow::resizeMainWindow() {
     offset = (this->width() - w) / 2;
     offset -= 10;
     gameWidget->graphicsViewField->setGeometry(offset,48,w,h);
-    std::cout << "Resize: " + std::to_string(this->width()) + " - " + std::to_string(w) << std::endl;
+    std::cout << "[INFO] Resize: " + std::to_string(this->width()) + " - " + std::to_string(w) << std::endl;
     controllField->setFieldSize(w, h);
     controllField->clearField();
     controllField->drawField();
@@ -160,13 +160,13 @@ void MainWindow::timeUp()
     if(timeCount == 0) {
         timer->stop();
         gameWidget->infoBox->clear();
-        gameWidget->infoBox->appendPlainText(QString::fromStdString(std::to_string(timeCount) + " " + myDict[28]));
+        gameWidget->infoBox->appendPlainText(QString::number(timeCount) + " " + QString::fromStdString(myDict[28]));
         controllField->timeUpWin();
         gameWidget->graphicsViewField->viewport()->removeEventFilter(this);
     }
     if(timeCount == 10 || timeCount == 5 || timeCount == 4 || timeCount == 3 || timeCount == 2 || timeCount == 1) {
         gameWidget->infoBox->clear();
-        gameWidget->infoBox->appendPlainText(QString::fromStdString(std::to_string(timeCount) + " " + myDict[28]));
+        gameWidget->infoBox->appendPlainText(QString::number(timeCount) + " " + QString::fromStdString(myDict[28]));
     }
 
 }
@@ -450,7 +450,6 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
     controllField->setShowPossTurns(pvpWidget->checkBox_showPossMoves->isChecked());
 
     gameWidget->graphicsViewField->setScene(controllField->getViewField());
-    std::cout << "SetFieldSize to " + std::to_string(gameWidget->graphicsViewField->width()) + " x " + std::to_string(gameWidget->graphicsViewField->height()) << std::endl;
     controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
     controllField->startGame();
     controllField->drawField();
