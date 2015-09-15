@@ -29,7 +29,7 @@ public:
      * \param fieldSize
      * Size of the gamingfield
      */
-    void insertPlayerHighscore(std::string playerName, int stoneCount, int fieldSize);
+    void insertPlayerHighscore(QString playerName, int stoneCount, int fieldSize);
 
     /*!
      * \brief Gets the highscore data
@@ -37,7 +37,7 @@ public:
      * \return highscoreString
      * complete data as string, lines seperated with '\n’
      */
-    std::string getHighscores();
+    QString getHighscores();
 
     /*!
      * \brief Gets the highscore data
@@ -47,7 +47,7 @@ public:
      * \return highscoreString
      * complete data as string, lines seperated with '\n’
      */
-    std::string getHighscoreBySize(int size);
+    QString getHighscoreBySize(int size);
 
 private:
 

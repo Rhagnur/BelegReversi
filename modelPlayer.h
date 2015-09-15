@@ -1,7 +1,7 @@
 #ifndef MODELPLAYER_H
 #define MODELPLAYER_H
 
-#include <string>
+#include <QString>
 
 //! Player Model Class
 /*!
@@ -18,7 +18,7 @@ public:
      * \brief Sets the new playerName for a player
      * \param name
      */
-    void setPlayerName(std::string name);
+    void setPlayerName(QString name);
 
     /*!
      * \brief Sets the new stoneCount for a player
@@ -36,12 +36,12 @@ public:
      * \brief Gets the current playerName from player
      * \return playerName
      */
-    std::string getPlayerName();
+    QString getPlayerName();
 
 private:
 
     int stoneCount;
-    std::string playerName;
+    QString playerName;
 
 };
 

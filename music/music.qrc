@@ -1,13 +1,9 @@
 <RCC>
     <qresource prefix="/music">
-        <file>Track01.mp3</file>
-        <file>Track02.mp3</file>
-        <file>Track03.mp3</file>
-        <file>Track04.mp3</file>
         <file>applause.wav</file>
+        <file>applauseLight.wav</file>
         <file>blop.wav</file>
         <file>trombone.wav</file>
         <file>woosh.wav</file>
-        <file>applauseLight.wav</file>
     </qresource>
 </RCC>

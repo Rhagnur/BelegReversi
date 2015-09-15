@@ -21,11 +21,11 @@ void viewField::clearField()
     this->clear();
 }
 
-void viewField::drawText(std::string text)
+void viewField::drawText(QString text)
 {
     QFont font;
     textitem = new QGraphicsTextItem;
-    QString textString = "<p style='text-align: center;'>" + QString::fromStdString(text) + "</p>";
+    QString textString = "<p style='text-align: center;'>" + text + "</p>";
 
     font.setPointSize(30);
     font.setBold(true);

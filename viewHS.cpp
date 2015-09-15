@@ -20,14 +20,14 @@ void ViewHS::clearField()
     this->clear();
 }
 
-void ViewHS::drawText(std::string text)
+void ViewHS::drawText(QString text)
 {
     int i = 0, index = 0;
     std::string name = "";
     std::string score = "";
     std::string size = "";
 
-    for (char test : text)
+    for (char test : text.toStdString())
     {
         if(index == 0 && test != '#')
         {

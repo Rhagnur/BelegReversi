@@ -46,8 +46,7 @@ RESOURCES += \
     music/music.qrc
 
 QMAKE_CXXFLAGS += -std=c++11
-QMAKE_CFLAGS+="-fsanitize=address -fno-omit-frame-pointer" \
-QMAKE_LFLAGS+="-fsanitize=address"
+
 
 DISTFILES +=
 

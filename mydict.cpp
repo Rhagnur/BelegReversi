@@ -67,7 +67,7 @@ MyDict::MyDict()
 
 }
 
-std::string* MyDict::getDict(std::string sprache)
+QString* MyDict::getDict(QString sprache)
 {
     return dict[sprache];
 }

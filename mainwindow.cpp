@@ -114,7 +114,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
                     timer->stop();
                     timeCount = 15;
                     timer->start(timePeriod);
-                    gameWidget->infoBox->appendPlainText(QString::fromStdString("15 " + myDict[28]));
+                    gameWidget->infoBox->appendPlainText("15 " + myDict[28]);
                 }
 
             }
@@ -147,7 +147,7 @@ void MainWindow::resizeMainWindow() {
     offset = (this->width() - w) / 2;
     offset -= 10;
     gameWidget->graphicsViewField->setGeometry(offset,48,w,h);
-    std::cout << "[INFO] Resize: " + std::to_string(this->width()) + " - " + std::to_string(w) << std::endl;
+    std::cout << "[INFO] Resize: " + QString::number(this->width()).toStdString() + " - " + QString::number(w).toStdString() << std::endl;
     controllField->setFieldSize(w, h);
     controllField->clearField();
     controllField->drawField();
@@ -160,13 +160,13 @@ void MainWindow::timeUp()
     if(timeCount == 0) {
         timer->stop();
         gameWidget->infoBox->clear();
-        gameWidget->infoBox->appendPlainText(QString::number(timeCount) + " " + QString::fromStdString(myDict[28]));
+        gameWidget->infoBox->appendPlainText(QString::number(timeCount) + " " + myDict[28]);
         controllField->timeUpWin();
         gameWidget->graphicsViewField->viewport()->removeEventFilter(this);
     }
     if(timeCount == 10 || timeCount == 5 || timeCount == 4 || timeCount == 3 || timeCount == 2 || timeCount == 1) {
         gameWidget->infoBox->clear();
-        gameWidget->infoBox->appendPlainText(QString::number(timeCount) + " " + QString::fromStdString(myDict[28]));
+        gameWidget->infoBox->appendPlainText(QString::number(timeCount) + " " + myDict[28]);
     }
 
 }
@@ -188,7 +188,7 @@ void MainWindow::toggleVolume(bool checked)
 
 void MainWindow::changeDesign(int design)
 {
-    std::cout << "[INFO] Change design :" + std::to_string(design) << std::endl;
+    std::cout << "[INFO] Change design :" + QString::number(design).toStdString() << std::endl;
     this->design = design;
     controllField->setDesign(design);
 }
@@ -197,38 +197,38 @@ void MainWindow::changeLanguage()
 {
     std::cout << "[INFO] Change text from elements" << std::endl;
 
-    optionWidget->checkBox->setText(QString::fromStdString(myDict[24]));
-    optionWidget->label_OptionDesign->setText(QString::fromStdString(myDict[3]));
-    optionWidget->label_OptionMusikLoad->setText(QString::fromStdString(myDict[4]));
-    optionWidget->label_OptionSprache->setText(QString::fromStdString(myDict[23]));
-    optionWidget->label_OptionVolumeLevel->setText(QString::fromStdString(myDict[11]));
-    optionWidget->label_OptionVolumeOnOff->setText(QString::fromStdString(myDict[14]));
-    optionWidget->pushButton_OptionBack->setText(QString::fromStdString(myDict[27]));
-    optionWidget->pushButton_OptionMusikLoad->setText(QString::fromStdString(myDict[13]));
+    optionWidget->checkBox->setText(myDict[24]);
+    optionWidget->label_OptionDesign->setText(myDict[3]);
+    optionWidget->label_OptionMusikLoad->setText(myDict[4]);
+    optionWidget->label_OptionSprache->setText(myDict[23]);
+    optionWidget->label_OptionVolumeLevel->setText(myDict[11]);
+    optionWidget->label_OptionVolumeOnOff->setText(myDict[14]);
+    optionWidget->pushButton_OptionBack->setText(myDict[27]);
+    optionWidget->pushButton_OptionMusikLoad->setText(myDict[13]);
 
-    menuWidget->pushButton_Credits->setText(QString::fromStdString(myDict[2]));
-    menuWidget->pushButton_Highscore->setText(QString::fromStdString(myDict[7]));
-    menuWidget->pushButton_optionsMenu->setText(QString::fromStdString(myDict[17]));
-    menuWidget->pushButton_StartAI->setText(QString::fromStdString(myDict[18]));
-    menuWidget->pushButton_StartPvP->setText(QString::fromStdString(myDict[19]));
+    menuWidget->pushButton_Credits->setText(myDict[2]);
+    menuWidget->pushButton_Highscore->setText(myDict[7]);
+    menuWidget->pushButton_optionsMenu->setText(myDict[17]);
+    menuWidget->pushButton_StartAI->setText(myDict[18]);
+    menuWidget->pushButton_StartPvP->setText(myDict[19]);
 
-    gameWidget->pushButton_IngameBack->setText(QString::fromStdString(myDict[27]));
-    gameWidget->pushButton_IngameOptions->setText(QString::fromStdString(myDict[17]));
-    gameWidget->pushButton_IngameSkip->setText(QString::fromStdString(myDict[26]));
+    gameWidget->pushButton_IngameBack->setText(myDict[27]);
+    gameWidget->pushButton_IngameOptions->setText(myDict[17]);
+    gameWidget->pushButton_IngameSkip->setText(myDict[26]);
 
-    hsWidget->label_HSSortieren->setText(QString::fromStdString(myDict[1]));
-    hsWidget->label_HSTitle->setText(QString::fromStdString(myDict[7]));
-    hsWidget->pushButton_HSBack->setText(QString::fromStdString(myDict[27]));
-    hsWidget->pushButton_HSExport->setText(QString::fromStdString(myDict[5]));
+    hsWidget->label_HSSortieren->setText(myDict[1]);
+    hsWidget->label_HSTitle->setText(myDict[7]);
+    hsWidget->pushButton_HSBack->setText(myDict[27]);
+    hsWidget->pushButton_HSExport->setText(myDict[5]);
 
-    pvpWidget->checkBox_showPossMoves->setText(QString::fromStdString(myDict[0]));
-    pvpWidget->pushButton_BackPVP->setText(QString::fromStdString(myDict[27]));
-    pvpWidget->pushButton_StartGamePvP->setText(QString::fromStdString(myDict[22]));
-    pvpWidget->label->setText(QString::fromStdString(myDict[20]));
-    pvpWidget->label_GameMode->setText(QString::fromStdString(myDict[21]));
-    pvpWidget->label_Player1->setText(QString::fromStdString(myDict[15]));
-    pvpWidget->label_Player2->setText(QString::fromStdString(myDict[16]));
-    pvpWidget->label_PossMoves->setText(QString::fromStdString(myDict[12]));
+    pvpWidget->checkBox_showPossMoves->setText(myDict[0]);
+    pvpWidget->pushButton_BackPVP->setText(myDict[27]);
+    pvpWidget->pushButton_StartGamePvP->setText(myDict[22]);
+    pvpWidget->label->setText(myDict[20]);
+    pvpWidget->label_GameMode->setText(myDict[21]);
+    pvpWidget->label_Player1->setText(myDict[15]);
+    pvpWidget->label_Player2->setText(myDict[16]);
+    pvpWidget->label_PossMoves->setText(myDict[12]);
 }
 
 void MainWindow::on_pushButton_IngameBack_clicked()
@@ -269,7 +269,7 @@ void MainWindow::on_pushButton_IngameSkip_clicked()
                 timer->stop();
                 timeCount = 15;
                 timer->start(timePeriod);
-                gameWidget->infoBox->appendPlainText(QString::fromStdString("15 " + myDict[28]));
+                gameWidget->infoBox->appendPlainText("15 " + myDict[28]);
             }
         }
     }
@@ -365,7 +365,7 @@ void MainWindow::on_pushButton_OptionMusikLoad_clicked()
 void MainWindow::on_comboBox_OptionSprache_activated(int index)
 {
 
-    std::string sprache = "";
+    QString sprache = "";
 
     if (index == 0) {
         sprache = "deu";
@@ -374,7 +374,7 @@ void MainWindow::on_comboBox_OptionSprache_activated(int index)
         sprache = "eng";
     }
 
-    std::cout << "[INFO] Change language to " + sprache << std::endl;
+    std::cout << "[INFO] Change language to " + sprache.toStdString() << std::endl;
 
     myDict = dict->getDict(sprache);
     controllField->changeDict(myDict);
@@ -417,8 +417,8 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
     this->disconnect(pvpWidget->pushButton_BackPVP, SIGNAL(clicked()), this, SLOT(on_pushButton_BackPVP_clicked()));
     this->disconnect(pvpWidget->comboBox_PvPGamemode, SIGNAL(activated(int)), this, SLOT(on_comboBox_PvPGamemode_activated(int)));
 
-    std::string player1Name = pvpWidget->lineEdit_Player1->text().toStdString();
-    std::string player2Name = pvpWidget->lineEdit_Player2->text().toStdString();
+    QString player1Name = pvpWidget->lineEdit_Player1->text();
+    QString player2Name = pvpWidget->lineEdit_Player2->text();
     QVariant sizeVariant = pvpWidget->comboBox_PvPFieldsize->itemData(pvpWidget->comboBox_PvPFieldsize->currentIndex());
     int fieldSize = sizeVariant.toInt();
 
@@ -440,8 +440,8 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
     mainUI->gridLayout->addWidget(gameContainer);
     gameContainer->show();
 
-    gameWidget->labelPlayer1->setText(QString::fromStdString(player1Name));
-    gameWidget->labelPlayer2->setText(QString::fromStdString(player2Name));
+    gameWidget->labelPlayer1->setText(player1Name);
+    gameWidget->labelPlayer2->setText(player2Name);
     controllField->setLabelAndLCD(gameWidget->infoBox, gameWidget->lcdNumber_Player1, gameWidget->lcdNumber_Player2);
     controllField->initControllerField(fieldSize, design);
 
@@ -461,7 +461,7 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
         this->connect(timer, SIGNAL(timeout()), this, SLOT(timeUp()));
         timeCount = 15;
         timer->start(timePeriod);
-        gameWidget->infoBox->appendPlainText(QString::fromStdString("15 " + myDict[28]));
+        gameWidget->infoBox->appendPlainText("15 " + myDict[28]);
     }
 
     gameWidget->graphicsViewField->viewport()->installEventFilter(this);
@@ -493,7 +493,7 @@ void MainWindow::on_pushButton_StartGamePvC_clicked()
     this->disconnect(pvcWidget->pushButton_BackPVC, SIGNAL(clicked()), this, SLOT(on_pushButton_BackPVC_clicked()));
     this->disconnect(pvcWidget->comboBox_PvCGamemode, SIGNAL(activated(int)), this, SLOT(on_comboBox_PvCGamemode_activated(int)));
 
-    std::string playerName = pvcWidget->lineEdit_PvCPlayer->text().toStdString();
+    QString playerName = pvcWidget->lineEdit_PvCPlayer->text();
     QVariant sizeVariant = pvcWidget->comboBox_PvCFieldsize->itemData(pvcWidget->comboBox_PvCFieldsize->currentIndex());
     int fieldSize = sizeVariant.toInt();
 
@@ -515,14 +515,14 @@ void MainWindow::on_pushButton_StartGamePvC_clicked()
     bool isAiFirst = false;
 
     if (beginner == "Spieler" || beginner == "Player") {
-        gameWidget->labelPlayer1->setText(QString::fromStdString(playerName));
+        gameWidget->labelPlayer1->setText(playerName);
         gameWidget->labelPlayer2->setText("Computer");
         controllField->setPlayer1Name(playerName);
         controllField->setPlayer2Name("Computer");
     }
     else {
         gameWidget->labelPlayer1->setText("Computer");
-        gameWidget->labelPlayer2->setText(QString::fromStdString(playerName));
+        gameWidget->labelPlayer2->setText(playerName);
         controllField->setPlayer2Name(playerName);
         controllField->setPlayer1Name("Computer");
         isAiFirst = true;
@@ -548,7 +548,7 @@ void MainWindow::on_pushButton_StartGamePvC_clicked()
         this->connect(timer, SIGNAL(timeout()), this, SLOT(timeUp()));
         timeCount = 15;
         timer->start(timePeriod);
-        gameWidget->infoBox->appendPlainText(QString::fromStdString("15 " + myDict[28]));
+        gameWidget->infoBox->appendPlainText("15 " + myDict[28]);
     }
 
     gameWidget->graphicsViewField->viewport()->installEventFilter(this);
@@ -618,9 +618,9 @@ void MainWindow::on_pushButton_HSExport_clicked()
     if (exportFile.open(QFile::Append))
     {
         QTextStream out(&exportFile);
-        std::string buffer = controllField->getHighscore();
-        std::replace(buffer.begin(), buffer.end(), '#', ' ');
-        out << QString::fromStdString(buffer);
+        QString buffer = controllField->getHighscore();
+        buffer.replace(QString("#"), QString(" "));
+        out << buffer;
     }
 }
 

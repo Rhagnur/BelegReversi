@@ -1,7 +1,7 @@
 #ifndef MYDICT_H
 #define MYDICT_H
 
-#include <iostream>
+#include <QString>
 #include <map>
 #include <array>
 
@@ -23,12 +23,12 @@ public:
      * \return dict
      * returns the choosen dict as stringarray
      */
-    std::string* getDict(std::string sprache);
+    QString* getDict(QString sprache);
 
 private:
 
-    std::map<std::string, std::string*> dict;
-    std::string deutsch[29], english[29];
+    std::map<QString, QString*> dict;
+    QString deutsch[29], english[29];
 };
 
 #endif // MYDICT_H

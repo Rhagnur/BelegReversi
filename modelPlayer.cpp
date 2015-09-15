@@ -10,7 +10,7 @@ int modelPlayer::getPlayerStoneCount()
     return stoneCount;
 }
 
-std::string modelPlayer::getPlayerName()
+QString modelPlayer::getPlayerName()
 {
     return playerName;
 }
@@ -21,7 +21,7 @@ void modelPlayer::setPlayerStoneCount(int count)
     stoneCount = count;
 }
 
-void modelPlayer::setPlayerName(std::string name)
+void modelPlayer::setPlayerName(QString name)
 {
     playerName = name;
 }

@@ -40,7 +40,7 @@ public:
      * \brief Saves new dictionary
      * \param newDict
      */
-    void changeDict(std::string *newDict);
+    void changeDict(QString *newDict);
 
     /*!
      * \brief Checks for several win condition (win, draw)
@@ -81,20 +81,14 @@ public:
      * \brief Return highscore from database class
      * \return data
      */
-    std::string getHighscore();
+    QString getHighscore();
 
     /*!
      * \brief Return highscore by size from database class
      * \param size
      * \return data
      */
-    std::string getHighscoreBySize(int size);
-
-    /*!
-     * \brief Return infoText
-     * \return infoText
-     */
-    std::string getInfoText();
+    QString getHighscoreBySize(int size);
 
     /*!
      * \brief Return if user skipped a turn
@@ -193,13 +187,13 @@ public:
      * \brief Set new name for player1
      * \param name
      */
-    void setPlayer1Name(std::string name);
+    void setPlayer1Name(QString name);
 
     /*!
      * \brief Set new name for player2
      * \param name
      */
-    void setPlayer2Name(std::string name);
+    void setPlayer2Name(QString name);
 
     /*!
      * \brief Set bool variable showPossibleFields
@@ -245,7 +239,7 @@ private:
     QLCDNumber *lcdPlayer1 = NULL, *lcdPLayer2 = NULL;
     QSound *set1 = NULL, *set2 = NULL, *wrong = NULL, *applause = NULL, *applauseLight = NULL;
 
-    std::string infoText, *myDict = NULL;
+    QString *myDict = NULL;
     bool skipped, showPossibleFields, isAiGame = false, aiFirst = false;
     int activePlayer, otherPlayer, design;
 

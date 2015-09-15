@@ -16,9 +16,9 @@ SQLite::~SQLite()
     myDB.close();
 }
 
-std::string SQLite::getHighscores()
+QString SQLite::getHighscores()
 {
-    std::string buffer = "";
+    QString buffer = "";
     QSqlQuery query;
     std::cout << "[INFO] Query to db" << std::endl;
     query.exec("SELECT name, score, fieldsize FROM highscore ORDER BY score DESC LIMIT 12;");
@@ -28,37 +28,35 @@ std::string SQLite::getHighscores()
         QString name = query.value(0).toString();
         int score = query.value(1).toInt();
         int fieldsize = query.value(2).toInt();
-        std::string nameBuffer = name.toStdString();
-        buffer += nameBuffer + "#" + std::to_string(score) + "#" + std::to_string(fieldsize) + "\n";
+
+        buffer += name + "#" + QString::number(score) + "#" + QString::number(fieldsize) + "\n";
     }
 
     return buffer;
 }
 
-std::string SQLite::getHighscoreBySize(int size)
+QString SQLite::getHighscoreBySize(int size)
 {
-    std::string buffer = "";
+    QString buffer = "";
     QSqlQuery query;
     std::cout << "[INFO] Query to db" << std::endl;
-    QString queryString = "SELECT name, score FROM highscore WHERE fieldsize = " + QString::fromStdString(std::to_string(size)) + " ORDER BY score DESC LIMIT 12 ;";
+    QString queryString = "SELECT name, score FROM highscore WHERE fieldsize = " + QString::number(size) + " ORDER BY score DESC LIMIT 12 ;";
     query.exec(queryString);
 
 
     while (query.next()) {
         QString name = query.value(0).toString();
         int score = query.value(1).toInt();
-        std::string nameBuffer = name.toStdString();
-        buffer += nameBuffer + "#" + std::to_string(score) + "\n";
+        buffer += name + "#" + QString::number(score) + "\n";
     }
 
     return buffer;
 }
 
-void SQLite::insertPlayerHighscore(std::string playerName, int stoneCount, int fieldSize)
+void SQLite::insertPlayerHighscore(QString playerName, int stoneCount, int fieldSize)
 {
     QSqlQuery query;
     QString queryMessage = "";
-    std::string buffer = "";
     int id = 0;
 
     query.exec("SELECT MAX(id) FROM highscore;");
@@ -66,8 +64,7 @@ void SQLite::insertPlayerHighscore(std::string playerName, int stoneCount, int f
         id = query.value(0).toInt() + 1;
     }
 
-    buffer = "INSERT INTO highscore (id, name, score, fieldsize) VALUES (" + std::to_string(id) + ",'" + playerName + "'," + std::to_string(stoneCount) + "," + std::to_string(fieldSize) + ");";
-    queryMessage = QString::fromStdString(buffer);
+    queryMessage = "INSERT INTO highscore (id, name, score, fieldsize) VALUES (" + QString::number(id) + ",'" + playerName + "'," + QString::number(stoneCount) + "," + QString::number(fieldSize) + ");";
 
     std::cout << "[INFO] Add new player score to db" << std::endl;
     myDB.exec(queryMessage);

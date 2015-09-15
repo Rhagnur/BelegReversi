@@ -99,7 +99,7 @@ private:
     Ui::OptionWidget *optionWidget = NULL;
     Ui::PvCWidget *pvcWidget = NULL;
 
-    std::string *myDict = NULL;
+    QString *myDict = NULL;
     QMediaPlayer *player = NULL;
     QMediaPlaylist *playList = NULL;
     int w = 500,h = 500, offset, design = 0, timePeriod = 1000, timeCount, gameMode = 0;

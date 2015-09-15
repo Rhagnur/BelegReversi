@@ -53,7 +53,7 @@ public:
      * \param text
      * text which should be shown in the scene
      */
-    void drawText(std::string text);
+    void drawText(QString text);
 
     /*!
      * \brief Gets the complete scene

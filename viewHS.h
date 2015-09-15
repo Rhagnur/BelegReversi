@@ -34,7 +34,7 @@ public:
      * \param text
      * complete highscore query as string
      */
-    void drawText(std::string text);
+    void drawText(QString text);
 
     /*!
      * \brief getViewField
