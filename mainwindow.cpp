@@ -69,10 +69,10 @@ MainWindow::MainWindow(QWidget *parent) :
     menuContainer->show();
 
     playList = new QMediaPlaylist;
-    playList->addMedia(QUrl("qrc:/music/Track01.mp3"));
-    playList->addMedia(QUrl("qrc:/music/Track02.mp3"));
+    //playList->addMedia(QUrl("qrc:/music/Track01.mp3"));
+    //playList->addMedia(QUrl("qrc:/music/Track02.mp3"));
     playList->addMedia(QUrl("qrc:/music/Track03.mp3"));
-    playList->addMedia(QUrl("qrc:/music/Track04.mp3"));
+    //playList->addMedia(QUrl("qrc:/music/Track04.mp3"));
     playList->setCurrentIndex(1);
 
     player = new QMediaPlayer;

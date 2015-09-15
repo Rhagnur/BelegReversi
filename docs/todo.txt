@@ -1,7 +1,5 @@
-4   Läuft auf Desktop, aber auch unter mobile Plattform getestet (Beleg in Doku)
 4   Doxygen mittels make
 5   Unit-Tests
-4   AddressSanitizer werfen keine Fehler Progausführung und Tests
 4   Tests laufen automatisch ab, Build Artafakte für Linux und für Win oder Mac (Docker)
 5   MinMax Algo CvP
 5   CvP Spielstärke Computer, einfach, mittel, schwer

@@ -1,0 +1,6 @@
+Benutzte Software
+- QT Creator 5.5
+- Android für x86 (GCC 4.9, QT 5.5.0)
+- Android Studio 1.3.2 with Android SDK
+- Android NDK r10e
+- Galaxy_Nexus_API_15 Virtual Device (API 15, CPU/ABI x86)
