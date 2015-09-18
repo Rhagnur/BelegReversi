@@ -55,7 +55,7 @@ QMAKE_CXXFLAGS += -std=c++11
 
 DISTFILES +=
 
-deldoc.commands = rm -r $$OUT_PWD/doc
+deldoc.commands = rm -rf $$OUT_PWD/doc
 
 copyfiles.depends = deldoc
 copyfiles.commands = $(COPY_DIR) $$PWD/src $$OUT_PWD/doc
@@ -67,10 +67,10 @@ doxygen.depends = copydoxyconf
 doxygen.commands = cd $$OUT_PWD/doc/; doxygen doxygen.conf
 
 rmfiles.depends = doxygen
-rmfiles.commands = rm $$OUT_PWD/doc/*.cpp $$OUT_PWD/doc/*.h
+rmfiles.commands = rm $$OUT_PWD/doc/*.cpp $$OUT_PWD/doc/*.h $$OUT_PWD/doc/doxygen.conf
 
 first.depends = $(first) rmfiles
 
 QMAKE_EXTRA_TARGETS += first copyfiles copydoxyconf deldoc doxygen rmfiles
-QMAKE_CLEAN += doc/*
+QMAKE_CLEAN += -r doc/ tmp/
 
