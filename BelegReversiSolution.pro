@@ -5,4 +5,4 @@ SUBDIRS += BelegReversi \
 
 
 BelegReversiTest.depends = BelegReversiLib
-#BelegReversi.depends = BelegReversiLib
+BelegReversi.depends = BelegReversiTest
