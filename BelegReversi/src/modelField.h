@@ -10,6 +10,9 @@
 class modelField
 {
 public:
+
+    modelField();
+
     //! Constructor
     /*!
      * \brief Constructor
@@ -17,6 +20,8 @@ public:
      * Size of the new gamingfield
      */
     modelField(int fieldSize);
+
+    void copyField(modelField &field);
 
     //! Deconstructor
     ~modelField();
@@ -74,7 +79,8 @@ public:
 
 private:
 
-    int** field = NULL, fieldSize, fieldWidth, fieldHeight;
+    int** field = NULL;
+    int fieldSize, fieldWidth, fieldHeight;
 };
 
 #endif // MODELFIELD_H

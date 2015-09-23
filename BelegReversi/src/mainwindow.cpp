@@ -78,7 +78,7 @@ MainWindow::MainWindow(QWidget *parent) :
     player = new QMediaPlayer;
     player->setPlaylist(playList);
 
-    player->setVolume(100);
+    player->setVolume(0);
     player->play();
 }
 

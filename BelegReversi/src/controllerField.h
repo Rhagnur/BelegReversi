@@ -16,6 +16,7 @@
 #include "modelPlayer.h"
 #include "viewField.h"
 #include "sqlite.h"
+#include "ai.h"
 
 
 
@@ -53,6 +54,11 @@ public:
      * \brief Calls the clearField method from viewField
      */
     void clearField();
+
+    /*!
+     * \brief AI Turn if you play against computer
+     */
+    void computerTurn();
 
     /*!
      * \brief Calculate and draw field
@@ -246,6 +252,7 @@ private:
     viewField *viewGamingField = NULL;
     modelField *gamingField = NULL;
     modelPlayer *player[2];
+    Ai *computer = NULL;
 
 };
 

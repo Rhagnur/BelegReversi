@@ -25,7 +25,9 @@ SOURCES += src/main.cpp\
     src/viewField.cpp \
     src/sqlite.cpp \
     src/viewHS.cpp \
-    src/mydict.cpp
+    src/mydict.cpp \
+    src/ai.cpp \
+    src/nodeinfo.cpp
 
 HEADERS  += src/mainwindow.h \
     src/modelField.h \
@@ -34,7 +36,10 @@ HEADERS  += src/mainwindow.h \
     src/viewField.h \
     src/sqlite.h \
     src/viewHS.h \
-    src/mydict.h
+    src/mydict.h \
+    src/ai.h \
+    src/tree.hh \
+    src/nodeinfo.h
 
 FORMS    += gui/mainwindow.ui \
     gui/gamewidget.ui \

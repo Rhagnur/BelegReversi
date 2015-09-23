@@ -3,6 +3,7 @@
 
 controllerField::controllerField()
 {
+    computer = new Ai();
     player[0] = new modelPlayer();
     player[1] = new modelPlayer();
     viewGamingField = new viewField();
@@ -18,6 +19,7 @@ controllerField::controllerField()
 
 controllerField::~controllerField()
 {
+    delete computer;
     delete player[0];
     delete player[1];
     delete gamingField;
@@ -122,6 +124,45 @@ void controllerField::clearField()
     viewGamingField->clearField();
 }
 
+void controllerField::computerTurn()
+{
+    if (searchPossibleTurns())
+    {
+        std::vector<int> turnVector = computer->turn(gamingField, activePlayer, otherPlayer);
+
+        if (turnVector.empty())
+        {
+            if (!checkWin())
+            {
+                skipTurn();
+            }
+        }
+        else
+        {
+            int i = turnVector.at(0);
+            int j = turnVector.at(1);
+            std::cout << "Zug ist i: " + std::to_string(i) + " j: " + std::to_string(j) << std::endl;
+            infoBox->clear();
+            infoBox->appendPlainText(player[otherPlayer - 1]->getPlayerName() + " " + myDict[8]);
+            turn(i, j);
+            flipStones(i, j);
+            changeActivePlayer();
+            searchPossibleTurns();
+            skipped = false;
+            viewGamingField->clear();
+            drawField();
+        }
+    }
+    else {
+        std::cout << "Nix gefunden ... :(" << std::endl;
+        if (!checkWin())
+        {
+            skipTurn();
+        }
+    }
+
+}
+
 void controllerField::drawField()
 {
     viewGamingField->clearField();
@@ -153,7 +194,7 @@ bool controllerField::evaluateClick(int x, int y)
         {
             infoBox->clear();
             infoBox->appendPlainText(player[otherPlayer - 1]->getPlayerName() + " " + myDict[8]);
-            (turn(i, j));
+            turn(i, j);
             flipStones(i, j);
             changeActivePlayer();
             searchPossibleTurns();
@@ -163,8 +204,7 @@ bool controllerField::evaluateClick(int x, int y)
             drawField();
 
             if(isAiGame) {
-                std::cout << "Hier wäre jetzt der normale AI Zug" << std::endl;
-                //todo AI zug, playerwechsel, bla bla
+                computerTurn();
             }
 
         }
@@ -576,14 +616,17 @@ void controllerField::skipTurn()
     searchPossibleTurns();
     drawField();
     skipped = true;
+    if(isAiGame) {
+        computerTurn();
+    }
 }
 
 void controllerField::startGame()
 {
     searchPossibleTurns();
-    if (isAiGame) {
-        std::cout << "Hier wäre jetzt der Zug der AI, wenn AI beginnt" << std::endl;
-        //todo, AI Zug, Playerwechsel, Zugsuche
+    if (aiFirst) {
+        drawField();
+        computerTurn();
     }
 }
 

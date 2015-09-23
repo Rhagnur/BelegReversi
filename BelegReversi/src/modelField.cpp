@@ -1,5 +1,10 @@
 #include "modelField.h"
 
+modelField::modelField()
+{
+
+}
+
 modelField::modelField(int fieldSize)
 {
     this->fieldSize = fieldSize;
@@ -10,6 +15,17 @@ modelField::modelField(int fieldSize)
         for (int j = 0; j < fieldSize; j++)
         {
             field[i][j] = 0;
+        }
+    }
+}
+
+void modelField::copyField(modelField &field)
+{
+    for (int i = 0; i < fieldSize; i++)
+    {
+        for (int j = 0; j < fieldSize; j++)
+        {
+            this->field[i][j] = field.getFieldValue(i, j);
         }
     }
 }
