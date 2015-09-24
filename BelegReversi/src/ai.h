@@ -8,15 +8,28 @@
 #include <list>
 #include <vector>
 
+/*!
+ * \brief The Ai class
+ */
 class Ai
 {
 public:
+    /*!
+     * \brief Constructor
+     */
     Ai();
+
+    /*!
+     * \brief Finding turn for AI
+     * \param field
+     * \param activePlayer
+     * \param otherPlayer
+     * \return std::vector<int> turn
+     */
     std::vector<int> turn(modelField *field, int activePlayer, int otherPlayer);
 private:
 
     modelField& flipStones(int i, int j, modelField &field);
-
     void processList();
     void append_children(modelField &field, tree<NodeInfo>::iterator parent);
     void debugTree();

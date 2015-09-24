@@ -26,11 +26,28 @@
 
 namespace Ui {
 class MainWindow;
+
+/*! \mainpage Reversi the game
+ *
+ * \section author_sec Autoren
+ *
+ * Jan Didschuneit <s0539714> \n
+ * Baran Ö.. <s05...>
+ *
+ * \section overview_sec Übersicht
+ *
+ * Dieser Beleg umfasst die Projektierung, Realisierung und Programmierung des Spiels Reversi unter den gestellten Anforderungen des Dozenten. \n
+ * Die Anforderungen selbst sind der ausgehändigten PDF zu entnehmen und werden nicht noch einmal genauer beschrieben hier.
+ *
+ * \subsection step1 Step 1: Opening the box
+ *
+ * etc...
+ */
 }
 
 //! Main GUI class
 /*!
- * \brief Main class of the GUI
+ * \brief Handling all the GUI stuff
  */
 class MainWindow : public QMainWindow
 {

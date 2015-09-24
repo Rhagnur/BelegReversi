@@ -5,7 +5,7 @@
 
 //! Field Model Class
 /*!
- * \brief The field model class
+ * \brief Definition of the gaming field
  */
 class modelField
 {
@@ -21,10 +21,14 @@ public:
      */
     modelField(int fieldSize);
 
-    void copyField(modelField &field);
-
     //! Deconstructor
     ~modelField();
+
+    /*!
+     * \brief copyField
+     * \param field
+     */
+    void copyField(modelField &field);
 
     /*!
      * \brief Sets the new height of the field

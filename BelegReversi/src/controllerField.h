@@ -19,11 +19,15 @@
 #include "ai.h"
 
 
-
+/*!
+ * \brief Handling the access to models and doing all the magic (calculation, algorithm)
+ */
 class controllerField
 {
 public:
-
+    /*!
+     * \brief isInit
+     */
     bool isInit;
 
     //! Constructor

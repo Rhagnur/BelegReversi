@@ -72,7 +72,7 @@ doxygen.depends = copydoxyconf
 doxygen.commands = cd $$OUT_PWD/doc/; doxygen doxygen.conf
 
 rmfiles.depends = doxygen
-rmfiles.commands = rm $$OUT_PWD/doc/*.cpp $$OUT_PWD/doc/*.h $$OUT_PWD/doc/doxygen.conf
+rmfiles.commands = rm $$OUT_PWD/doc/*.cpp $$OUT_PWD/doc/*.h $$OUT_PWD/doc/*.hh $$OUT_PWD/doc/doxygen.conf
 
 first.depends = $(first) rmfiles
 

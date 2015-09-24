@@ -65,7 +65,7 @@ std::vector<int> Ai::findBestTurn()
     NodeInfo bestOutcome, rootTempInfo;
     int highestNumber = 0;
     int idex = 0;
-    for (int i = 0; i < firstChildrenVector.size(); i++)
+    for (unsigned int i = 0; i < firstChildrenVector.size(); i++)
     {
         tree<NodeInfo>::iterator subTree = firstChildrenVector.at(i);
         tree<NodeInfo>::iterator beginSubTree = subTree.begin();
@@ -98,7 +98,7 @@ std::vector<int> Ai::findBestTurn()
                 }
 
               int tempErg = 0;
-              for (int i = 0; i < winChance.size(); i++)
+              for (unsigned int i = 0; i < winChance.size(); i++)
               {
                   tempErg += winChance.at(i);
               }
@@ -110,7 +110,7 @@ std::vector<int> Ai::findBestTurn()
     //bestOutcome.getField()->showFieldDebug();
     //std::cout << "Höchste Punktzahl " + QString::number(bestOutcome.getDiffStoneCount()).toStdString() << std::endl;
 
-    for (int i = 0; i < subTreeWinChance.size(); i++)
+    for (unsigned int i = 0; i < subTreeWinChance.size(); i++)
     {
         if (highestNumber < subTreeWinChance.at(i))
         {
@@ -159,7 +159,7 @@ void Ai::processList()
 
     std::cout << "processList() start" <<std::endl;
     std::vector<tree<NodeInfo>::iterator> tempVec;
-    for (int i = 0; i < treeIteratorVector.size(); i++)
+    for (unsigned int i = 0; i < treeIteratorVector.size(); i++)
     {
         tempVec.push_back(treeIteratorVector.at(i));
     }
@@ -168,7 +168,7 @@ void Ai::processList()
 
 
 
-    for (int i = 0; i < tempVec.size(); i++)
+    for (unsigned int i = 0; i < tempVec.size(); i++)
     {
         tree<NodeInfo>::iterator temp;
         NodeInfo tempInf;

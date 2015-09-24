@@ -25,7 +25,9 @@ SOURCES += \
     ../BelegReversi/src/mydict.cpp \
     ../BelegReversi/src/sqlite.cpp \
     ../BelegReversi/src/viewField.cpp \
-    ../BelegReversi/src/viewHS.cpp
+    ../BelegReversi/src/viewHS.cpp \
+    ../BelegReversi/src/ai.cpp \
+    ../BelegReversi/src/nodeinfo.cpp
 
 HEADERS += \
     ../BelegReversi/src/controllerField.h \
@@ -35,7 +37,9 @@ HEADERS += \
     ../BelegReversi/src/mydict.h \
     ../BelegReversi/src/sqlite.h \
     ../BelegReversi/src/viewField.h \
-    ../BelegReversi/src/viewHS.h
+    ../BelegReversi/src/viewHS.h \
+    ../BelegReversi/src/ai.h \
+    ../BelegReversi/src/nodeinfo.h
 
 FORMS += ../BelegReversi/gui/mainwindow.ui \
     ../BelegReversi/gui/gamewidget.ui \

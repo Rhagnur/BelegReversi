@@ -5,7 +5,7 @@
 
 //! Player Model Class
 /*!
- * \brief The player model class
+ * \brief Definition of a player
  */
 class modelPlayer
 {
