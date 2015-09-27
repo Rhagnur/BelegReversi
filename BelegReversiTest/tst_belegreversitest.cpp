@@ -2,6 +2,7 @@
 #include <QtTest>
 #include "../BelegReversi/src/modelPlayer.h"
 #include "../BelegReversi/src/modelField.h"
+#include "../BelegReversi/src/controllerField.h"
 
 class BelegReversiTest : public QObject
 {
@@ -18,6 +19,9 @@ private Q_SLOTS:
     void testingModelFieldValue();
     void testingModelFieldSize();
     void testingModelFieldRatio();
+    void testingControllerFieldInit();
+    void testingControllerFieldFindPossibleTurn();
+    void testingControllerFieldFlipStones();
 };
 
 BelegReversiTest::BelegReversiTest()
@@ -68,6 +72,36 @@ void BelegReversiTest::testingModelFieldRatio() {
     QCOMPARE(field->getFieldWidth(), 100);
     QCOMPARE(field->getFieldHeight(), 50);
     delete field;
+}
+
+void BelegReversiTest::testingControllerFieldInit() {
+    controllerField *field = new controllerField(true);
+    field->initControllerFieldForTest(6);
+    QCOMPARE(field->getGamingFieldElementValue(2,2), 1);
+    QCOMPARE(field->getGamingFieldElementValue(3,3), 1);
+    QCOMPARE(field->getGamingFieldElementValue(2,3), 2);
+    QCOMPARE(field->getGamingFieldElementValue(3,2), 2);
+}
+
+void BelegReversiTest::testingControllerFieldFindPossibleTurn() {
+    controllerField *field = new controllerField(true);
+    field->initControllerFieldForTest(6);
+    field->searchPossibleTurns();
+    QCOMPARE(field->getGamingFieldElementValue(1,3), 3);
+    QCOMPARE(field->getGamingFieldElementValue(2,4), 3);
+    QCOMPARE(field->getGamingFieldElementValue(3,1), 3);
+    QCOMPARE(field->getGamingFieldElementValue(4,2), 3);
+
+}
+
+void BelegReversiTest::testingControllerFieldFlipStones() {
+    controllerField *field = new controllerField(true);
+    field->initControllerFieldForTest(6);
+    field->searchPossibleTurns();
+    field->turn(1, 3);
+    field->flipStones(1, 3);
+    QCOMPARE(field->getGamingFieldElementValue(1,3), 1);
+    QCOMPARE(field->getGamingFieldElementValue(2,3), 1);
 }
 
 QTEST_APPLESS_MAIN(BelegReversiTest)

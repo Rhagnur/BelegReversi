@@ -39,7 +39,8 @@ HEADERS += \
     ../BelegReversi/src/viewField.h \
     ../BelegReversi/src/viewHS.h \
     ../BelegReversi/src/ai.h \
-    ../BelegReversi/src/nodeinfo.h
+    ../BelegReversi/src/nodeinfo.h \
+    ../BelegReversi/src/tree.hh
 
 FORMS += ../BelegReversi/gui/mainwindow.ui \
     ../BelegReversi/gui/gamewidget.ui \

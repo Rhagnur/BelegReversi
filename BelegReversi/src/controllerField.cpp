@@ -17,6 +17,25 @@ controllerField::controllerField()
     applauseLight = new QSound(":/music/applauseLight.wav");
 }
 
+controllerField::controllerField(bool test)
+{
+    if (test)
+    {
+        player[0] = new modelPlayer();
+        player[1] = new modelPlayer();
+        viewGamingField = NULL;
+        isInit = false;
+        showPossibleFields = true;
+        myDB = NULL;
+        set1 = NULL;
+        set2 = NULL;
+        wrong = NULL;
+        applause = NULL;
+        applauseLight = NULL;
+        testing = test;
+    }
+}
+
 controllerField::~controllerField()
 {
     delete computer;
@@ -380,6 +399,11 @@ void controllerField::flipStones(int i, int j)
     }
 }
 
+modelField* controllerField::getField()
+{
+    return gamingField;
+}
+
 QString controllerField::getHighscore()
 {
     return myDB->getHighscores();
@@ -446,11 +470,15 @@ void controllerField::initControllerFieldForTest(int size)
     isInit = true;
     activePlayer = 1;
     otherPlayer = 2;
+    player[0]->setPlayerName(QString("TestplayerOne"));
+    player[1]->setPlayerName(QString("TestplayerTwo"));
     gamingField = new modelField(size);
     gamingField->setFieldValue(gamingField->getFieldSize()/2 - 1,gamingField->getFieldSize()/2 - 1, activePlayer);
     gamingField->setFieldValue(gamingField->getFieldSize()/2,gamingField->getFieldSize()/2, activePlayer);
     gamingField->setFieldValue(gamingField->getFieldSize()/2,gamingField->getFieldSize()/2 - 1, otherPlayer);
     gamingField->setFieldValue(gamingField->getFieldSize()/2 - 1,gamingField->getFieldSize()/2, otherPlayer);
+    player[0]->setPlayerStoneCount(2);
+    player[1]->setPlayerStoneCount(2);
 }
 
 bool controllerField::isPossibleTurn(int i, int j)
@@ -635,8 +663,12 @@ void controllerField::stoneCount()
     player[activePlayer - 1]->setPlayerStoneCount((player[activePlayer - 1]->getPlayerStoneCount()) + 1);
     player[otherPlayer - 1]->setPlayerStoneCount((player[otherPlayer - 1]->getPlayerStoneCount()) - 1);
 
-    lcdPlayer1->display(player[0]->getPlayerStoneCount());
-    lcdPLayer2->display(player[1]->getPlayerStoneCount());
+    if(!testing)
+    {
+        lcdPlayer1->display(player[0]->getPlayerStoneCount());
+        lcdPLayer2->display(player[1]->getPlayerStoneCount());
+    }
+
 }
 
 void controllerField::timeUpWin()
@@ -649,11 +681,11 @@ void controllerField::timeUpWin()
 void controllerField::turn(int i, int j)
 {
     gamingField->setFieldValue(i, j , activePlayer);
-    if (activePlayer == 1)
+    if (activePlayer == 1 && set1)
     {
         set1->play();
     }
-    else
+    if (activePlayer == 2 && set2)
     {
         set2->play();
     }

@@ -3,9 +3,8 @@
 # Project created by QtCreator 2015-09-19T18:05:51
 #
 #-------------------------------------------------
-QT       += core testlib
+QT       += core gui multimedia sql testlib widgets
 
-QT       -= gui
 
 TARGET = tst_belegreversitest
 CONFIG   += console
@@ -21,3 +20,5 @@ LIBS +=     -L../BelegReversiLib -lBelegReversiLib
 SOURCES +=  tst_belegreversitest.cpp
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
+
+QMAKE_CXXFLAGS += -std=c++11

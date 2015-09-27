@@ -33,6 +33,12 @@ public:
     //! Constructor
     controllerField();
 
+    /*!
+     * \brief Constructor only for testing purpose
+     * \param test
+     */
+    controllerField(bool test);
+
     //! Deconstructor
     ~controllerField();
 
@@ -86,6 +92,12 @@ public:
      * \param j
      */
     void flipStones(int i, int j);
+
+    /*!
+     * \brief getField
+     * \return modelField field
+     */
+    modelField* getField();
 
     /*!
      * \brief Return highscore from database class
@@ -250,7 +262,7 @@ private:
     QSound *set1 = NULL, *set2 = NULL, *wrong = NULL, *applause = NULL, *applauseLight = NULL;
 
     QString *myDict = NULL;
-    bool skipped, showPossibleFields, isAiGame = false, aiFirst = false;
+    bool skipped, showPossibleFields, isAiGame = false, aiFirst = false, testing=false;
     int activePlayer, otherPlayer, design;
 
     viewField *viewGamingField = NULL;
