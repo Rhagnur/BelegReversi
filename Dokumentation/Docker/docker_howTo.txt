@@ -1,0 +1,34 @@
+Docker Cross Compilation
+
+Unter Zuhilfenahme von
+- http://stackoverflow.com/questions/14170590/building-qt-5-on-linux-for-windows/14170591#14170591
+- http://stackoverflow.com/questions/10934683/how-do-i-configure-qt-for-cross-compilation-from-linux-to-windows-target
+
+
+Testsysteme
+- Windows 7 mit Ubuntu 14.10 auf VMware Workstation
+- Qt 5.5
+
+Anleitung
+1. Get MXE (git clone https://github.com/mxe/mxe.git)
+2. Install build dependencies
+apt-get install \
+    autoconf automake autopoint bash bison bzip2 cmake flex \
+    gettext git g++ gperf intltool libffi-dev libgdk-pixbuf2.0-dev \
+    libtool libltdl-dev libssl-dev libxml-parser-perl make openssl \
+    p7zip-full patch perl pkg-config python ruby scons sed \
+    unzip wget xz-utils
+apt-get install g++-multilib libc6-dev-i386
+
+3. Build QT 5 for Windows
+cd mxe && make MXE_TARGETS=x86_64-w64-mingw32.static qt5
+max_targets damit es eine 64Bit Anwendung wird, qt5 anstatt qtbase, da sonst qtmultimedia gefehlt hatte
+
+4. Go to the directory of your app and add the cross-build tools to the PATH environment variable
+export PATH=<mxe root>/usr/bin:$PATH
+
+5. Build the App
+make
+
+App wurde anstandslos gebuildet, einzig der 3. Schritt hat etwas länger gedauert.
+Screenshots werden in der Dokumentation gezeigt.

@@ -85,12 +85,12 @@ std::vector<int> Ai::findBestTurn()
                       }
                       else if (temp.getDiffStoneCount() == 0)
                       {
-                          std::cout << "Mögliches Unentschieden" << std::cout;
+                          std::cout << "Mögliches Unentschieden" << std::endl;
                           winChance.push_back(0);
                       }
                       else
                       {
-                          std::cout << "Mögliche Niederlage" << std::cout;
+                          std::cout << "Mögliche Niederlage" << std::endl;
                           winChance.push_back(-10);
                       }
                   }
