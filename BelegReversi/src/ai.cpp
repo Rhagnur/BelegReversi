@@ -50,9 +50,19 @@ std::vector<int> Ai::turn(modelField *field, int activePlayer, int otherPlayer)
         index += 1;
     }
 
-    debugTree();
+    //debugTree();
 
     std::vector<int> bestTurn = findBestTurn();
+    for (int i = 0; i < firstChildrenVector.size(); i++) {
+        calcWinChance(firstChildrenVector.at(i));
+    }
+
+    for (int i = 0; i < firstChildrenVector.size(); i++) {
+        tree<NodeInfo>::iterator temp = firstChildrenVector.at(i);
+        NodeInfo tempInf = temp.node->data;
+        tempInf.getField()->showFieldDebug();
+        std::cout << "WinChance : " + QString::number(tempInf.getWinChance()).toStdString() << std::endl;
+    }
 
 
     possTurnsTree.clear();
@@ -61,13 +71,49 @@ std::vector<int> Ai::turn(modelField *field, int activePlayer, int otherPlayer)
     return bestTurn;
 }
 
+void Ai::calcWinChance(tree<NodeInfo>::iterator subtree)
+{
+    tree<NodeInfo>::iterator temp = subtree;
+    while (temp != NULL) {
+        if (temp.begin() == NULL) {
+            if (temp.node->data.getDiffStoneCount() > 0) {
+                temp.node->data.setWinChance(1);
+            }
+            else if (temp.node->data.getDiffStoneCount() == 0) {
+                temp.node->data.setWinChance(0);
+            }
+            else {
+                temp.node->data.setWinChance(-1);
+            }
+        }
+        else {
+            calcWinChance(temp.begin());
+
+            int erg = 0;
+            tree<NodeInfo>::iterator tempEndLeaf = temp.begin();
+            while (tempEndLeaf != NULL) {
+                //std::cout << "KnotenWinChance : " + QString::number(tempEndLeaf.node->data.getWinChance()).toStdString() << std::endl;
+                erg += tempEndLeaf.node->data.getWinChance();
+                tempEndLeaf = tempEndLeaf.node->next_sibling;
+            }
+
+            //std::cout << "Ergebnis: " + QString::number(erg).toStdString() << std::endl;
+            temp.node->data.setWinChance(erg);
+        }
+        //temp.node->data.getField()->showFieldDebug();
+        temp = temp.node->next_sibling;
+    }
+}
+
 std::vector<int> Ai::findBestTurn()
 {
+
     tree<NodeInfo>::iterator tempIte, rootTemp;
     std::vector<int> subTreeWinChance;
     NodeInfo bestOutcome, rootTempInfo;
     int highestNumber = 0;
     int idex = 0;
+    /*
     for (unsigned int i = 0; i < firstChildrenVector.size(); i++)
     {
         tree<NodeInfo>::iterator subTree = firstChildrenVector.at(i);
@@ -75,29 +121,43 @@ std::vector<int> Ai::findBestTurn()
         if(beginSubTree!=subTree.end()) {
            tree<NodeInfo>::iterator sib2=subTree.begin();
            tree<NodeInfo>::iterator end2=subTree.end();
-           std::vector<int>winChance;
 
               while(sib2!=end2) {
-                  if (possTurnsTree.depth(sib2) == tiefe + 1)
+
+
+
+                  if (sib2.begin() == NULL)
                   {
-                      NodeInfo temp = sib2.node->data;
-                      if (temp.getDiffStoneCount() > 0)
+                      std::cout << std::endl;
+                      std::cout << "#######################################" <<std::endl;
+
+                      if (sib2.node->data.getDiffStoneCount() > 0)
                       {
-                          //std::cout << "Möglicher Sieg" << std::endl;
-                          winChance.push_back(10);
+                          std::cout << "Möglicher Sieg" << std::endl;
+                          sib2.node->data.setWinChance(1);
                       }
-                      else if (temp.getDiffStoneCount() == 0)
+                      else if (sib2.node->data.getDiffStoneCount() == 0)
                       {
-                          //std::cout << "Mögliches Unentschieden" << std::endl;
-                          winChance.push_back(0);
+                          std::cout << "Mögliches Unentschieden" << std::endl;
+                          sib2.node->data.setWinChance(0);
                       }
                       else
                       {
-                          //std::cout << "Mögliche Niederlage" << std::endl;
-                          winChance.push_back(-10);
+                          std::cout << "Mögliche Niederlage" << std::endl;
+                          sib2.node->data.setWinChance(-1);
                       }
-                      //std::cout << QString::number(temp.getDiffStoneCount()).toStdString() + " ";
+                      //std::cout << QString::number(sib2.node->data.getDiffStoneCount()).toStdString() + " ";
+
+                      sib2.node->data.getField()->showFieldDebug();
+                      std::cout << std::endl;
+                      std::cout << "WinChance : " + QString::number(sib2.node->data.getWinChance()).toStdString() << std::endl;
+                      std::cout << "Wer war am Zug : " + QString::number(sib2.node->data.getWhosTurn()).toStdString() << std::endl;
+                      std::cout << "#######################################" <<std::endl;
                   }
+
+
+
+
                   if (possTurnsTree.depth(sib2) == tiefe)
                   {
                       //std::cout << " # " << std::endl;
@@ -105,13 +165,6 @@ std::vector<int> Ai::findBestTurn()
                 ++sib2;
                 }
 
-              int tempErg = 0;
-              for (unsigned int i = 0; i < winChance.size(); i++)
-              {
-                  tempErg += winChance.at(i);
-              }
-
-              subTreeWinChance.push_back(tempErg);
 
               }
         std::cout << std::endl;
@@ -119,18 +172,8 @@ std::vector<int> Ai::findBestTurn()
     //bestOutcome.getField()->showFieldDebug();
     //std::cout << "Höchste Punktzahl " + QString::number(bestOutcome.getDiffStoneCount()).toStdString() << std::endl;
 
-    for (unsigned int i = 0; i < subTreeWinChance.size(); i++)
-    {
-        if (highestNumber < subTreeWinChance.at(i))
-        {
-            highestNumber = subTreeWinChance.at(i);
-            idex = i;
-        }
-    }
 
-    std::cout << "Höchst mögliche Punktzahl gefunden bei Subtree (i) :" + QString::number(idex).toStdString() + " Punktzahl = " + QString::number(highestNumber).toStdString() << std::endl;
-
-
+    */
     rootTemp = firstChildrenVector.at(idex);
     rootTempInfo = rootTemp.node->data;
 
@@ -219,6 +262,7 @@ void Ai::append_children(modelField &field, tree<NodeInfo>::iterator parent)
                 tempInfos.setDiffStoneCount(calculateStoneCountForTurn(fieldCopy) + offset);
                 tempInfos.setField(clearField(fieldCopy));
                 tempInfos.setTurn(tempTurn);
+                tempInfos.setWhosTurn(activePlayer);
 
                 temp = possTurnsTree.append_child(parent, tempInfos);
 

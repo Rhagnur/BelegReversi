@@ -20,6 +20,16 @@ void NodeInfo::setTurn(std::vector<int> turn)
     this->turn = turn;
 }
 
+void NodeInfo::setWhosTurn(int playerID)
+{
+    this->whosTurn = playerID;
+}
+
+void NodeInfo::setWinChance(int winChance)
+{
+    this->winChance = winChance;
+}
+
 int NodeInfo::getDiffStoneCount()
 {
     return diffStoneCount;
@@ -33,4 +43,14 @@ modelField* NodeInfo::getField()
 std::vector<int> NodeInfo::getTurn()
 {
     return turn;
+}
+
+int NodeInfo::getWhosTurn()
+{
+    return whosTurn;
+}
+
+int NodeInfo::getWinChance()
+{
+    return winChance;
 }

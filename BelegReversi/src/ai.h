@@ -39,9 +39,10 @@ private:
     int calculateStoneCountForTurn(modelField &field);
     void changePlayer();
     std::vector<int> findBestTurn();
+    void calcWinChance(tree<NodeInfo>::iterator subtree);
 
     int activePlayer, otherPlayer, aiPlayer, humanPlayer;
-    int tiefe = 4, index;
+    int tiefe = 15, index;
 
     tree<NodeInfo> possTurnsTree;
     std::vector<tree<NodeInfo>::iterator> treeIteratorVector;

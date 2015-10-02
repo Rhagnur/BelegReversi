@@ -33,6 +33,18 @@ public:
      */
     void setTurn(std::vector<int> turn);
 
+    /*!
+     * \brief setWhosTurn
+     * \param playerID
+     */
+    void setWhosTurn(int playerID);
+
+    /*!
+     * \brief setWinChance
+     * \param winChance
+     */
+    void setWinChance(int winChance);
+
 
     /*!
      * \brief getDiffStoneCount
@@ -52,8 +64,20 @@ public:
      */
     std::vector<int> getTurn();
 
+    /*!
+     * \brief getWhosTurn
+     * \return
+     */
+    int getWhosTurn();
+
+    /*!
+     * \brief getWinChance
+     * \return
+     */
+    int getWinChance();
+
 private:
-    int diffStoneCount;
+    int diffStoneCount, whosTurn, winChance;
     std::vector<int> turn;
     modelField *field;
 };
