@@ -41,7 +41,7 @@ private:
     std::vector<int> findBestTurn();
 
     int activePlayer, otherPlayer, aiPlayer, humanPlayer;
-    int tiefe = 5, index;
+    int tiefe = 4, index;
 
     tree<NodeInfo> possTurnsTree;
     std::vector<tree<NodeInfo>::iterator> treeIteratorVector;

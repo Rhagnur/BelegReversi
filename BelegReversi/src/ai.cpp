@@ -50,7 +50,10 @@ std::vector<int> Ai::turn(modelField *field, int activePlayer, int otherPlayer)
         index += 1;
     }
 
+    debugTree();
+
     std::vector<int> bestTurn = findBestTurn();
+
 
     possTurnsTree.clear();
     treeIteratorVector.clear();
@@ -80,19 +83,24 @@ std::vector<int> Ai::findBestTurn()
                       NodeInfo temp = sib2.node->data;
                       if (temp.getDiffStoneCount() > 0)
                       {
-                          std::cout << "Möglicher Sieg" << std::endl;
+                          //std::cout << "Möglicher Sieg" << std::endl;
                           winChance.push_back(10);
                       }
                       else if (temp.getDiffStoneCount() == 0)
                       {
-                          std::cout << "Mögliches Unentschieden" << std::endl;
+                          //std::cout << "Mögliches Unentschieden" << std::endl;
                           winChance.push_back(0);
                       }
                       else
                       {
-                          std::cout << "Mögliche Niederlage" << std::endl;
+                          //std::cout << "Mögliche Niederlage" << std::endl;
                           winChance.push_back(-10);
                       }
+                      //std::cout << QString::number(temp.getDiffStoneCount()).toStdString() + " ";
+                  }
+                  if (possTurnsTree.depth(sib2) == tiefe)
+                  {
+                      //std::cout << " # " << std::endl;
                   }
                 ++sib2;
                 }
@@ -106,6 +114,7 @@ std::vector<int> Ai::findBestTurn()
               subTreeWinChance.push_back(tempErg);
 
               }
+        std::cout << std::endl;
     }
     //bestOutcome.getField()->showFieldDebug();
     //std::cout << "Höchste Punktzahl " + QString::number(bestOutcome.getDiffStoneCount()).toStdString() << std::endl;
@@ -137,18 +146,21 @@ void Ai::debugTree()
        tree<NodeInfo>::iterator sib2=possTurnsTree.begin(begin);
           tree<NodeInfo>::iterator end2=possTurnsTree.end(begin);
           while(sib2!=end2) {
-            if (possTurnsTree.depth(sib2) == tiefe + 1)
+            if (possTurnsTree.depth(sib2) == tiefe + 1 || sib2.number_of_children() == 0)
             {
                 std::cout << "Endleaf erreicht" << std::endl;
+                NodeInfo temp = sib2.node->data;
+                std::cout << temp.getDiffStoneCount() << std::endl;
+                temp.getField()->showFieldDebug();
+                std::cout << std::endl;
+
 
             }
-            NodeInfo temp = sib2.node->data;
-            for(int i=0; i<possTurnsTree.depth(sib2); ++i)
-                std::cout << "#";
-            std::cout << temp.getDiffStoneCount() << std::endl;
-            temp.getField()->showFieldDebug();
-            std::cout << std::endl;
             ++sib2;
+
+            //for(int i=0; i<possTurnsTree.depth(sib2); ++i)
+            //    std::cout << "#";
+
             }
           }
 
@@ -189,10 +201,10 @@ void Ai::append_children(modelField &field, tree<NodeInfo>::iterator parent)
             if (field.getFieldValue(i, j) == 3)
             {
                 int offset = 0;
-                if ((i == 0 && j == 0) || (i == 0 && j == field.getFieldSize() - 1) || (i == field.getFieldSize() -1 && j == 0) || (i == field.getFieldSize() -1 && j == field.getFieldSize() - 1))
-                {
-                    offset = 99;
-                }
+                //if ((i == 0 && j == 0) || (i == 0 && j == field.getFieldSize() - 1) || (i == field.getFieldSize() -1 && j == 0) || (i == field.getFieldSize() -1 && j == field.getFieldSize() - 1))
+                //{
+                //    offset = 99;
+                //}
 
                 tree<NodeInfo>::iterator temp;
                 NodeInfo tempInfos;
