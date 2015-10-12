@@ -228,6 +228,13 @@ void MainWindow::changeLanguage()
     pvpWidget->label_Player1->setText(myDict[15]);
     pvpWidget->label_Player2->setText(myDict[16]);
     pvpWidget->label_PossMoves->setText(myDict[12]);
+
+    pvcWidget->label_PvCSize->setText(myDict[20]);
+    pvcWidget->label_PvCDifficulty->setText(myDict[29]);
+    pvcWidget->label_PvCPossMoves->setText(myDict[12]);
+    pvcWidget->label->setText(myDict[30]);
+    pvcWidget->pushButton_BackPVC->setText(myDict[27]);
+    pvcWidget->pushButton_StartGamePvC->setText(myDict[22]);
 }
 
 void MainWindow::on_pushButton_IngameBack_clicked()
@@ -559,8 +566,8 @@ void MainWindow::on_pushButton_BackPVC_clicked()
     this->disconnect(pvcWidget->pushButton_BackPVC, SIGNAL(clicked()), this, SLOT(on_pushButton_BackPVC_clicked()));
     bool reset = false;
     controllField->setAiGame(reset, reset);
-    mainUI->gridLayout->removeWidget(pvpContainer);
-    pvpContainer->hide();
+    mainUI->gridLayout->removeWidget(pvcContainer);
+    pvcContainer->hide();
     mainUI->gridLayout->addWidget(menuContainer);
     menuContainer->show();
     this->connect(menuWidget->pushButton_StartPvP, SIGNAL(clicked()), this, SLOT(on_pushButton_StartPvP_clicked()));

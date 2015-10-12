@@ -31,6 +31,8 @@ MyDict::MyDict()
     deutsch[26] = "Zug aussetzen";
     deutsch[27] = "Zurück";
     deutsch[28] = "Sekunden übrig";
+    deutsch[29] = "Schwierigkeit";
+    deutsch[30] = "Wer beginnt?";
 
     english[0] = "activated";
     english[1] = "Filter output";
@@ -61,6 +63,8 @@ MyDict::MyDict()
     english[26] = "Skip turn";
     english[27] = "Back";
     english[28] = "seconds left";
+    english[29] = "Difficulty";
+    english[30] = "Who will start?";
 
     dict["deu"] = deutsch;
     dict["eng"] = english;

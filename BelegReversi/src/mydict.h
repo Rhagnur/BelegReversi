@@ -28,7 +28,7 @@ public:
 private:
 
     std::map<QString, QString*> dict;
-    QString deutsch[29], english[29];
+    QString deutsch[31], english[31];
 };
 
 #endif // MYDICT_H
