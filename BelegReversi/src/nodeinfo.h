@@ -77,7 +77,7 @@ public:
     int getWinChance();
 
 private:
-    int diffStoneCount, whosTurn, winChance;
+    int diffStoneCount = 0, whosTurn = 0, winChance = 0;
     std::vector<int> turn;
     modelField *field;
 };

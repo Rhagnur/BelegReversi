@@ -31,8 +31,8 @@ class MainWindow;
  *
  * \section author_sec Autoren
  *
- * Jan Didschuneit <s0539714> \n
- * Baran Ö.. <s05...>
+ * Jan Didschuneit (s0539714) \n
+ * Baran Ö.. (s05...)
  *
  * \section overview_sec Übersicht
  *

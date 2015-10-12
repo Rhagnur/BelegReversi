@@ -37,10 +37,9 @@ MainWindow::MainWindow(QWidget *parent) :
     pvcWidget->comboBox_PvCFieldsize->addItem("8x8", QVariant(8));
     pvcWidget->comboBox_PvCFieldsize->addItem("10x10", QVariant(10));
     pvcWidget->comboBox_PvCFieldsize->setCurrentIndex(2);
-    pvcWidget->comboBox_PvCGamemode->addItem(tr("normal"));
-    pvcWidget->comboBox_PvCGamemode->addItem(tr("Bo3"));
-    pvcWidget->comboBox_PvCGamemode->addItem(tr("Bo5"));
-    pvcWidget->comboBox_PvCGamemode->addItem(tr("Under Pressure"));
+    pvcWidget->comboBox_PvCDifficulty->addItem(tr("easy"));
+    pvcWidget->comboBox_PvCDifficulty->addItem(tr("normal"));
+    pvcWidget->comboBox_PvCDifficulty->addItem(tr("hard"));
     pvcWidget->comboBox_PvCBeginnt->addItem("Player");
     pvcWidget->comboBox_PvCBeginnt->addItem("Computer");
 
@@ -484,14 +483,12 @@ void MainWindow::on_pushButton_StartAI_clicked()
 
     this->connect(pvcWidget->pushButton_StartGamePvC, SIGNAL(clicked()), this, SLOT(on_pushButton_StartGamePvC_clicked()));
     this->connect(pvcWidget->pushButton_BackPVC, SIGNAL(clicked()), this, SLOT(on_pushButton_BackPVC_clicked()));
-    this->connect(pvcWidget->comboBox_PvCGamemode, SIGNAL(activated(int)), this, SLOT(on_comboBox_PvCGamemode_activated(int)));
 }
 
 void MainWindow::on_pushButton_StartGamePvC_clicked()
 {
     this->disconnect(pvcWidget->pushButton_StartGamePvC, SIGNAL(clicked()), this, SLOT(on_pushButton_StartGamePvC_clicked()));
     this->disconnect(pvcWidget->pushButton_BackPVC, SIGNAL(clicked()), this, SLOT(on_pushButton_BackPVC_clicked()));
-    this->disconnect(pvcWidget->comboBox_PvCGamemode, SIGNAL(activated(int)), this, SLOT(on_comboBox_PvCGamemode_activated(int)));
 
     QString playerName = pvcWidget->lineEdit_PvCPlayer->text();
     QVariant sizeVariant = pvcWidget->comboBox_PvCFieldsize->itemData(pvcWidget->comboBox_PvCFieldsize->currentIndex());
@@ -511,8 +508,9 @@ void MainWindow::on_pushButton_StartGamePvC_clicked()
     mainUI->gridLayout->addWidget(gameContainer);
     gameContainer->show();
 
-    QString beginner = pvcWidget->comboBox_PvCBeginnt->currentText();
-    bool isAiFirst = false;
+    QString beginner = pvcWidget->comboBox_PvCBeginnt->currentText(), diffculty = "";
+    bool isAiFirst = false, isAiGame = true;
+    int indexDifficulty = 0;
 
     if (beginner == "Spieler" || beginner == "Player") {
         gameWidget->labelPlayer1->setText(playerName);
@@ -529,27 +527,29 @@ void MainWindow::on_pushButton_StartGamePvC_clicked()
 
     }
 
+    indexDifficulty = pvcWidget->comboBox_PvCDifficulty->currentIndex();
+    if (indexDifficulty == 0) {
+        diffculty = "easy";
+    }
+    else if (indexDifficulty == 1) {
+        diffculty = "normal";
+    }
+    else {
+        diffculty = "hard";
+    }
+
 
     controllField->setLabelAndLCD(gameWidget->infoBox, gameWidget->lcdNumber_Player1, gameWidget->lcdNumber_Player2);
     controllField->initControllerField(fieldSize, design);
-    controllField->setAiGame(isAiFirst);
-
+    controllField->setAiGame(isAiGame, isAiFirst);
     controllField->setShowPossTurns(pvcWidget->checkBox_PvCshowPossMoves->isChecked());
+    controllField->setDifficulty(diffculty);
 
     gameWidget->graphicsViewField->setScene(controllField->getViewField());
     controllField->setFieldSize(gameWidget->graphicsViewField->width(), gameWidget->graphicsViewField->height());
     controllField->startGame();
     controllField->drawField();
     resizeMainWindow();
-
-
-    if (gameMode == 3)
-    {
-        this->connect(timer, SIGNAL(timeout()), this, SLOT(timeUp()));
-        timeCount = 15;
-        timer->start(timePeriod);
-        gameWidget->infoBox->appendPlainText("15 " + myDict[28]);
-    }
 
     gameWidget->graphicsViewField->viewport()->installEventFilter(this);
 }
@@ -558,7 +558,8 @@ void MainWindow::on_pushButton_BackPVC_clicked()
 {
     this->disconnect(pvcWidget->pushButton_StartGamePvC, SIGNAL(clicked()), this, SLOT(on_pushButton_StartGamePvC_clicked()));
     this->disconnect(pvcWidget->pushButton_BackPVC, SIGNAL(clicked()), this, SLOT(on_pushButton_BackPVC_clicked()));
-    this->disconnect(pvcWidget->comboBox_PvCGamemode, SIGNAL(activated(int)), this, SLOT(on_comboBox_PvCGamemode_activated(int)));
+    bool reset = false;
+    controllField->setAiGame(reset, reset);
     mainUI->gridLayout->removeWidget(pvpContainer);
     pvpContainer->hide();
     mainUI->gridLayout->addWidget(menuContainer);

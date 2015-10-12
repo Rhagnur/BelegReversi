@@ -20,13 +20,19 @@ public:
     Ai();
 
     /*!
+     * \brief Deconstructor
+     */
+    ~Ai();
+
+    /*!
      * \brief Finding turn for AI
      * \param field
      * \param activePlayer
      * \param otherPlayer
+     * \param difficulty
      * \return std::vector<int> turn
      */
-    std::vector<int> turn(modelField *field, int activePlayer, int otherPlayer);
+    std::vector<int> turn(modelField *field, int activePlayer, int otherPlayer, QString difficulty);
 private:
 
     modelField& flipStones(int i, int j, modelField &field);
@@ -42,7 +48,7 @@ private:
     void calcWinChance(tree<NodeInfo>::iterator subtree);
 
     int activePlayer, otherPlayer, aiPlayer, humanPlayer;
-    int tiefe = 15, index;
+    int tiefe, index;
 
     tree<NodeInfo> possTurnsTree;
     std::vector<tree<NodeInfo>::iterator> treeIteratorVector;

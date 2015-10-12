@@ -147,7 +147,7 @@ void controllerField::computerTurn()
 {
     if (searchPossibleTurns())
     {
-        std::vector<int> turnVector = computer->turn(gamingField, activePlayer, otherPlayer);
+        std::vector<int> turnVector = computer->turn(gamingField, activePlayer, otherPlayer, difficulty);
 
         if (turnVector.empty())
         {
@@ -160,7 +160,7 @@ void controllerField::computerTurn()
         {
             int i = turnVector.at(0);
             int j = turnVector.at(1);
-            std::cout << "Zug ist i: " + std::to_string(i) + " j: " + std::to_string(j) << std::endl;
+            //std::cout << "Zug ist i: " + std::to_string(i) + " j: " + std::to_string(j) << std::endl;
             infoBox->clear();
             infoBox->appendPlainText(player[otherPlayer - 1]->getPlayerName() + " " + myDict[8]);
             turn(i, j);
@@ -593,9 +593,9 @@ bool controllerField::searchPossibleTurns()
     return foundPossibleTurn;
 }
 
-void controllerField::setAiGame(bool isAiFirst)
+void controllerField::setAiGame(bool isAiGame, bool isAiFirst)
 {
-    isAiGame = true;
+    this->isAiGame = isAiGame;
     aiFirst = isAiFirst;
 }
 
@@ -606,6 +606,11 @@ void controllerField::setDesign(int design)
     {
         drawField();
     }
+}
+
+void controllerField::setDifficulty(QString difficulty)
+{
+    this->difficulty = difficulty;
 }
 
 void controllerField::setFieldSize(int w, int h)

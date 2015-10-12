@@ -179,15 +179,22 @@ public:
 
     /*!
      * \brief Sets bool variable so controller know, that game is vs AI and if AI will start
+     * \param isAiGame
      * \param isAiFirst
      */
-    void setAiGame(bool isAiFirst);
+    void setAiGame(bool isAiGame, bool isAiFirst);
 
     /*!
      * \brief Set new design as number
      * \param design
      */
     void setDesign(int design);
+
+    /*!
+     * \brief setDifficulty
+     * \param difficulty
+     */
+    void setDifficulty(QString difficulty);
 
     /*!
      * \brief Set new fieldsize
@@ -261,7 +268,7 @@ private:
     QLCDNumber *lcdPlayer1 = NULL, *lcdPLayer2 = NULL;
     QSound *set1 = NULL, *set2 = NULL, *wrong = NULL, *applause = NULL, *applauseLight = NULL;
 
-    QString *myDict = NULL;
+    QString *myDict = NULL, difficulty = "easy";
     bool skipped, showPossibleFields, isAiGame = false, aiFirst = false, testing=false;
     int activePlayer, otherPlayer, design;
 

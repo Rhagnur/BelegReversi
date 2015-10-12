@@ -183,19 +183,19 @@ color: #FFF;</string>
       </spacer>
      </item>
      <item alignment="Qt::AlignHCenter">
-      <widget class="QLabel" name="label_PvCGameMode">
+      <widget class="QLabel" name="label_PvCDifficulty">
        <property name="styleSheet">
         <string notr="true">font: 75 14pt &quot;Verdana&quot;;
 color: #FFF;
 margin-bottom: 6px;</string>
        </property>
        <property name="text">
-        <string>Spielmodus</string>
+        <string>Schwierigkeit</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox_PvCGamemode">
+      <widget class="QComboBox" name="comboBox_PvCDifficulty">
        <property name="focusPolicy">
         <enum>Qt::WheelFocus</enum>
        </property>
