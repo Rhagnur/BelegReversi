@@ -52,7 +52,6 @@ std::vector<int> Ai::turn(modelField *field, int activePlayer, int otherPlayer, 
         this->otherPlayer = otherPlayer;
         aiPlayer = activePlayer;
         humanPlayer = otherPlayer;
-        std::vector<int> zug;
 
         if (difficulty == "hard" && fieldIter.getFieldValue(0, 0) == 3) {
             std::vector<int> temp;
@@ -189,7 +188,7 @@ std::vector<int> Ai::findBestTurn()
     {
         tree<NodeInfo>::iterator temp = firstChildrenVector.at(i);
         NodeInfo tempInf = temp.node->data;
-        if (tempInf.getWinChance() > erg) {
+        if (tempInf.getWinChance() > winChance) {
             winChance = tempInf.getWinChance();
             erg = i;
         }

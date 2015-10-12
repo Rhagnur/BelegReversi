@@ -441,11 +441,10 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
 
     gameWidget->labelPlayer1->setText(player1Name);
     gameWidget->labelPlayer2->setText(player2Name);
-    controllField->setLabelAndLCD(gameWidget->infoBox, gameWidget->lcdNumber_Player1, gameWidget->lcdNumber_Player2);
-    controllField->initControllerField(fieldSize, design);
-
     controllField->setPlayer1Name(player1Name);
     controllField->setPlayer2Name(player2Name);
+    controllField->setLabelAndLCD(gameWidget->infoBox, gameWidget->lcdNumber_Player1, gameWidget->lcdNumber_Player2);
+    controllField->initControllerField(fieldSize, design);
     controllField->setShowPossTurns(pvpWidget->checkBox_showPossMoves->isChecked());
 
     gameWidget->graphicsViewField->setScene(controllField->getViewField());
