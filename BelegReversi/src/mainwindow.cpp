@@ -28,8 +28,6 @@ MainWindow::MainWindow(QWidget *parent) :
     pvpWidget->comboBox_PvPFieldsize->addItem("10x10", QVariant(10));
     pvpWidget->comboBox_PvPFieldsize->setCurrentIndex(2);
     pvpWidget->comboBox_PvPGamemode->addItem(tr("normal"));
-    pvpWidget->comboBox_PvPGamemode->addItem(tr("Bo3"));
-    pvpWidget->comboBox_PvPGamemode->addItem(tr("Bo5"));
     pvpWidget->comboBox_PvPGamemode->addItem(tr("Under Pressure"));
 
     pvcWidget->comboBox_PvCFieldsize->addItem("4x4", QVariant(4));
@@ -77,7 +75,7 @@ MainWindow::MainWindow(QWidget *parent) :
     player = new QMediaPlayer;
     player->setPlaylist(playList);
 
-    player->setVolume(0);
+    player->setVolume(100);
     player->play();
 }
 
@@ -88,6 +86,7 @@ MainWindow::~MainWindow()
     delete pvpWidget;
     delete menuWidget;
     delete optionWidget;
+    delete pvcWidget;
     delete hsWidget;
     delete hsField;
     delete player;
@@ -205,7 +204,7 @@ void MainWindow::changeLanguage()
     optionWidget->pushButton_OptionBack->setText(myDict[27]);
     optionWidget->pushButton_OptionMusikLoad->setText(myDict[13]);
 
-    menuWidget->pushButton_Credits->setText(myDict[2]);
+    //menuWidget->pushButton_Credits->setText(myDict[2]);
     menuWidget->pushButton_Highscore->setText(myDict[7]);
     menuWidget->pushButton_optionsMenu->setText(myDict[17]);
     menuWidget->pushButton_StartAI->setText(myDict[18]);
@@ -461,7 +460,7 @@ void MainWindow::on_pushButton_StartGamePvP_clicked()
     resizeMainWindow();
 
 
-    if (gameMode == 3)
+    if (gameMode == 1)
     {
         this->connect(timer, SIGNAL(timeout()), this, SLOT(timeUp()));
         timeCount = 15;

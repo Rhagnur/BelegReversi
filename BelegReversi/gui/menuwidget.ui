@@ -111,24 +111,6 @@ border-radius: 5px;</string>
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_Credits">
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: #424242;
-font: 75 12pt &quot;Verdana&quot;;
-color: #FFF;
-height: 50px;
-min-width: 300px;
-border-radius: 5px;</string>
-       </property>
-       <property name="text">
-        <string>Credits</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
    <item>

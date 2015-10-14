@@ -32,16 +32,37 @@ class MainWindow;
  * \section author_sec Autoren
  *
  * Jan Didschuneit (s0539714) \n
- * Baran Ö.. (s05...)
+ * Baran Özyüzücüler (s0540255)
  *
  * \section overview_sec Übersicht
  *
  * Dieser Beleg umfasst die Projektierung, Realisierung und Programmierung des Spiels Reversi unter den gestellten Anforderungen des Dozenten. \n
- * Die Anforderungen selbst sind der ausgehändigten PDF zu entnehmen und werden nicht noch einmal genauer beschrieben hier.
+ * Die Anforderungen selbst sind der ausgehändigten PDF zu entnehmen und werden nicht noch einmal genauer beschrieben hier.\n\n
  *
- * \subsection step1 Step 1: Opening the box
+ * \section technial_sec Technische Daten
  *
- * etc...
+ * Benötigte Software und Packages zum Kompilieren und Testen:\n\n
+ *
+ * Programmierumgebung\n
+ * - Ubuntu 14.10\n
+ * - QT 5.5\n
+ * - QT Creator 3.5.0\n\n
+ * .
+ * Valgrind\n
+ * - "valgrind" Package\n\n
+ * .
+ * Doxygen\n
+ * - "doxygen" und "graphviz" Packages\n\n
+ * .
+ * Android Testing\n
+ * - Android für x86 (GCC 4.9, QT 5.5.0)
+ * - Android Studio 1.3.2 with Android SDK
+ * - Android NDK r10e
+ * - Galaxy_Nexus_API_15 Virtual Device (API 15, CPU/ABI x86)\n\n
+ * .
+ * Windows (Docker) Testing\n
+ * - siehe txt Datei in Dokumentation/Docker\n
+ * .
  */
 }
 

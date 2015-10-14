@@ -7,7 +7,6 @@ viewField::viewField()
 
 viewField::~viewField()
 {
-    delete textitem;
     delete pixmapItemList;
 }
 
