@@ -21,6 +21,7 @@
 
 /*!
  * \brief Handling the access to models and doing all the magic (calculation, algorithm)
+ * \author Jan Didschuneit
  */
 class controllerField
 {

@@ -23,7 +23,9 @@
 #include "ui_hswidget.h"
 #include "ui_optionwidget.h"
 #include "ui_pvcwidget.h"
-
+/*!
+ * \author Jan Didschuneit
+ */
 namespace Ui {
 class MainWindow;
 

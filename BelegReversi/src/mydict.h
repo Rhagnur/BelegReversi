@@ -9,6 +9,7 @@
 /*!
     A class which provides the different dictonaries for the GUI and texts
     In the Moment only available in german and english
+ * \author Baran
 */
 class MyDict
 {

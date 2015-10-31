@@ -6,6 +6,7 @@
 
 /*!
  * \brief Definition of information node of the search tree
+ * \author Jan Didschuneit
  */
 class NodeInfo
 {

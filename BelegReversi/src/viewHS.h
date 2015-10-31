@@ -14,6 +14,7 @@
 /*!
  * \brief View for the Highscore
  * inherits from QGraphicsScene
+ * \author Baran
  */
 class ViewHS : public QGraphicsScene
 {

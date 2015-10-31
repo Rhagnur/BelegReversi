@@ -6,6 +6,7 @@
 //! Player Model Class
 /*!
  * \brief Definition of a player
+ * \author Baran
  */
 class modelPlayer
 {

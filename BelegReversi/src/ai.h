@@ -10,6 +10,7 @@
 
 /*!
  * \brief The Ai class
+ * \author Jan Didschuneit
  */
 class Ai
 {

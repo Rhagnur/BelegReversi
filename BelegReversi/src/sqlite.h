@@ -10,6 +10,7 @@
 //! Database class
 /*!
  * \brief Class for creating and getting access to SQLite database
+ * \author Baran
  */
 class SQLite
 {

@@ -6,6 +6,7 @@
 //! Field Model Class
 /*!
  * \brief Definition of the gaming field
+ * \author Baran
  */
 class modelField
 {

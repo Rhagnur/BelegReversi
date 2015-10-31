@@ -16,6 +16,7 @@
 /*!
  * \brief View for the Gamingfield
  * inherits from QGraphicsScene
+ * \author Baran
  */
 class viewField : public QGraphicsScene
 {
